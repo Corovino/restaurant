@@ -1,0 +1,25 @@
+<button type="button" (click)="ClickButton();"  type="button" class="btn btn-primary" data-toggle="modal" data-target="#createAbsence"  >Add Absence</button>
+
+<app-modals></app-modals> 
+
+
+
+<div class="table-responsive">
+<table class="table">
+  <thead>
+     <tr>
+      <th>User name</th>
+      <th>Cell phone number</th>
+      <th>State</th>
+      <th>Role</th>
+      <th>Restauran</th>           
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of user | async" id="">
+       
+        <td><button  (click)="editaRestaurant(item.$key)" class="btn btn-primary" data-toggle="modal" data-target="#editRestauran">Edit</button></td>
+
+    </tr>
+  </tbody>
+</table>

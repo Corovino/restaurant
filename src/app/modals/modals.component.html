@@ -1,0 +1,129 @@
+<!--Modal edit restaurant-->
+ <div class="modal fade" id="editRestauran" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Edit Restaurant</h4>
+              </div>
+              <div class="modal-body">
+                <form action="" class="form-horizontal" #restaurantEdit='ngForm' (ngSubmit)="restauranEdit(restaurantForm.value)"  *ngFor="let item of promise">
+                  <fieldset>
+                    <div>{{item}}</div>
+                    <!-- Name 
+                    <div class="control-group">
+                      <label class="control-label"  for="username">Store</label>
+                      <div class="controls">
+                        <input type="text" id="username" #storeRef="ngModel" minlength="4" required name="store" placeholder="" class="input-xlarge" ngModel>
+                        <div *ngIf="storeRef.errors && (storeRef.dirty || storeRef.touched ) "  class="alert alert-danger">
+                               <div [hidden]="!storeRef.errors.required" >
+                                  Please enter a store. 
+                              </div> 
+                              <div [hidden]="!storeRef.errors.minlength" >
+                                  Please enter atleast 4 characters. 
+                              </div> 
+                        </div>
+                        
+                      </div>
+                    </div>
+                    <div class="control-group">
+                      <label class="control-label"  for="address">Address</label>
+                      <div class="controls">
+                        <input type="text" id="address" #addressRef="ngModel" name="address" required  placeholder="" class="input-xlarge" ngModel>
+                         <div [hidden]="addressRef.valid || addressRef.pristine" class="alert alert-danger">
+                            Please enter a Address. 
+                        </div> 
+                      </div>
+                    </div>
+                    <div class="control-group">
+                      <label class="control-label"  for="username">State</label>
+                      <div class="controls">
+                        <input type="text" id="username" #stateRef="ngModel" name="state" required  placeholder="" class="input-xlarge" ngModel>
+                        <div [hidden]="stateRef.valid || stateRef.pristine" class="alert alert-danger">
+                            Please enter a State. 
+                        </div> 
+                      </div>
+                    </div>
+                    <div class="control-group">
+                      <label class="control-label"  for="username">Zip</label>
+                      <div class="controls">
+                        <input type="text" id="zip" #zipRef="ngModel" name="zip"  required  placeholder="" class="input-xlarge" ngModel>
+                        <div [hidden]="zipRef.valid || zipRef.pristine" class="alert alert-danger">
+                            Please enter a Zip. 
+                        </div> 
+                      </div>
+                    </div>
+                    <div class="control-group">
+                      <label class="control-label"  for="phoner">Phone</label>
+                      <div class="controls">
+                        <input type="text" id="phone" #phoneRef="ngModel" name="phone" required placeholder="" class="input-xlarge" ngModel>
+                         <div [hidden]="phoneRef.valid || phoneRef.pristine" class="alert alert-danger">
+                            Please enter a Phone Number. 
+                        </div> 
+                      </div>
+                    </div>
+                    <div class="control-group">
+                      <label class="control-label"  for="username">Manager name</label>
+                      <div class="controls">
+                        <input type="text" id="maneger_name" #managerNameRef="ngModel"  required  name="manager_name" placeholder="" class="input-xlarge" ngModel>
+                         <div [hidden]="managerNameRef.valid || managerNameRef.pristine" class="alert alert-danger">
+                            Please enter a Manager Name. 
+                        </div> 
+                      </div>
+                    </div>
+                    <div class="control-group">
+                      <label class="control-label"  for="username">Manager phone</label>
+                      <div class="controls">
+                        <input type="text" id="manager_phone" #managerPhoneRef="ngModel"  required name="manager_phone" placeholder="" class="input-xlarge" ngModel>
+                        <div [hidden]="managerPhoneRef.valid || managerPhoneRef.pristine" class="alert alert-danger">
+                            Please enter a Manager Phone Number. 
+                        </div> 
+                      </div>
+                    </div>
+                    <div class="control-group">
+                      <label class="control-label"  for="username">Email</label>
+                      <div class="controls">
+                        <input type="text" id="email" #emailRef="ngModel"  required pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" name="email" placeholder="" class="input-xlarge" ngModel>
+                        <div class="md-errors-spacer" [hidden]="emailRef.valid || emailRef.untouched">
+                          <div  *ngIf="emailRef.errors && emailRef.errors.required" class="alert alert-danger">
+                              Email is required
+                          </div>
+                          <div  *ngIf="emailRef.errors && emailRef.errors.pattern">
+                              Email is invalid
+                          </div>
+                      </div>
+                      </div>
+                    </div>
+                    <div class="control-group">
+                      <label class="control-label"  for="username">EIN</label>
+                      <div class="controls">
+                        <input type="text" id="username" #einRef="ngModel" required  name="ein" placeholder="" class="input-xlarge" ngModel>
+                        <div [hidden]="einRef.valid || einRef.pristine" class="alert alert-danger">
+                            Please enter a EIN. 
+                        </div>  
+                      </div>
+                    </div>
+                    <div class="control-group">
+                      
+                      <div class="controls" style="padding-top: 10px;"> 
+                          <button type="submit" [disabled]="!restaurantForm.valid" class="btn btn-primary">Save changes</button>
+                      </div>
+                    </div>
+                    <!-- Name -->
+                  </fieldset>
+
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default"    data-dismiss="modal">Close</button>
+                
+              </div>
+            </div>
+          </div>
+ </div>
+<!-- ./ -->
+
+
+
+
+

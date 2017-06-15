@@ -1,0 +1,22 @@
+
+<div class="container">
+  <div class="card card-container">
+    <h1 class="test-center">Register</h1>
+<form #registerForm='ngForm' (ngSubmit)='registerUser(registerForm.value)' class="form-signin">
+    <div>
+      
+        <input type="text" placeholder="Email" name="email" ngModel class="form-control">
+        <input type="password" placeholder="Pasword"  name="password" ngModel class="form-control">
+        <input type="password" placeholder="Pasword" name="repassword" ngModel class="form-control">
+      
+        <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Sign in</button>
+       
+           <a routerLink="/login" routerLinkActive="active" class="forgot-password">Login</a>
+       
+    </div>
+</form>
+   </div>
+</div>
+<router-outlet></router-outlet>
+
+

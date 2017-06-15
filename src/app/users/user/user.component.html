@@ -1,0 +1,116 @@
+<div class="col-md-10 content">
+    <button type="button"   type="button" class="btn btn-primary" data-toggle="modal" data-target="#createUser">Add User</button>
+
+    <!-- Modal create User -->
+        <div class="modal fade" id="createUser" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Add User {{title}}</h4>
+              </div>
+              <div class="modal-body">
+                <form action="" class="form-horizontal" #userForm="ngForm" (ngSubmit)="userInfo(userForm.value)" >
+                  <fieldset>
+                    <!-- Name -->
+                    <div class="control-group">
+                      <label class="control-label"  for="name">Name</label>
+                      <div class="controls">
+                        <input type="text" id="name" #nameRef="ngModel" minlength="4" required name="name" placeholder="" class="input-xlarge" ngModel>
+                        <div *ngIf="nameRef.errors && (nameRef.dirty || nameRef.touched )"  class="invalid">
+                               <div [hidden]="!nameRef.errors.required" >
+                                  Please enter a store. 
+                               </div> 
+                               <div [hidden]="!nameRef.errors.minlength" >
+                                  Please enter atleast 4 characters. 
+                               </div> 
+                        </div>
+                        
+                      </div>
+                    </div>
+                    <div class="control-group">
+                      <label class="control-label"  for="last_name">Last name</label>
+                      <div class="controls">
+                        <input type="text" id="last_name" #lastnameRef="ngModel" name="last_name" required  placeholder="" class="input-xlarge" ngModel>
+                         <div [hidden]="lastnameRef.valid || lastnameRef.pristine" class="alert alert-danger">
+                            Please enter a Last name. 
+                        </div> 
+                      </div>
+                    </div>
+                    <div class="control-group">
+                      <label class="control-label"  for="password">Password</label>
+                      <div class="controls">
+                        <input type="password" id="password" #passwordRef="ngModel" name="password" required  placeholder="" class="input-xlarge" ngModel>
+                        <div [hidden]="passwordRef.valid || passwordRef.pristine" class="alert alert-danger">
+                            Please enter a Password. 
+                        </div> 
+                      </div>
+                    </div>
+                    <div class="control-group">
+                      <label class="control-label"  for="phone">Cell Phone</label>
+                      <div class="controls">
+                        <input type="text" id="phone" #cellphoneRef="ngModel" name="cellphone" required placeholder="" class="input-xlarge" ngModel>
+                         <div [hidden]="cellphoneRef.valid || cellphoneRef.pristine" class="alert alert-danger">
+                            Please enter a Cell Phone Number. 
+                        </div> 
+                      </div>
+                    </div>
+                    <div class="control-group">
+                      <label class="control-label"  for="rol">Role</label>
+                      <div class="controls">
+                         <select #managerNameRef="ngModel"  required  name="rol"  ngModel>
+                             <option value="1" selected>Admin</option>
+                             <option value="2">User</option>
+                             <option value="3">other</option>
+                         </select>   
+                         
+                      </div>
+                    </div>
+                    <div class="control-group">
+                      
+                      <div class="controls" style="padding-top: 10px;"> 
+                          <button type="submit" [disabled]="!userForm.valid" class="btn btn-primary">Save changes</button>
+                      </div>
+                    </div>
+                  
+                  </fieldset>
+
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default"    data-dismiss="modal">Close</button>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+    <!-- ./ -->
+
+    <div class="table-responsive">
+    <table class="table">
+      <thead>
+         <tr>
+          <th>Name</th>
+          <th>Last name</th>
+          <th>Cell phone</th>
+          <th>Role</th>
+          <th>Edit</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of user | async" id="">
+            <td>{{item.name}}</td>
+            <td>{{item.last_name}}</td>
+            <td>{{item.cell_phone}}</td>
+            <td>
+                <div [ngSwitch]="item.rol">
+                    <p *ngSwitchCase="1">Admin</p>
+                    <p *ngSwitchCase="2">User</p>
+                </div>    
+            </td>
+            <td><button  (click)="editUser(item.$key)" class="btn btn-primary" data-toggle="modal" data-target="#editRestauran">Edit</button></td>
+
+        </tr>
+      </tbody>
+    </table>
+</div>    
