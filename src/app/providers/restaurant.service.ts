@@ -3,21 +3,22 @@ import { Observable } from 'rxjs/Observable';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import { Subject } from 'rxjs/Subject';
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export class RestaurantService {
   private restaurant: FirebaseListObservable<any[]>;
+  private editRestaurant : FirebaseListObservable<any[]>;
   
   constructor(private af : AngularFireDatabase ) { 
-     this.restaurant = af.list('/restaurant');
+     
   }
 
 
   getRestaurant()
   {
-      
-
-      return this.restaurant;
+     
+      return this.restaurant = this.af.list('/restaurant');
   }
 
   postRestaurant(value : any)
@@ -40,6 +41,17 @@ export class RestaurantService {
       });
 
       return result;
+  }
+
+  getIdRestaurant(key : any)
+  {
+     
+     return this.af.list('/restaurant/'+key);
+     /*promise.subscribe(data =>{
+          console.log(data);
+     } );
+     this.val = promise
+     console.log(this.val);*/
   }
 
 }

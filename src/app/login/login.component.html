@@ -16,12 +16,67 @@
           
         </div>
     </form>
-    <a href="#" class="forgot-password">
+    <a href="#" class="forgot-password" data-toggle="modal" data-target="#recoveryPass"> 
                 Forgot the password? 
     </a>
      <a routerLink="/register" routerLinkActive="active" class="forgot-password">Register</a>
 
     </div>
 </div>
+
+<!--Modal Recovery pass -->
+
+<!-- Modal -->
+    <div class="modal fade" id="recoveryPass" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Insert email for recovery pass</h4>
+          </div>
+          <div class="modal-body">
+            <form action="" class="form-horizontal" #recoveryPassForm='ngForm' (ngSubmit)="recoverPass(recoveryPassForm.value)" >
+              <fieldset>
+              <div class="control-group">
+                <label class="control-label"  for="username">Email</label>
+                <div class="controls">
+                  <input type="text" id="email" #emailRef="ngModel"  required pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" name="email" placeholder="" class="input-xlarge" ngModel>
+                  <div class="md-errors-spacer" [hidden]="emailRef.valid || emailRef.untouched">
+                    <div  *ngIf="emailRef.errors && emailRef.errors.required" class="alert alert-danger">
+                        Email is required
+                    </div>
+                    <div  *ngIf="emailRef.errors && emailRef.errors.pattern">
+                        Email is invalid
+                  </div>
+                </div>
+                </div>
+              </div>
+              <div class="control-group">
+              
+                  <div class="controls" style="padding-top: 10px;"> 
+                      <button type="submit" [disabled]="!recoveryPassForm.valid" class="btn btn-primary">Save changes</button>
+                  </div>
+              </div>
+              
+              </fieldset>
+
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default"    data-dismiss="modal">Close</button>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+<!-- ./ -->
+
+
+
+
+
+<!--./ -->
+
+
 <router-outlet></router-outlet>
 

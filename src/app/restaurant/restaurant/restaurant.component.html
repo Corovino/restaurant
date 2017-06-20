@@ -1,6 +1,6 @@
 
 		<div class="col-md-10 content">
-         <!-- Form ModAL rESTAURANT -->  
+         <!-- Form ModAL Resstaurant  -->  
         <button type="button" (click)="ClickButton();"  type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal"  >Add Restaurant</button>
         <!-- Modal -->
             <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -158,8 +158,8 @@
         </table>
         </div>
         <!--  ./ -->    
-        <div *ngFor="let res of val | async ">
-         <div>{{res}}</div>
+        <div *ngFor="let res of val  ">
+         <div>{{res.store}}</div>
          
        </div>        
 		</div>

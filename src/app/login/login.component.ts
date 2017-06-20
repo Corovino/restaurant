@@ -29,8 +29,13 @@ export class LoginComponent implements OnInit {
 
   loginUser(value: any)
   {
+      console.log(value); 
       let promise = this.authService.login(value.email, value.password);
-      console.log(promise);
+
+      /*promise.subscribe( response => {
+          console.log(promise);        
+      })
+
       this.auth.onAuthStateChanged( login => {
          console.log(login);
           if(login){
@@ -38,7 +43,23 @@ export class LoginComponent implements OnInit {
           }else{
             alert('No es posible ingresar en este momento');
           }
-      });
+      });*/
+  }
+
+  recoverPass(mailAddres: any){
+
+    console.log(mailAddres);
+    let reset = {
+       email : mailAddres
+    }
+    
+    this.auth.sendPasswordResetEmail(mailAddres.email).then( response => {
+        alert('Se envio un correo a su cuenta.'); 
+        console.log('Se envio un correo a su cuenta.',response);
+    }).catch( error => {
+       alert('');
+       console.log('error', error);
+    });
   }
 
 }

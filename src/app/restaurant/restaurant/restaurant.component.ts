@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { RestaurantService } from '../../providers/restaurant.service';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
-//import { ModalsComponent } from '../../modals/modals.component';
+import { ModalsComponent } from '../../modals/modals.component';
 //import { Popup } from 'ng2-opd-popup';
 
 @Component({
@@ -29,7 +29,7 @@ export class RestaurantComponent implements OnInit {
   {
       console.log("data");
   }
-
+   
   restaurantInfo(value : any)
   {
       console.log(value);

@@ -37,6 +37,14 @@ export class RolComponent implements OnInit {
   		});
   }
 
+  /*recoverPass(mailAddres){
+  	let recover = firebase.auth();
+  	recover.senPasswordResetEmail(mailAddres).then( response => {
+        console.log('Se envio un correo a su cuenta.',response);
+  	}).catch( error => {
+  		console.log('error', error);
+  	});
+  }*/
 
 
 }

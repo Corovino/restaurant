@@ -27,21 +27,28 @@ export class AuthService  {
   login(email : string, password : string ) {
     //this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
 
-     this.auth.signInWithEmailAndPassword(email, password).catch( e => {
-         console.log(e)
-         
-         return e;
+     this.auth.signInWithEmailAndPassword(email, password).catch( error => {
+           
+           let errorCode = error.code;
+           let errorMessage = error.message;
+
+           if (errorCode === 'auth/wrong-password') {
+             alert('Wrong password.');
+           } else {
+             alert(errorMessage);
+           }
+           console.log(error);
      });
-    /*this.auth.onAuthStateChanged(fu =>{
-         if ( fu )
-         {
-            this.c(fu);
+    
+     this.auth.onAuthStateChanged(login =>{
+          console.log(login);
+          if(login){
             this.router.navigate(['/dashboard']);
-         }else{
-            alert("Erro al ingresar  los datos, intentalo de nuevo ");
-            this.c(fu);
-         }
-    });*/
+          }else{
+            //alert('No es posible ingresar en este momento');
+            console.log(login);
+          }
+     });
   }
 
   logout() {
