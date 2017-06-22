@@ -39,8 +39,11 @@ export class AuthService  {
            }
            console.log(error);
      });
+
+
+
     
-     this.auth.onAuthStateChanged(login =>{
+     this.auth.onAuthStateChanged( login => {
           console.log(login);
           if(login){
             this.router.navigate(['/dashboard']);

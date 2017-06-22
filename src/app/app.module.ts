@@ -25,6 +25,7 @@ import { ModalsComponent } from './modals/modals.component';
 import { EmployeeComponent } from './employee/employee.component';
 import { AbsencesComponent } from './absences/absences.component';
 import { RolComponent } from './rol/rol.component';
+import { LoopObjectPipe } from './loop-object.pipe';
 
 
 
@@ -43,6 +44,7 @@ import { RolComponent } from './rol/rol.component';
     EmployeeComponent,
     AbsencesComponent,
     RolComponent,
+    LoopObjectPipe,
     
   ],
   imports: [

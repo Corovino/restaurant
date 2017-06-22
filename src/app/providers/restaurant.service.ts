@@ -4,25 +4,28 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/map';
+import { Restaurant  } from '../restaurant';
+import * as firebase from 'firebase/app';
 
 @Injectable()
 export class RestaurantService {
   private restaurant: FirebaseListObservable<any[]>;
   private editRestaurant : FirebaseListObservable<any[]>;
-  
-  constructor(private af : AngularFireDatabase ) { 
-     
+
+  constructor(private af : AngularFireDatabase ) {
+     this.restaurant = this.af.list('/restaurant');
   }
 
 
   getRestaurant()
   {
-     
+
       return this.restaurant = this.af.list('/restaurant');
   }
 
   postRestaurant(value : any)
   {
+      console.log('service restaurant', value.store)
       let result = new Promise((resolve, reject)=>{
            this.restaurant.push({
                 store:value.store,
@@ -33,7 +36,7 @@ export class RestaurantService {
                 manager_name : value.manager_name,
                 manager_phone : value.manager_phone,
                 email:value.email,
-                ein: value.ein 
+                ein: value.ein
            });
 
       }).catch( error => {
@@ -45,13 +48,14 @@ export class RestaurantService {
 
   getIdRestaurant(key : any)
   {
-     
-     return this.af.list('/restaurant/'+key);
-     /*promise.subscribe(data =>{
-          console.log(data);
-     } );
-     this.val = promise
-     console.log(this.val);*/
+
+     return this.af.list('/restaurant/');
+
+  }
+
+  updateRestaurant(key: any,data : any)
+  {
+      return this.restaurant.update(key, data);
   }
 
 }

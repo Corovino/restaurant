@@ -1,8 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { RestaurantService } from '../../providers/restaurant.service';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
+import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
+import 'rxjs/add/operator/map';
 import { ModalsComponent } from '../../modals/modals.component';
-//import { Popup } from 'ng2-opd-popup';
+import {forEach} from "@angular/router/src/utils/collection";
+import  { LoopObjectPipe } from '../../loop-object.pipe';
+import { Restaurant } from '../../restaurant';
 
 @Component({
   selector: 'app-restaurant',
@@ -14,44 +19,81 @@ export class RestaurantComponent implements OnInit {
 
   private restaurant: FirebaseListObservable<any[]>;
   public val : any;
+  private  res : Restaurant[];
+  private key :string;
 
-  
-  constructor(private resService : RestaurantService, private af : AngularFireDatabase ) { 
-   
+
+  constructor(private resService : RestaurantService, private af : AngularFireDatabase ) {
+      this.val = {};
   }
 
   ngOnInit() {
      this.restaurant = this.af.list('/restaurant');
      console.log(this.restaurant);
   }
-  
+
   ClickButton()
   {
       console.log("data");
   }
-   
+
   restaurantInfo(value : any)
   {
       console.log(value);
       this.resService.postRestaurant(value).then( data => {
-         ( data ) ? alert ("Seguardaron los datos ") : alert ("Error al guardar "); 
+         ( data ) ? alert ("Seguardaron los datos ") : alert ("Error al guardar ");
       });
   }
 
-  editaRestaurant(key : any)
+  editaRestaurant(key : any, index : any)
   {
-    console.log(key);
-     let promise = this.af.list('/restaurant/'+key);
-     promise.subscribe(data =>{
-          console.log(data);
-     } );
-     this.val = promise
-     console.log(this.val);
 
-      //let val = data.target.closest('tr').innerText;
-      //let array = val.split(',');
-      //console.log(array);
+
+
+
+     this.resService.getIdRestaurant(key).subscribe( data => {
+        console.log(key);
+        this.key = key;
+        data.forEach( data => {
+
+            if ( data.$key === key) {
+
+
+                    this.val = {
+                       store: data.store,
+                       addres: data.addres,
+                       state: data.state,
+                       phone:data.phone,
+                       zip :data.zip,
+                       manager_name :data.manager_name,
+                       manager_phone:data.manager_phone,
+                       email: data.email,
+                       ein:data.ein
+
+                    };
+            }
+        });
+
+
+
+     });
+
+
+
+
+
   }
-  
+
+  restauranEdit( data: any)
+  {
+      console.log(this.key);
+      console.log("re",data);
+      this.resService.updateRestaurant( this.key, data );
+  }
+
+
+
+
+
 
 }
