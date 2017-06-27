@@ -179,7 +179,7 @@
                       <label class="control-label"  for="username">Store</label>
                       <div class="controls">
                         <input type="text" id="username" #storeRef="ngModel" minlength="4" required name="store" placeholder="" [(ngModel)]="val.store" class="input-xlarge" ngModel>
-                        <div *ngIf="storeRef.errors && (storeRef.dirty || storeRef.touched ) "  class="alert alert-danger">
+                        <div *ngIf="storeRef.errors && (storeRef.dirty || storeRef.touched ) "  class="invalid">
                                <div [hidden]="!storeRef.errors.required" >
                                   Please enter a store.
                               </div>
@@ -187,6 +187,7 @@
                                   Please enter atleast 4 characters.
                               </div>
                         </div>
+
 
                       </div>
                     </div>
@@ -255,7 +256,7 @@
                           <div  *ngIf="emailRef.errors && emailRef.errors.pattern">
                               Email is invalid
                           </div>
-                      </div>
+                        </div>
                       </div>
                     </div>
                     <div class="control-group">

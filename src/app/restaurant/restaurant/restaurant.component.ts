@@ -54,33 +54,29 @@ export class RestaurantComponent implements OnInit {
      this.resService.getIdRestaurant(key).subscribe( data => {
         console.log(key);
         this.key = key;
-        data.forEach( data => {
+          data.forEach( data => {
 
-            if ( data.$key === key) {
+              if ( data.$key === key) {
 
 
-                    this.val = {
-                       store: data.store,
-                       addres: data.addres,
-                       state: data.state,
-                       phone:data.phone,
-                       zip :data.zip,
-                       manager_name :data.manager_name,
-                       manager_phone:data.manager_phone,
-                       email: data.email,
-                       ein:data.ein
+                      this.val = {
+                         store: data.store,
+                         addres: data.addres,
+                         state: data.state,
+                         phone:data.phone,
+                         zip :data.zip,
+                         manager_name :data.manager_name,
+                         manager_phone:data.manager_phone,
+                         email: data.email,
+                         ein:data.ein
 
-                    };
-            }
+                      };
+              }
         });
 
 
 
      });
-
-
-
-
 
   }
 
@@ -90,10 +86,6 @@ export class RestaurantComponent implements OnInit {
       console.log("re",data);
       this.resService.updateRestaurant( this.key, data );
   }
-
-
-
-
 
 
 }

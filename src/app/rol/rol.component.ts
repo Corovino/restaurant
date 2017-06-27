@@ -11,13 +11,16 @@ import { Subject } from 'rxjs/Subject';
 })
 export class RolComponent implements OnInit {
 
-  private rol: FirebaseListObservable<any[]>;		
+  private rol: FirebaseListObservable<any[]>;
+  private  key: any;
+  private  rolData:any;
 
   constructor(private af : AngularFireDatabase) { }
 
   ngOnInit() {
 
   	  this.rol = this.af.list('/rol');
+  	  this.rolData= {};
   	  console.log(this.rol);
 
   }
@@ -31,20 +34,37 @@ export class RolComponent implements OnInit {
                 rol_name:value.rol_name,
                 description:value.description
 
-  			});	
+  			});
   		} ).catch( error => {
           console.log('Error promesa postRol', error);
   		});
   }
 
-  /*recoverPass(mailAddres){
-  	let recover = firebase.auth();
-  	recover.senPasswordResetEmail(mailAddres).then( response => {
-        console.log('Se envio un correo a su cuenta.',response);
-  	}).catch( error => {
-  		console.log('error', error);
-  	});
-  }*/
+  editRol(value : any)
+  {
+      this.key = value;
+      this.rol.subscribe( data => {
+
+          data.forEach( data => {
+
+            if (data.$key == this.key)
+            {
+                  this.rolData = {
+                     description:data.description,
+                     rol_name: data.rol_name
+                  }
+            }
+
+          } );
+      });
+      console.log(this.rolData);
+  }
+
+  updateRol(data: any)
+  {
+
+       this.rol.update(this.key, data);
+  }
 
 
 }

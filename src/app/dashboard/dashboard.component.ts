@@ -18,18 +18,21 @@ import * as firebase from 'firebase/app';
 })
 export class DashboardComponent implements OnInit {
   private au: any;
-  private user : any; 
-  constructor(private  authService : AuthService, private af : AngularFireAuth ) 
+  private user : any;
+  constructor(private  authService : AuthService, private af : AngularFireAuth )
   {
       this.au = firebase.auth();
   }
 
   ngOnInit() {
-    
-        
-  }
 
-   
-  
+    this.au.onAuthStateChanged(user => {
+      if (user) {
+        this.user = user;
+        console.log(this.user);
+      }
+    });
+
+  }
 
 }

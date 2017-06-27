@@ -14,188 +14,202 @@
               <form action="" class="form-horizontal" #employeeForm='ngForm' (ngSubmit)="employeeInfo(employeeForm.value)" >
                 <fieldset>
                   <!-- Name -->
-                  <div class="control-group">
-                    <label class="control-label"  for="firts_name">Firts Name</label>
-                    <div class="controls">
-                      <input type="text" id="firts_name" #firtsnameRef="ngModel" minlength="4" required name="firts_name" placeholder="" class="input-xlarge" ngModel>
-                      <div *ngIf="firtsnameRef.errors && (firtsnameRef.dirty || firtsnameRef.touched ) "  class="alert alert-danger">
-                             <div [hidden]="!firtsnameRef.errors.required" >
-                                Please enter a store. 
-                            </div> 
-                            <div [hidden]="!firtsnameRef.errors.minlength" >
-                                Please enter atleast 4 characters. 
-                            </div> 
-                      </div>
-                      
+                  <div class="col-md-12 content">
+                    <div class="col-md-6 form-group col-md-offset-2">
+                        <div class="control-group">
+                          <label class="control-label"  for="firts_name">Firts Name</label>
+                          <div class="controls">
+                            <input type="text" id="firts_name" #firtsnameRef="ngModel" minlength="4" required name="firts_name" placeholder="" class="input-xlarge" ngModel>
+                            <div *ngIf="firtsnameRef.errors && (firtsnameRef.dirty || firtsnameRef.touched ) "  class="alert alert-danger">
+                                   <div [hidden]="!firtsnameRef.errors.required" >
+                                      Please enter a store.
+                                  </div>
+                                  <div [hidden]="!firtsnameRef.errors.minlength" >
+                                      Please enter atleast 4 characters.
+                                  </div>
+                            </div>
+
+                          </div>
+                        </div>
+                        <div class="control-group">
+                          <label class="control-label"  for="last_name">Last name</label>
+                          <div class="controls">
+                            <input type="text" id="last_name" #lastnameRef="ngModel" name="last_name" required  placeholder="" class="input-xlarge" ngModel>
+                             <div [hidden]="lastnameRef.valid || lastnameRef.pristine" class="alert alert-danger">
+                                Please enter a Last name.
+                            </div>
+                          </div>
+                        </div>
+                        <div class="control-group">
+                          <label class="control-label"  for="restaurant">Restaurant / Store </label>
+                          <div class="controls">
+                            <!--input type="text" id="password" #passwordRef="ngModel" name="password" required  placeholder="" class="input-xlarge" ngModel-->
+                            <select #restaurantdRef="ngModel" name="restaurant" name="restaurant" required ngModel  >
+                               <option *ngFor="let item of restaurant | async" value="{{item.store}}">{{item.store}}</option>
+
+                            </select>
+
+                          </div>
+                        </div>
+                        <div class="control-group">
+                          <label class="control-label"  for="social_security_number">Social Security Number</label>
+                          <div class="controls">
+                            <input type="text" id="social_security_number" #securityNumberRef="ngModel" name="social_security_number" required placeholder="" class="input-xlarge" ngModel>
+                             <div [hidden]="securityNumberRef.valid || securityNumberRef.pristine" class="alert alert-danger">
+                                Please enter a Social Security Number.
+                            </div>
+                          </div>
+                        </div>
+                        <div class="control-group">
+                          <label class="control-label"  for="ssn">SSN</label>
+                          <div class="controls">
+                            <input type="text" id="phone" #ssnRef="ngModel" name="ssn" required placeholder="" class="input-xlarge" ngModel>
+                             <div [hidden]="ssnRef.valid || ssnRef.pristine" class="alert alert-danger">
+                                Please enter a SSN.
+                            </div>
+                          </div>
+                        </div>
+                        <div class="control-group">
+                          <label class="control-label"  for="phone">Phone</label>
+                          <div class="controls">
+                            <input type="text" id="phone" #phoneRef="ngModel" name="phone" required placeholder="" class="input-xlarge" ngModel>
+                             <div [hidden]="phoneRef.valid || phoneRef.pristine" class="alert alert-danger">
+                                Please enter a  Phone Number.
+                            </div>
+                          </div>
+                        </div>
+                        <div class="control-group">
+                          <label class="control-label"  for="birth_day">Date of Birth</label>
+                          <div class="controls">
+                            <input type="text" id="birth_day" #birthDayRef="ngModel" name="birth_day" required placeholder="" class="input-xlarge" ngModel>
+                             <div [hidden]="birthDayRef.valid || birthDayRef.pristine" class="alert alert-danger">
+                                Please enter a Date of Birth.
+                            </div>
+                          </div>
+                        </div>
+                        <div class="control-group">
+                          <label class="control-label"  for="race">Race</label>
+                          <div class="controls">
+                            <input type="text" id="race" #raceRef="ngModel" name="race" required placeholder="" class="input-xlarge" ngModel>
+                             <div [hidden]="raceRef.valid || raceRef.pristine" class="alert alert-danger">
+                                Please enter a Race.
+                            </div>
+                          </div>
+                        </div>
                     </div>
-                  </div>
-                  <div class="control-group">
-                    <label class="control-label"  for="last_name">Last name</label>
-                    <div class="controls">
-                      <input type="text" id="last_name" #lastnameRef="ngModel" name="last_name" required  placeholder="" class="input-xlarge" ngModel>
-                       <div [hidden]="lastnameRef.valid || lastnameRef.pristine" class="alert alert-danger">
-                          Please enter a Last name. 
-                      </div> 
-                    </div>
-                  </div>
-                  <div class="control-group">
-                    <label class="control-label"  for="restauran">Restaurant / Store </label>
-                    <div class="controls">
-                      <!--input type="text" id="password" #passwordRef="ngModel" name="password" required  placeholder="" class="input-xlarge" ngModel-->
-                      <select #restaurantdRef="ngModel" name="restaurant" name="restaurant" required ngModel>
-                         <option value="1">Us family</option>
-                         <option value="2">Mc donasl</option>
-                      </select>
-                      <div [hidden]="restaurantdRef.valid || restaurantdRef.pristine" class="alert alert-danger">
-                          Please select a Restaurant. 
-                      </div> 
-                    </div>
-                  </div>
-                  <div class="control-group">
-                    <label class="control-label"  for="social_security_number">Social Security Number</label>
-                    <div class="controls">
-                      <input type="text" id="social_security_number" #securityNumberRef="ngModel" name="social_security_number" required placeholder="" class="input-xlarge" ngModel>
-                       <div [hidden]="securityNumberRef.valid || securityNumberRef.pristine" class="alert alert-danger">
-                          Please enter a Social Security Number. 
-                      </div> 
-                    </div>
-                  </div>
-                  <div class="control-group">
-                    <label class="control-label"  for="ssn">SSN</label>
-                    <div class="controls">
-                      <input type="text" id="phone" #ssnRef="ngModel" name="ssn" required placeholder="" class="input-xlarge" ngModel>
-                       <div [hidden]="ssnRef.valid || ssnRef.pristine" class="alert alert-danger">
-                          Please enter a SSN. 
-                      </div> 
-                    </div>
-                  </div>
-                  <div class="control-group">
-                    <label class="control-label"  for="phone">Phone</label>
-                    <div class="controls">
-                      <input type="text" id="phone" #phoneRef="ngModel" name="phone" required placeholder="" class="input-xlarge" ngModel>
-                       <div [hidden]="phoneRef.valid || phoneRef.pristine" class="alert alert-danger">
-                          Please enter a  Phone Number. 
-                      </div> 
-                    </div>
-                  </div>
-                  <div class="control-group">
-                    <label class="control-label"  for="birth_day">Date of Birth</label>
-                    <div class="controls">
-                      <input type="text" id="birth_day" #birthDayRef="ngModel" name="birth_day" required placeholder="" class="input-xlarge" ngModel>
-                       <div [hidden]="birthDayRef.valid || birthDayRef.pristine" class="alert alert-danger">
-                          Please enter a Date of Birth. 
-                      </div> 
-                    </div>
-                  </div>
-                  <div class="control-group">
-                    <label class="control-label"  for="race">Race</label>
-                    <div class="controls">
-                      <input type="text" id="race" #raceRef="ngModel" name="race" required placeholder="" class="input-xlarge" ngModel>
-                       <div [hidden]="raceRef.valid || raceRef.pristine" class="alert alert-danger">
-                          Please enter a Race. 
-                      </div> 
-                    </div>
-                  </div>
-                  <div class="control-group">
-                    <label class="control-label"  for="gender">Gender</label>
-                    <div class="controls">
-                      <!--input type="text" id="phone" #cellphoneRef="ngModel" name="cellphone" required placeholder="" class="input-xlarge" ngModel-->
-                      <select #genderRef="ngModel" name="gender" name="gender" required ngModel>
-                         <option value="1">M</option>
-                         <option value="2">F</option>
-                      </select>
-                       <div [hidden]="genderRef.valid || genderRef.pristine" class="alert alert-danger">
-                          Please select a Gender. 
-                      </div> 
-                    </div>
-                  </div>
-                  <div class="control-group">
-                    <label class="control-label"  for="phone">Dependant Medical Coverage</label>
-                    <div class="controls">
-                      <!--input type="text" id="phone" #medicalCoverageRef="ngModel" name="cellphone" required placeholder="" class="input-xlarge" ngModel-->
-                      <select #medicalCoverageRef="ngModel" name="medical_coverage" name="medical_coverage" required ngModel>
-                         <option value="1">Yes</option>
-                         <option value="2">No</option>
-                      </select>
-                       <div [hidden]="medicalCoverageRef.valid || medicalCoverageRef.pristine" class="alert alert-danger">
-                          Please select a Dependant Medical Coverage. 
-                      </div> 
-                    </div>
-                  </div>
-                  <div class="control-group">
-                    <label class="control-label"  for="pay_frecuency">Pay Frequency</label>
-                    <div class="controls">
-                      <input type="text" id="pay_frecuency" #payFrecuencyRef="ngModel" name="pay_frecuency" required placeholder="" class="input-xlarge" ngModel>
-                       <div [hidden]="payFrecuencyRef.valid || payFrecuencyRef.pristine" class="alert alert-danger">
-                          Please enter a Pay Frequency. 
-                      </div> 
+                    <div class="col-xs-6 form-group">
+                        <div class="control-group">
+                          <label class="control-label"  for="gender">Gender</label>
+                          <div class="controls">
+                            <!--input type="text" id="phone" #cellphoneRef="ngModel" name="cellphone" required placeholder="" class="input-xlarge" ngModel-->
+                            <select #genderRef="ngModel" name="gender" name="gender" required ngModel>
+                               <option value="1">M</option>
+                               <option value="2">F</option>
+                            </select>
+                             <div [hidden]="genderRef.valid || genderRef.pristine" class="alert alert-danger">
+                                Please select a Gender.
+                            </div>
+                          </div>
+                        </div>
+                        <div class="control-group">
+                          <label class="control-label"  for="phone">Dependant Medical Coverage</label>
+                          <div class="controls">
+                            <!--input type="text" id="phone" #medicalCoverageRef="ngModel" name="cellphone" required placeholder="" class="input-xlarge" ngModel-->
+                            <select #medicalCoverageRef="ngModel" name="medical_coverage" name="medical_coverage" required ngModel>
+                               <option value="1">Yes</option>
+                               <option value="2">No</option>
+                            </select>
+                             <div [hidden]="medicalCoverageRef.valid || medicalCoverageRef.pristine" class="alert alert-danger">
+                                Please select a Dependant Medical Coverage.
+                            </div>
+                          </div>
+                        </div>
+                        <div class="control-group">
+                          <label class="control-label"  for="pay_frecuency">Pay Frequency</label>
+                          <div class="controls">
+                            <input type="text" id="pay_frecuency" #payFrecuencyRef="ngModel" name="pay_frecuency" required placeholder="" class="input-xlarge" ngModel>
+                             <div [hidden]="payFrecuencyRef.valid || payFrecuencyRef.pristine" class="alert alert-danger">
+                                Please enter a Pay Frequency.
+                            </div>
+                          </div>
+                        </div>
+                        <div class="control-group">
+                          <label class="control-label"  for="status">Status</label>
+                          <div class="controls">
+                            <!--input type="text" id="phone" #cellphoneRef="ngModel" name="cellphone" required placeholder="" class="input-xlarge" ngModel-->
+                            <select  #statusRef="ngModel" name="status" required ngModel>
+                              <option value="1">Single</option>
+                              <option value="1">Married</option>
+                              <option value="1">Divorced</option>
+                            </select>
+                             <div [hidden]="statusRef.valid || statusRef.pristine" class="alert alert-danger">
+                                Please enter a Status.
+                            </div>
+                          </div>
+                        </div>
+                        <div class="control-group">
+                          <label class="control-label"  for="status">Rol</label>
+                          <div class="controls">
+                            <!--input type="text" id="phone" #cellphoneRef="ngModel" name="cellphone" required placeholder="" class="input-xlarge" ngModel-->
+                            <select  #statusRef="ngModel" name="rol" required   ngModel>
+                              <option *ngFor="let item of rol | async" value="{{item.rol_name}}">{{item.rol_name}}</option>
+                            </select>
+                            <!--div [hidden]="statusRef.valid || statusRef.pristine" class="alert alert-danger">
+                              Please enter a Status.
+                            </div-->
+                          </div>
+                        </div>
+                        <div class="control-group">
+                          <label class="control-label"  for="allowances">Number of Allowances</label>
+                          <div class="controls">
+                            <input type="number" id="allowances" #allowancesRef="ngModel" name="number_allowances" required placeholder="" class="input-xlarge" ngModel>
+
+                             <div [hidden]="allowancesRef.valid || allowancesRef.pristine" class="alert alert-danger">
+                                Please enter Number of Allowances.
+                            </div>
+                          </div>
+                        </div>
+                        <div class="control-group">
+                          <label class="control-label"  for="withheld">Addiotional withheld</label>
+                          <div class="controls">
+                            <input type="text" id="withheld" #withheldRef="ngModel" name="withheld" required placeholder="" class="input-xlarge" ngModel>
+
+                             <div [hidden]="withheldRef.valid || withheldRef.pristine" class="alert alert-danger">
+                                Please enter a Addiotional withheld.
+                            </div>
+                          </div>
+                        </div>
+                        <div class="control-group">
+                          <label class="control-label"  for="source_hire">Source of Hire</label>
+                          <div class="controls">
+                            <input type="text" id="source_hire" #sourceHireRef="ngModel" name="source_hire" required placeholder="" class="input-xlarge" ngModel>
+
+                             <div [hidden]="sourceHireRef.valid || sourceHireRef.pristine" class="alert alert-danger">
+                                Please enter a Source of Hire.
+                            </div>
+                          </div>
+                        </div>
+                        <div class="control-group">
+
+                          <div class="controls" style="padding-top: 10px;">
+                              <button type="submit" [disabled]="!employeeForm.valid" class="btn btn-primary">Save changes</button>
+                          </div>
+                        </div>
                     </div>
                   </div>
 
-                  <div class="control-group">
-                    <label class="control-label"  for="status">Status</label>
-                    <div class="controls">
-                      <!--input type="text" id="phone" #cellphoneRef="ngModel" name="cellphone" required placeholder="" class="input-xlarge" ngModel-->
-                      <select  #statusRef="ngModel" name="status" required ngModel>
-                        <option value="1">Single</option>
-                        <option value="1">Married</option>
-                        <option value="1">Divorced</option>
-                      </select>
-                       <div [hidden]="statusRef.valid || statusRef.pristine" class="alert alert-danger">
-                          Please enter a Status. 
-                      </div> 
-                    </div>
-                  </div>
-                  <div class="control-group">
-                    <label class="control-label"  for="allowances">Number of Allowances</label>
-                    <div class="controls">
-                      <input type="number" id="allowances" #allowancesRef="ngModel" name="number_allowances" required placeholder="" class="input-xlarge" ngModel>
-                     
-                       <div [hidden]="allowancesRef.valid || allowancesRef.pristine" class="alert alert-danger">
-                          Please enter Number of Allowances. 
-                      </div> 
-                    </div>
-                  </div>
-                  <div class="control-group">
-                    <label class="control-label"  for="withheld">Addiotional withheld</label>
-                    <div class="controls">
-                      <input type="text" id="withheld" #withheldRef="ngModel" name="withheld" required placeholder="" class="input-xlarge" ngModel>
-                     
-                       <div [hidden]="withheldRef.valid || withheldRef.pristine" class="alert alert-danger">
-                          Please enter a Addiotional withheld. 
-                      </div> 
-                    </div>
-                  </div>
-                  <div class="control-group">
-                    <label class="control-label"  for="source_hire">Source of Hire</label>
-                    <div class="controls">
-                      <input type="text" id="source_hire" #sourceHireRef="ngModel" name="source_hire" required placeholder="" class="input-xlarge" ngModel>
-                     
-                       <div [hidden]="sourceHireRef.valid || sourceHireRef.pristine" class="alert alert-danger">
-                          Please enter a Source of Hire. 
-                      </div> 
-                    </div>
-                  </div>
-                  <div class="control-group">
-                    
-                    <div class="controls" style="padding-top: 10px;"> 
-                        <button type="submit" [disabled]="!employeeForm.valid" class="btn btn-primary">Save changes</button>
-                    </div>
-                  </div>
-                
                 </fieldset>
 
               </form>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default"    data-dismiss="modal">Close</button>
-              
+
             </div>
           </div>
         </div>
       </div>
   <!-- ./ -->
-
 
   <div class="table-responsive">
   <table class="table">
@@ -204,7 +218,7 @@
         <th>First name</th>
         <th>Last name</th>
         <th>Restaurant /Store</th>
-        <th>Ssn Last</th>           
+        <th>Ssn</th>
         <th>Phone</th>
         <th>Date of birth</th>
         <th>Race</th>
@@ -215,29 +229,259 @@
         <th>Number of allowances</th>
         <th>Additional witheld</th>
         <th>Source of hire</th>
+        <th>Rol</th>
         <th>Edit</th>
 
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let item of employee | async" id="">
-          <td>{{item.firts_name}}</td> 
-          <td>{{item.last_name}}</td> 
-          <td>{{item.restaurant}}</td> 
-          <td>{{item.ssn_last}}</td> 
-          <td>{{item.phone}}</td> 
-          <td>{{item.birth_day}}</td> 
-          <td>{{item.race}}</td> 
-          <td>{{item.gender}}</td> 
-          <td>{{item.medical_coverage}}</td> 
-          <td>{{item.pay_frecuency}}</td> 
-          <td>{{item.status}}</td> 
-          <td>{{item.number_allowances}}</td> 
-          <td>{{item.withheld}}</td> 
-          <td>{{item.source_hire}}</td> 
-          <td><button  (click)="editaRestaurant(item.$key)" class="btn btn-primary" data-toggle="modal" data-target="#editRestauran">Edit</button></td>
+          <td>{{item.firts_name}}</td>
+          <td>{{item.last_name}}</td>
+          <td>{{item.restaurant}}
+          </td>
+          <td>{{item.ssn}}</td>
+          <td>{{item.phone}}</td>
+          <td>{{item.birth_day}}</td>
+          <td>{{item.race}}</td>
+          <td >
+            <div [ngSwitch]="item.gender">
+              <p *ngSwitchCase="1">Men</p>
+              <p *ngSwitchCase="2">Women</p>
+            </div>
+          </td>
+          <td>
+            <div [ngSwitch]="item.medical_coverage">
+              <p class="label label-success" *ngSwitchCase="1">Si</p>
+              <p class="label label-danger" *ngSwitchCase="2">No</p>
+            </div>
+          </td>
+          <td>{{item.pay_frecuency}}</td>
+          <td>
+            <div [ngSwitch]="item.status">
+              <p class="label label-success" *ngSwitchCase="1">Active</p>
+              <p *ngSwitchCase="2">Disable</p>
+            </div>
+          </td>
+          <td>{{item.number_allowances}}</td>
+          <td>{{item.withheld}}</td>
+          <td>{{item.source_hire}}</td>
+          <td><p class="label label-success">{{item.rol}}<p></td>
+          <td><button  (click)="editEmployee(item.$key)" class="btn btn-primary" data-toggle="modal" data-target="#editEmployee">Edit</button></td>
 
       </tr>
     </tbody>
   </table>
-</div>  
+</div>
+
+
+
+  <!-- Modal Edit Employee -->
+  <div class="modal fade" id="editEmployee" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Add Employee</h4>
+        </div>
+        <div class="modal-body">
+          <form action="" class="form-horizontal" #employeeUpdate='ngForm' (ngSubmit)="updateEmployee(employeeUpdate.value)" >
+            <fieldset>
+              <!-- Name -->
+              <div class="col-md-12 content">
+                <div class="col-md-6 form-group col-md-offset-2">
+                  <div class="control-group">
+                    <label class="control-label"  for="firts_name">Firts Name</label>
+                    <div class="controls">
+                      <input type="text" id="firts_name"  minlength="4" required name="firts_name" placeholder="" class="input-xlarge" [(ngModel)]="employees.firts_name">
+                      <div *ngIf="firtsnameRef.errors && (firtsnameRef.dirty || firtsnameRef.touched ) "  class="alert alert-danger">
+                        <div [hidden]="!firtsnameRef.errors.required" >
+                          Please enter a store.
+                        </div>
+                        <div [hidden]="!firtsnameRef.errors.minlength" >
+                          Please enter atleast 4 characters.
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <label class="control-label"  for="last_name">Last name</label>
+                    <div class="controls">
+                      <input type="text" id="last_name" #lastnameRef="ngModel" name="last_name" required  placeholder="" class="input-xlarge" [(ngModel)]="employees.last_name">
+                      <div [hidden]="lastnameRef.valid || lastnameRef.pristine" class="alert alert-danger">
+                        Please enter a Last name.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <label class="control-label"  for="restaurant">Restaurant / Store </label>
+                    <div class="controls">
+                      <!--input type="text" id="password" #passwordRef="ngModel" name="password" required  placeholder="" class="input-xlarge" ngModel-->
+                      <select #restaurantdRef="ngModel" name="restaurant" name="restaurant" required [(ngModel)]="employees.restauran">
+                        <option *ngFor="let item of restaurant | async" value="{{item.store}}">{{item.store}}</option>
+
+                      </select>
+
+                    </div>
+                  </div>
+                  <div   class="control-group">
+                    <label class="control-label"  for="social_security_number">Social Security Number</label>
+                    <div class="controls">
+                      <input type="text" id="social_security_number" #securityNumberRef="ngModel" name="social_security_number" required placeholder="" class="input-xlarge" [(ngModel)]="employees.social_security_number">
+                      <div [hidden]="securityNumberRef.valid || securityNumberRef.pristine" class="alert alert-danger">
+                        Please enter a Social Security Number.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <label class="control-label"  for="ssn">SSN</label>
+                    <div class="controls">
+                      <input type="text" id="phone" #ssnRef="ngModel" name="ssn" required placeholder="" class="input-xlarge" [(ngModel)]="employees.ssn">
+                      <div [hidden]="ssnRef.valid || ssnRef.pristine" class="alert alert-danger">
+                        Please enter a SSN.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <label class="control-label"  for="phone">Phone</label>
+                    <div class="controls">
+                      <input type="text" id="phone" #phoneRef="ngModel" name="phone" required placeholder="" class="input-xlarge" [(ngModel)]="employees.phone">
+                      <div [hidden]="phoneRef.valid || phoneRef.pristine" class="alert alert-danger">
+                        Please enter a  Phone Number.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <label class="control-label"  for="birth_day">Date of Birth</label>
+                    <div class="controls">
+                      <input type="text" id="birth_day" #birthDayRef="ngModel" name="birth_day" required placeholder="" class="input-xlarge" [(ngModel)]="employees.birth_day">
+                      <div [hidden]="birthDayRef.valid || birthDayRef.pristine" class="alert alert-danger">
+                        Please enter a Date of Birth.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <label class="control-label"  for="race">Race</label>
+                    <div class="controls">
+                      <input type="text" id="race" #raceRef="ngModel" name="race" required placeholder="" class="input-xlarge"  [(ngModel)]="employees.race" >
+                      <div [hidden]="raceRef.valid || raceRef.pristine" class="alert alert-danger">
+                        Please enter a Race.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xs-6 form-group">
+                  <div class="control-group">
+                    <label class="control-label"  for="gender">Gender</label>
+                    <div class="controls">
+                      <!--input type="text" id="phone" #cellphoneRef="ngModel" name="cellphone" required placeholder="" class="input-xlarge" ngModel-->
+                      <select #genderRef="ngModel" name="gender" name="gender" required [(ngModel)]="employees.gender">
+                        <option value="1">M</option>
+                        <option value="2">F</option>
+                      </select>
+                      <div [hidden]="genderRef.valid || genderRef.pristine" class="alert alert-danger">
+                        Please select a Gender.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <label class="control-label"  for="phone">Dependant Medical Coverage</label>
+                    <div class="controls">
+                      <!--input type="text" id="phone" #medicalCoverageRef="ngModel" name="cellphone" required placeholder="" class="input-xlarge" ngModel-->
+                      <select #medicalCoverageRef="ngModel" name="medical_coverage" name="medical_coverage" required [(ngModel)]="employees.medical_coverage">
+                        <option value="1">Yes</option>
+                        <option value="2">No</option>
+                      </select>
+                      <div [hidden]="medicalCoverageRef.valid || medicalCoverageRef.pristine" class="alert alert-danger">
+                        Please select a Dependant Medical Coverage.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <label class="control-label"  for="pay_frecuency">Pay Frequency</label>
+                    <div class="controls">
+                      <input type="text" id="pay_frecuency" #payFrecuencyRef="ngModel" name="pay_frecuency" required placeholder="" class="input-xlarge" [(ngModel)]="employees.pay_frecuency">
+                      <div [hidden]="payFrecuencyRef.valid || payFrecuencyRef.pristine" class="alert alert-danger">
+                        Please enter a Pay Frequency.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <label class="control-label"  for="status">Status</label>
+                    <div class="controls">
+                      <!--input type="text" id="phone" #cellphoneRef="ngModel" name="cellphone" required placeholder="" class="input-xlarge" ngModel-->
+                      <select  #statusRef="ngModel" name="status" required  [(ngModel)]="employees.status">
+                        <option value="1">Single</option>
+                        <option value="1">Married</option>
+                        <option value="1">Divorced</option>
+                      </select>
+                      <div [hidden]="statusRef.valid || statusRef.pristine" class="alert alert-danger">
+                        Please enter a Status.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <label class="control-label"  for="status">Rol</label>
+                    <div class="controls">
+                      <!--input type="text" id="phone" #cellphoneRef="ngModel" name="cellphone" required placeholder="" class="input-xlarge" ngModel-->
+                      <select  #statusRef="ngModel" name="rol" required   [(ngModel)]="employees.rol">
+                        <option *ngFor="let item of rol | async" value="{{item.rol_name}}">{{item.rol_name}}</option>
+                      </select>
+                      <!--div [hidden]="statusRef.valid || statusRef.pristine" class="alert alert-danger">
+                        Please enter a Status.
+                      </div-->
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <label class="control-label"  for="allowances">Number of Allowances</label>
+                    <div class="controls">
+                      <input type="number" id="allowances" #allowancesRef="ngModel" name="number_allowances" required placeholder="" class="input-xlarge" [(ngModel)]="employees.number_allowances">
+
+                      <div [hidden]="allowancesRef.valid || allowancesRef.pristine" class="alert alert-danger">
+                        Please enter Number of Allowances.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <label class="control-label"  for="withheld">Additional withheld</label>
+                    <div class="controls">
+                      <input type="text" id="withheld" #withheldRef="ngModel" name="withheld" required placeholder="" class="input-xlarge" [(ngModel)]="employees.withheld">
+
+                      <div [hidden]="withheldRef.valid || withheldRef.pristine" class="alert alert-danger">
+                        Please enter a Addiotional withheld.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <label class="control-label"  for="source_hire">Source of Hire</label>
+                    <div class="controls">
+                      <input type="text" id="source_hire" #sourceHireRef="ngModel" name="source_hire" required placeholder="" class="input-xlarge" [(ngModel)]="employees.withheld">
+
+                      <div [hidden]="sourceHireRef.valid || sourceHireRef.pristine" class="alert alert-danger">
+                        Please enter a Source of Hire.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="control-group">
+
+                    <div class="controls" style="padding-top: 10px;">
+                      <button type="submit" [disabled]="!employeeUpdate.valid" class="btn btn-primary">Save changes</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </fieldset>
+
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default"    data-dismiss="modal">Close</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ./ -->
+

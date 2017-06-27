@@ -26,6 +26,9 @@ import { EmployeeComponent } from './employee/employee.component';
 import { AbsencesComponent } from './absences/absences.component';
 import { RolComponent } from './rol/rol.component';
 import { LoopObjectPipe } from './loop-object.pipe';
+import { AuthGuard } from './auth.guard';
+import { AuthService } from './providers/auth.service';
+
 
 
 
@@ -45,7 +48,6 @@ import { LoopObjectPipe } from './loop-object.pipe';
     AbsencesComponent,
     RolComponent,
     LoopObjectPipe,
-    
   ],
   imports: [
     BrowserModule,
@@ -57,7 +59,7 @@ import { LoopObjectPipe } from './loop-object.pipe';
     AngularFireAuthModule
     //PopupModule.forRoot()
   ],
-  providers: [],
+  providers: [AuthGuard, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

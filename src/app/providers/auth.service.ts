@@ -12,23 +12,32 @@ export class AuthService  {
   public user : Observable<firebase.User>;
   private auth;
   private  response : boolean;
-  
+  loggedIn: boolean = false;
 
-  constructor( public afAuth: AngularFireAuth, private router : Router) 
+
+  constructor( public afAuth: AngularFireAuth, private router : Router)
   {
        this.user = afAuth.authState;
        this.auth = firebase.auth();
-       
-      
-
   }
 
- 
-  login(email : string, password : string ) {
-    //this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
 
-     this.auth.signInWithEmailAndPassword(email, password).catch( error => {
-           
+  login(email : string, password : string ) {
+
+
+     this.auth.signInWithEmailAndPassword(email, password).then( login => {
+       console.log(this.user);
+
+       if(login){
+         console.log(login);
+         this.getUserLoggedIn();
+       }
+         console.log(login);
+
+
+
+     }).catch( error => {
+
            let errorCode = error.code;
            let errorMessage = error.message;
 
@@ -42,22 +51,12 @@ export class AuthService  {
 
 
 
-    
-     this.auth.onAuthStateChanged( login => {
-          console.log(login);
-          if(login){
-            this.router.navigate(['/dashboard']);
-          }else{
-            //alert('No es posible ingresar en este momento');
-            console.log(login);
-          }
-     });
   }
 
   logout() {
     this.auth.signOut().then(() =>{
-        
-        this.router.navigate(['/login']);  
+
+        this.router.navigate(['/login']);
     }).catch(e =>{
         console.log(e);
     });
@@ -65,23 +64,30 @@ export class AuthService  {
 
   register(email:any, password:any)
   {
-      
+
       this.auth.createUserWithEmailAndPassword(email, password).then(e =>{
-       
-        this.router.navigate(['/dashboard']);
+
+        //this.router.navigate(['/dashboard']);
+         console.log(e);
       } ).catch( e => {
          console.log(e);
       });
-     /* this.auth.onAuthStateChanged(firebaseUser =>{   
-          if( firebaseUser )
-          {
-                alert("Se haregistrado satisfactoriamente. Porfavor ingrese");
-                this.router.navigate(['/dashboard']);
-          } else{
-                alert("Erro al ingresar  los datos, intentalo de nuevo ");
-          }
-      } );*/
-      
+
+
+  }
+
+  getUserLoggedIn()
+  {
+
+    this.auth.onAuthStateChanged( login => {
+     console.log(login);
+     if(login){
+       console.log(login);
+       this.router.navigate(['/dashboard']);
+     }else{
+       console.log(login);
+     }
+     });
   }
 
 }

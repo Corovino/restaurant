@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from '../auth.guard';
 
 import { LoginComponent } from '../login/login.component';
 import { RegisterComponent } from '../register/register.component';
@@ -12,21 +13,21 @@ import { AbsencesComponent } from '../absences/absences.component';
 import { RolComponent } from '../rol/rol.component';
 
 
-const routes : Routes = 
-[ 
+const routes : Routes =
+[
    {path: '', redirectTo: '/login', pathMatch: 'full' },
    {path: 'login', component: LoginComponent },
    {path: 'register', component: RegisterComponent  },
-   {path: 'dashboard', component: DashboardComponent, children:[
+   {path: 'dashboard', component: DashboardComponent,  children:[
       {path:'**', redirectTo:'dashboard', pathMatch:'full'},
-      {path: 'addrestaurant', component: RestaurantComponent },
-      {path: 'adduser', component: UserComponent },
-      {path: 'addemployee', component: EmployeeComponent },
-      {path: 'absences', component: AbsencesComponent },
+      {path: 'addrestaurant', component: RestaurantComponent  },
+      {path: 'adduser', component: UserComponent  },
+      {path: 'addemployee', component: EmployeeComponent  },
+      {path: 'absences', component: AbsencesComponent  },
       {path: 'rol', component: RolComponent }
-      
-   ] }
-   
+   ] },
+  {path:'**', redirectTo:'login', pathMatch:'full'}
+
 ];
 
 @NgModule({
@@ -40,3 +41,4 @@ const routes : Routes =
   declarations: []
 })
 export class ApproutingModule { }
+

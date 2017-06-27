@@ -19,40 +19,65 @@
                         <input type="text" id="name" #nameRef="ngModel" minlength="4" required name="name" placeholder="" class="input-xlarge" ngModel>
                         <div *ngIf="nameRef.errors && (nameRef.dirty || nameRef.touched )"  class="invalid">
                                <div [hidden]="!nameRef.errors.required" >
-                                  Please enter a store. 
-                               </div> 
+                                  Please enter a Name.
+                               </div>
                                <div [hidden]="!nameRef.errors.minlength" >
-                                  Please enter atleast 4 characters. 
-                               </div> 
+                                  Please enter atleast 4 characters.
+                               </div>
                         </div>
-                        
+
                       </div>
                     </div>
                     <div class="control-group">
                       <label class="control-label"  for="last_name">Last name</label>
                       <div class="controls">
-                        <input type="text" id="last_name" #lastnameRef="ngModel" name="last_name" required  placeholder="" class="input-xlarge" ngModel>
-                         <div [hidden]="lastnameRef.valid || lastnameRef.pristine" class="alert alert-danger">
-                            Please enter a Last name. 
-                        </div> 
+                        <input type="text" id="last_name" #lastnameRef="ngModel" minlength="4" name="last_name" required  placeholder="" class="input-xlarge" ngModel>
+                         <div [hidden]="lastnameRef.valid || lastnameRef.pristine" class="invalid">
+                            Please enter a Last name.
+                        </div>
+                      </div>
+                    </div>
+                    <div class="control-group">
+                      <label class="control-label"  for="password">Email</label>
+                      <div class="controls">
+                        <input type="email" id="email" #emailRef="ngModel" name="email" required  pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"  placeholder="" class="input-xlarge" ngModel>
+                        <div class="md-errors-spacer" [hidden]="emailRef.valid || emailRef.untouched" class="invalid">
+                          <div  *ngIf="emailRef.errors && emailRef.errors.required" class="invalid">
+                            Email is required
+                          </div>
+                          <div  *ngIf="emailRef.errors && emailRef.errors.pattern">
+                            Email is invalid
+                          </div>
+                        </div>
                       </div>
                     </div>
                     <div class="control-group">
                       <label class="control-label"  for="password">Password</label>
                       <div class="controls">
                         <input type="password" id="password" #passwordRef="ngModel" name="password" required  placeholder="" class="input-xlarge" ngModel>
-                        <div [hidden]="passwordRef.valid || passwordRef.pristine" class="alert alert-danger">
-                            Please enter a Password. 
-                        </div> 
+                        <div [hidden]="passwordRef.valid || passwordRef.pristine" class="invalid">
+                            Please enter a Password.
+                        </div>
                       </div>
                     </div>
                     <div class="control-group">
                       <label class="control-label"  for="phone">Cell Phone</label>
                       <div class="controls">
                         <input type="text" id="phone" #cellphoneRef="ngModel" name="cellphone" required placeholder="" class="input-xlarge" ngModel>
-                         <div [hidden]="cellphoneRef.valid || cellphoneRef.pristine" class="alert alert-danger">
-                            Please enter a Cell Phone Number. 
-                        </div> 
+                         <div [hidden]="cellphoneRef.valid || cellphoneRef.pristine" class="invalid">
+                            Please enter a Cell Phone Number.
+                        </div>
+                      </div>
+                    </div>
+                    <div class="control-group">
+                      <label class="control-label"  for="restaurant">Restaurant / Store </label>
+                      <div class="controls">
+                        <!--input type="text" id="password" #passwordRef="ngModel" name="password" required  placeholder="" class="input-xlarge" ngModel-->
+                        <select #restaurantdRef="ngModel" name="restaurant" name="restaurant" required ngModel  >
+                          <option *ngFor="let item of restaurant | async" value="{{item.store}}">{{item.store}}</option>
+
+                        </select>
+
                       </div>
                     </div>
                     <div class="control-group">
@@ -62,24 +87,24 @@
                              <option value="1" selected>Admin</option>
                              <option value="2">User</option>
                              <option value="3">other</option>
-                         </select>   
-                         
+                         </select>
+
                       </div>
                     </div>
                     <div class="control-group">
-                      
-                      <div class="controls" style="padding-top: 10px;"> 
+
+                      <div class="controls" style="padding-top: 10px;">
                           <button type="submit" [disabled]="!userForm.valid" class="btn btn-primary">Save changes</button>
                       </div>
                     </div>
-                  
+
                   </fieldset>
 
                 </form>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-default"    data-dismiss="modal">Close</button>
-                
+
               </div>
             </div>
           </div>
@@ -93,6 +118,8 @@
           <th>Name</th>
           <th>Last name</th>
           <th>Cell phone</th>
+          <th>email</th>
+          <th>Restaurant</th>
           <th>Role</th>
           <th>Edit</th>
         </tr>
@@ -102,15 +129,17 @@
             <td>{{item.name}}</td>
             <td>{{item.last_name}}</td>
             <td>{{item.cell_phone}}</td>
+            <td>{{item.email}}</td>
+            <td>{{item.restaurant}}</td>
             <td>
                 <div [ngSwitch]="item.rol">
-                    <p *ngSwitchCase="1">Admin</p>
-                    <p *ngSwitchCase="2">User</p>
-                </div>    
+                    <p *ngSwitchCase="1" class="label label-success">Admin</p>
+                    <p *ngSwitchCase="2" class="label label-success">User</p>
+                </div>
             </td>
             <td><button  (click)="editUser(item.$key)" class="btn btn-primary" data-toggle="modal" data-target="#editRestauran">Edit</button></td>
 
         </tr>
       </tbody>
     </table>
-</div>    
+</div>
