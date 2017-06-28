@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
+import { DatauserService } from '../providers/datauser.service';
 import { Subject } from 'rxjs/Subject';
 import * as firebase from 'firebase/app';
 
@@ -10,7 +11,8 @@ import * as firebase from 'firebase/app';
 @Component({
   selector: 'app-employee',
   templateUrl: './employee.component.html',
-  styleUrls: ['./employee.component.css']
+  styleUrls: ['./employee.component.css'],
+  providers : [ DatauserService ]
 })
 export class EmployeeComponent implements OnInit {
 
@@ -25,7 +27,7 @@ export class EmployeeComponent implements OnInit {
   private employees: any;
   private key:any;
 
-  constructor(private af : AngularFireDatabase, private auth: AngularFireAuth) {
+  constructor(private af : AngularFireDatabase, private auth: AngularFireAuth, private userRestaurant : DatauserService  ) {
 
 
   }
@@ -39,8 +41,8 @@ export class EmployeeComponent implements OnInit {
 
 
 
-      console.log(this.getUserRestaurant());
-      let test = this.getUserRestaurant().subscribe( data => {
+
+      let test = this.userRestaurant.getRestauranUser().subscribe( data => {
 
           return data.map( data => {
                  console.log(data.restaurant);
@@ -134,21 +136,5 @@ export class EmployeeComponent implements OnInit {
   }
 
 
-
-
-
-  getUserRestaurant()
-  {
-      this.au = firebase.auth().currentUser.email;
-
-      this.users = this.af.list("/users",{
-        query:{
-          orderByChild: 'email',
-          equalTo: this.au
-        }
-      });
-
-      return this.users;
-  }
 
 }
