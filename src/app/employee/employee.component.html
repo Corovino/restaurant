@@ -22,7 +22,7 @@
                             <input type="text" id="firts_name" #firtsnameRef="ngModel" minlength="4" required name="firts_name" placeholder="" class="input-xlarge" ngModel>
                             <div *ngIf="firtsnameRef.errors && (firtsnameRef.dirty || firtsnameRef.touched ) "  class="alert alert-danger">
                                    <div [hidden]="!firtsnameRef.errors.required" >
-                                      Please enter a store.
+                                      Please enter a Name.
                                   </div>
                                   <div [hidden]="!firtsnameRef.errors.minlength" >
                                       Please enter atleast 4 characters.
@@ -283,7 +283,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title" id="myModalLabel">Add Employee</h4>
+          <h4 class="modal-title" id="myModalLabel">Edit Employee</h4>
         </div>
         <div class="modal-body">
           <form action="" class="form-horizontal" #employeeUpdate='ngForm' (ngSubmit)="updateEmployee(employeeUpdate.value)" >
@@ -297,7 +297,7 @@
                       <input type="text" id="firts_name"  minlength="4" required name="firts_name" placeholder="" class="input-xlarge" [(ngModel)]="employees.firts_name">
                       <div *ngIf="firtsnameRef.errors && (firtsnameRef.dirty || firtsnameRef.touched ) "  class="alert alert-danger">
                         <div [hidden]="!firtsnameRef.errors.required" >
-                          Please enter a store.
+                          Please enter a Name.
                         </div>
                         <div [hidden]="!firtsnameRef.errors.minlength" >
                           Please enter atleast 4 characters.
@@ -326,7 +326,7 @@
 
                     </div>
                   </div>
-                  <div   class="control-group">
+                  <!--div   class="control-group">
                     <label class="control-label"  for="social_security_number">Social Security Number</label>
                     <div class="controls">
                       <input type="text" id="social_security_number" #securityNumberRef="ngModel" name="social_security_number" required placeholder="" class="input-xlarge" [(ngModel)]="employees.social_security_number">
@@ -334,11 +334,11 @@
                         Please enter a Social Security Number.
                       </div>
                     </div>
-                  </div>
+                  </div-->
                   <div class="control-group">
                     <label class="control-label"  for="ssn">SSN</label>
                     <div class="controls">
-                      <input type="text" id="phone" #ssnRef="ngModel" name="ssn" required placeholder="" class="input-xlarge" [(ngModel)]="employees.ssn">
+                      <input type="text" id="phone" #ssnRef="ngModel" name="ssn" required placeholder="" class="input-xlarge" [(ngModel)]="employees.ssn" disabled>
                       <div [hidden]="ssnRef.valid || ssnRef.pristine" class="alert alert-danger">
                         Please enter a SSN.
                       </div>
