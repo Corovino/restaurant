@@ -16,51 +16,44 @@ export class EmployeeComponent implements OnInit {
 
   private employee: FirebaseListObservable<any[]>;
   private restaurant : FirebaseListObservable<any[]>;
+  private users :  FirebaseListObservable<any[]>;
   private rol : FirebaseListObservable<any[]>;
   private au : any;
-  private user: any;
+
+
 
   private employees: any;
   private key:any;
 
   constructor(private af : AngularFireDatabase, private auth: AngularFireAuth) {
-    this.au = firebase.auth();
-    this.au.onAuthStateChanged(user => {
-      if (user) {
-        this.user = user.email;
-         console.log(this.user);
-      }
-    });
+
+
   }
 
   ngOnInit() {
 
-      this.employee = this.af.list('/employees');
+
       this.restaurant = this.af.list('/restaurant');
       this.rol = this.af.list('/rol');
       this.employees= {};
 
 
 
-      /*this.au.onAuthStateChanged(user => {
-        if (user) {
-          this.user = user.email;
-          if (this.user == "hjr@iqthink.com") {
-            this.user=1;
-          }else{
-            this.user=2;
-          }
-        }
+      console.log(this.getUserRestaurant());
+      let test = this.getUserRestaurant().subscribe( data => {
+
+          return data.map( data => {
+                 console.log(data.restaurant);
+                 this.employee = this.af.list('/employees',{
+                   query:{
+                     orderByChild: 'restaurant',
+                     equalTo: data.restaurant
+                   }
+                 });
+
+             });
       });
 
-      this.employee = this.af.list('/employee', {
-        query: {
-          orderByChild: 'restaurant',
-          equalTo: 'restaurant'
-        }
-      });*/
-  		console.log(this.restaurant);
-      console.log(this.employee);
   }
 
   employeeInfo(value : any)
@@ -135,9 +128,27 @@ export class EmployeeComponent implements OnInit {
 
 
   updateEmployee(data : any){
-
+       console.log(data);
        this.employee.update(this.key, data);
 
+  }
+
+
+
+
+
+  getUserRestaurant()
+  {
+      this.au = firebase.auth().currentUser.email;
+
+      this.users = this.af.list("/users",{
+        query:{
+          orderByChild: 'email',
+          equalTo: this.au
+        }
+      });
+
+      return this.users;
   }
 
 }

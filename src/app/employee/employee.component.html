@@ -235,7 +235,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let item of employee | async" id="">
+      <tr  *ngFor="let item of employee | async"  id="">
           <td>{{item.firts_name}}</td>
           <td>{{item.last_name}}</td>
           <td>{{item.restaurant}}
@@ -268,6 +268,7 @@
           <td>{{item.source_hire}}</td>
           <td><p class="label label-success">{{item.rol}}<p></td>
           <td><button  (click)="editEmployee(item.$key)" class="btn btn-primary" data-toggle="modal" data-target="#editEmployee">Edit</button></td>
+
 
       </tr>
     </tbody>
