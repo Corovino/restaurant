@@ -23,8 +23,11 @@ export class RestaurantComponent implements OnInit {
   private key :string;
 
 
+
   constructor(private resService : RestaurantService, private af : AngularFireDatabase ) {
       this.val = {};
+      console.log(this.search);
+
   }
 
   ngOnInit() {
@@ -80,11 +83,16 @@ export class RestaurantComponent implements OnInit {
 
   }
 
-  restauranEdit( data: any)
+  restauranEdit($event, data: any)
   {
       console.log(this.key);
       console.log("re",data);
       this.resService.updateRestaurant( this.key, data );
+  }
+
+  search( search : any)
+  {
+      console.log(search);
   }
 
 
