@@ -25,6 +25,8 @@ export class NavComponent implements OnInit {
   constructor(private af : AngularFireAuth, private  authService : AuthService, private restaurant : DatauserService )
   {
       this.au = firebase.auth();
+      this.restaurantName = "Restaurant App";
+
   }
 
   ngOnInit() {
@@ -37,11 +39,15 @@ export class NavComponent implements OnInit {
 
     this.restaurant.getRestauranUser().subscribe( data => {
 
-          return data.map( data => {
-                this.restaurantName = data.restaurant;
+           data.map( data => {
+
+               this.restaurantName = data.restaurant;
+
           });
 
     } );
+
+
 
   }
 
