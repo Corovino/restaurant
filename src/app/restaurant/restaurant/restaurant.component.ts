@@ -83,27 +83,7 @@ export class RestaurantComponent implements OnInit {
       this.resService.updateRestaurant( this.key, data );
   }
 
-  /*search( search : any)
-  {
 
-
-   this.restaurant = this.af.list('/restaurant',{
-      query:{
-
-        limitToFirst:1,
-        orderBychild:"store",
-        equalTo:search
-      }
-    });
-     test.subscribe( data => {
-
-          data.map( data => {
-                console.log(data);
-          });
-    });
-    console.log(this.restaurant);
-    console.log(search);
-  }*/
 
 
 }
