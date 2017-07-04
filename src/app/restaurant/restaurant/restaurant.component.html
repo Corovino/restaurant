@@ -7,7 +7,7 @@
         <div  class="col-md-5 ">
           <form class="navbar-form navbar-left" method="GET" role="search">
             <div class="form-group">
-              <input type="text" name="q" class="form-control" placeholder="Search"  #dataSearch (keyup.enter)="search(dataSearch.value)">
+              <input type="text" name="q" class="form-control" placeholder="Search"  [(ngModel)]="search">
             </div>
             <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
           </form>
@@ -31,7 +31,7 @@
               </tr>
               </thead>
               <tbody>
-              <tr *ngFor="let item of restaurant | async; let i = index" id="">
+              <tr *ngFor="let item of restaurant | async | filter: search " id="">
                 <td>{{ item.store }}</td>
                 <td>{{ item.addres }}</td>
                 <td>{{ item.state }}</td>
@@ -40,13 +40,17 @@
                 <td>{{ item.manager_phone }}</td>
                 <td>{{ item.email }}</td>
                 <td>{{ item.ein }}</td>
-                <td><button  (click)="editaRestaurant(item.$key, i)" class="btn btn-primary" data-toggle="modal" data-target="#editRestauran">Edit</button></td>
+                <td><button  (click)="editaRestaurant(item.$key)" class="btn btn-primary" data-toggle="modal" data-target="#editRestauran">Edit</button></td>
 
               </tr>
+
               </tbody>
             </table>
           </div>
         </div>
+
+
+
         <!--  ./ -->
 
         <!-- Modal Create Restaurant-->

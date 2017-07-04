@@ -28,6 +28,7 @@ import { RolComponent } from './rol/rol.component';
 import { LoopObjectPipe } from './loop-object.pipe';
 import { AuthGuard } from './auth.guard';
 import { AuthService } from './providers/auth.service';
+import { FilterPipe } from './pipes/filter.pipe';
 
 
 
@@ -48,6 +49,7 @@ import { AuthService } from './providers/auth.service';
     AbsencesComponent,
     RolComponent,
     LoopObjectPipe,
+    FilterPipe,
   ],
   imports: [
     BrowserModule,

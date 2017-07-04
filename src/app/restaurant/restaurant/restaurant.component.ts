@@ -4,9 +4,7 @@ import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable }
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/map';
-import { ModalsComponent } from '../../modals/modals.component';
-import {forEach} from "@angular/router/src/utils/collection";
-import  { LoopObjectPipe } from '../../loop-object.pipe';
+import { FilterPipe } from '../../pipes/filter.pipe';
 import { Restaurant } from '../../restaurant';
 
 @Component({
@@ -18,15 +16,16 @@ import { Restaurant } from '../../restaurant';
 export class RestaurantComponent implements OnInit {
 
   private restaurant: FirebaseListObservable<any[]>;
-  public val : any;
-  private  res : Restaurant[];
+  private test: FirebaseListObservable<any[]>;
+  public  val : any;
+  private res : Restaurant[];
   private key :string;
 
 
 
   constructor(private resService : RestaurantService, private af : AngularFireDatabase ) {
       this.val = {};
-      console.log(this.search);
+
 
   }
 
@@ -35,10 +34,7 @@ export class RestaurantComponent implements OnInit {
      console.log(this.restaurant);
   }
 
-  ClickButton()
-  {
-      console.log("data");
-  }
+
 
   restaurantInfo(value : any)
   {
@@ -48,11 +44,8 @@ export class RestaurantComponent implements OnInit {
       });
   }
 
-  editaRestaurant(key : any, index : any)
+  editaRestaurant(key : any)
   {
-
-
-
 
      this.resService.getIdRestaurant(key).subscribe( data => {
         console.log(key);
@@ -90,10 +83,27 @@ export class RestaurantComponent implements OnInit {
       this.resService.updateRestaurant( this.key, data );
   }
 
-  search( search : any)
+  /*search( search : any)
   {
-      console.log(search);
-  }
+
+
+   this.restaurant = this.af.list('/restaurant',{
+      query:{
+
+        limitToFirst:1,
+        orderBychild:"store",
+        equalTo:search
+      }
+    });
+     test.subscribe( data => {
+
+          data.map( data => {
+                console.log(data);
+          });
+    });
+    console.log(this.restaurant);
+    console.log(search);
+  }*/
 
 
 }
