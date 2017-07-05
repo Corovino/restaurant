@@ -18,14 +18,16 @@ export class AbsencesComponent implements OnInit {
   private employee: FirebaseListObservable<any[]>;
   private employeeData: FirebaseListObservable<any[]>;
   private absence :FirebaseListObservable<any[]>;
-  private idUser : any;
+  private absenc :any;
+  private key : any;
   private nameRestaurant: any;
 
   constructor(private af : AngularFireDatabase, private userRestaurant : DatauserService  ) { }
 
   ngOnInit() {
-    //this.employee = this.af.list('/employees');
-    this.absence=this.af.list('/absences',);
+
+    this.absence = this.af.list('/absences');
+    this.absenc = {};
 
     let test = this.userRestaurant.getRestauranUser().subscribe( data => {
 
@@ -46,8 +48,6 @@ export class AbsencesComponent implements OnInit {
 
   createAbsences(value: any)
   {
-      console.log(value.employee);
-      console.log(this.nameRestaurant);
 
 
       let promise = new Promise( () => {
@@ -80,12 +80,42 @@ export class AbsencesComponent implements OnInit {
     });
 
     console.log( this.employeeData );
-
   }
+
+
 
   editaAbsences(key: any)
   {
      console.log(key);
+     this.key = key;
+     let promises = this.absence.subscribe( data => {
+
+          data.forEach( data => {
+            if( data.$key == key)
+            {
+                  this.absenc = {
+                    employee: data.employee,
+                    restaurant : data.nameRestaurant,
+                    category: data.category,
+                    start_date: data.start_date,
+                    end_date: data.end_date,
+                    approved : data.approved,
+                    remarks : data.remarks
+                  }
+            }
+
+          } );
+
+     } );
+
+     console.log(this.absenc.employee);
+  }
+
+
+  updateAbsence( data :any)
+  {
+    console.log( data );
+    this.absence.update(this.key, data);
   }
 
 

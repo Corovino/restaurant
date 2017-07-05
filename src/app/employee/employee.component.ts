@@ -103,7 +103,6 @@ export class EmployeeComponent implements OnInit {
                if ( data.$key == value)
                {
 
-
                     this.employees = {
                       birth_day : data.birth_day,
                       firts_name : data.firts_name,
@@ -124,7 +123,6 @@ export class EmployeeComponent implements OnInit {
                     }
                }
             });
-
         });
 
 

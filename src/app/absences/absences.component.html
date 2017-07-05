@@ -151,19 +151,17 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title" id="myModalLabel">Add Absence</h4>
+          <h4 class="modal-title" id="myModalLabel">Edit Absence</h4>
         </div>
         <div class="modal-body">
-          <form action="" class="form-horizontal" #absenceForm='ngForm' (ngSubmit)="createAbsences(absenceForm.value)" >
+          <form action="" class="form-horizontal" #absenceEditForm='ngForm' (ngSubmit)="updateAbsence(absenceEditForm.value)" >
             <fieldset>
               <!-- Name -->
               <div class="control-group">
                 <label class="control-label"  for="employee">Employee</label>
                 <div class="controls">
-                  <!--input type="text" id="password" #passwordRef="ngModel" name="password" required  placeholder="" class="input-xlarge" ngModel-->
-                  <select #employeeRef="ngModel" name="employee"  required ngModel>
-                    <option *ngFor="let item of employee | async" value="{{item.firts_name}}{{item.last_name}}">{{item.firts_name}} {{item.last_name}}</option>
-                  </select>
+
+                  <input type="text" id="employee" #startDateRef="ngModel" minlength="4" required name="employee" placeholder="" class="input-xlarge" [(ngModel)]="absenc.employee" disabled>
 
                 </div>
               </div>
@@ -172,7 +170,7 @@
                 <label class="control-label"  for="category">Category</label>
                 <div class="controls">
 
-                  <select #restaurantdRef="ngModel" name="category"  required ngModel>
+                  <select #restaurantdRef="ngModel" name="category"  required [(ngModel)]="absenc.category">
                     <option value="vacation">Vacation</option>
                     <option value="Maternity">Maternity</option>
                     <option value="Military">Military</option>
@@ -187,7 +185,7 @@
               <div class="control-group">
                 <label class="control-label"  for="start_sate">Star Date</label>
                 <div class="controls">
-                  <input type="date" id="rol_name" #startDateRef="ngModel" minlength="4" required name="start_date" placeholder="" class="input-xlarge" ngModel>
+                  <input type="date" id="rol_name" #startDateRef="ngModel" minlength="4" required name="start_date" placeholder="" class="input-xlarge" [(ngModel)]="absenc.start_date">
                   <div *ngIf="startDateRef.errors && (startDateRef.dirty || startDateRef.touched ) "  class="alert alert-danger">
                     <div [hidden]="!startDateRef.errors.required" >
                       Please enter a Start Date.
@@ -202,7 +200,7 @@
               <div class="control-group">
                 <label class="control-label"  for="end_date">End Date</label>
                 <div class="controls">
-                  <input type="date" id="end_date" #endDateRef="ngModel" name="end_date" required  placeholder="" class="input-xlarge" ngModel>
+                  <input type="date" id="end_date" #endDateRef="ngModel" name="end_date" required  placeholder="" class="input-xlarge" [(ngModel)]="absenc.end_date">
                   <div [hidden]="endDateRef.valid || endDateRef.pristine" class="alert alert-danger">
                     Please enter a End Date.
                   </div>
@@ -212,7 +210,7 @@
                 <label class="control-label"  for="approved">Approved</label>
                 <div class="controls">
 
-                  <select #restaurantdRef="ngModel" name="approved"  required ngModel>
+                  <select #restaurantdRef="ngModel" name="approved"  required [(ngModel)]="absenc.approved">
                     <option value="Yes">Yes</option>
                     <option value="No">No</option>
                   </select>
@@ -222,7 +220,7 @@
                 <label class="control-label"  for="remarks">Remarks</label>
                 <div class="controls">
 
-                  <textarea class="form-control" #remarksRef="ngModel" name="remarks" required    ngModelrows="5" ngModel></textarea>
+                  <textarea class="form-control" #remarksRef="ngModel" name="remarks" required    ngModelrows="5" [(ngModel)]="absenc.remarks"></textarea>
                   <div [hidden]="remarksRef.valid || remarksRef.pristine" class="alert alert-danger">
                     Please enter a Remarks.
                   </div>
@@ -232,7 +230,7 @@
               <div class="control-group">
 
                 <div class="controls" style="padding-top: 10px;">
-                  <button type="submit" [disabled]="!absenceForm.valid" class="btn btn-primary">Save changes</button>
+                  <button type="submit" [disabled]="!absenceEditForm.valid" class="btn btn-primary">Save changes</button>
                 </div>
               </div>
 
