@@ -3,6 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import { DatauserService } from '../providers/datauser.service';
+import { EmployeeSearchPipe } from '../pipes/employee-search.pipe';
 import { Subject } from 'rxjs/Subject';
 import * as firebase from 'firebase/app';
 
@@ -94,6 +95,7 @@ export class EmployeeComponent implements OnInit {
 
   editEmployee(value : any)
   {
+
         this.key = value;
         let promises = this.employee.subscribe(data => {
 
@@ -125,7 +127,7 @@ export class EmployeeComponent implements OnInit {
 
         });
 
-        console.log(this.employees.firts_name);
+
   }
 
 

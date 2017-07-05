@@ -1,5 +1,16 @@
 <div class="col-md-10 content">
+  <div  class="col-md-5 ">
     <button type="button"   type="button" class="btn btn-primary" data-toggle="modal" data-target="#createUser">Add User</button>
+  </div>
+    <div  class="col-md-5 ">
+      <form class="navbar-form navbar-left" method="GET" role="search">
+        <div class="form-group">
+          <input type="text" name="q" class="form-control" placeholder="Search" [(ngModel)]="search" >
+        </div>
+
+        <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
+      </form>
+    </div>
 
     <!-- Modal create User -->
         <div class="modal fade" id="createUser" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -110,11 +121,11 @@
           </div>
         </div>
     <!-- ./ -->
-
+  <div class="col-md-12">
     <div class="table-responsive">
-    <table class="table">
-      <thead>
-         <tr>
+      <table class="table">
+        <thead>
+        <tr>
           <th>Name</th>
           <th>Last name</th>
           <th>Cell phone</th>
@@ -123,23 +134,26 @@
           <th>Role</th>
           <th>Edit</th>
         </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let item of user | async" id="">
-            <td>{{item.name}}</td>
-            <td>{{item.last_name}}</td>
-            <td>{{item.cell_phone}}</td>
-            <td>{{item.email}}</td>
-            <td>{{item.restaurant}}</td>
-            <td>
-                <div [ngSwitch]="item.rol">
-                    <p *ngSwitchCase="1" class="label label-success">Admin</p>
-                    <p *ngSwitchCase="2" class="label label-success">User</p>
-                </div>
-            </td>
-            <td><button  (click)="editUser(item.$key)" class="btn btn-primary" data-toggle="modal" data-target="#editRestauran">Edit</button></td>
+        </thead>
+        <tbody>
+        <tr *ngFor="let item of user | async | users : search" id="">
+          <td>{{item.name}}</td>
+          <td>{{item.last_name}}</td>
+          <td>{{item.cell_phone}}</td>
+          <td>{{item.email}}</td>
+          <td>{{item.restaurant}}</td>
+          <td>
+            <div [ngSwitch]="item.rol">
+              <p *ngSwitchCase="1" class="label label-success">Admin</p>
+              <p *ngSwitchCase="2" class="label label-success">User</p>
+            </div>
+          </td>
+          <td><button  (click)="editUser(item.$key)" class="btn btn-primary" data-toggle="modal" data-target="#editRestauran">Edit</button></td>
 
         </tr>
-      </tbody>
-    </table>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
 </div>

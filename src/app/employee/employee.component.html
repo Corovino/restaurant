@@ -1,12 +1,13 @@
 <div class="col-md-10 content">
-  <div  class="col-md-5 ">
+    <div  class="col-md-5 ">
     <button type="button"  type="button" class="btn btn-primary" data-toggle="modal" data-target="#createEmployee"  >Add Employee</button>
   </div>
   <div  class="col-md-5 ">
     <form class="navbar-form navbar-left" method="GET" role="search">
       <div class="form-group">
-        <input type="text" name="q" class="form-control" placeholder="Sew2wearch">
+        <input type="text" name="q" class="form-control" placeholder="Search" [(ngModel)]="search" >
       </div>
+
       <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
     </form>
   </div>
@@ -221,11 +222,11 @@
         </div>
       </div>
   <!-- ./ -->
-
+<div class="col-md-12">
   <div class="table-responsive">
-  <table class="table">
-    <thead>
-       <tr>
+    <table class="table">
+      <thead>
+      <tr>
         <th>First name</th>
         <th>Last name</th>
         <th>Restaurant /Store</th>
@@ -244,47 +245,49 @@
         <th>Edit</th>
 
       </tr>
-    </thead>
-    <tbody>
-      <tr  *ngFor="let item of employee | async"  id="">
-          <td>{{item.firts_name}}</td>
-          <td>{{item.last_name}}</td>
-          <td>{{item.restaurant}}
-          </td>
-          <td>{{item.ssn}}</td>
-          <td>{{item.phone}}</td>
-          <td>{{item.birth_day}}</td>
-          <td>{{item.race}}</td>
-          <td >
-            <div [ngSwitch]="item.gender">
-              <p *ngSwitchCase="1">Men</p>
-              <p *ngSwitchCase="2">Women</p>
-            </div>
-          </td>
-          <td>
-            <div [ngSwitch]="item.medical_coverage">
-              <p class="label label-success" *ngSwitchCase="1">Si</p>
-              <p class="label label-danger" *ngSwitchCase="2">No</p>
-            </div>
-          </td>
-          <td>{{item.pay_frecuency}}</td>
-          <td>
-            <div [ngSwitch]="item.status">
-              <p class="label label-success" *ngSwitchCase="1">Active</p>
-              <p *ngSwitchCase="2">Disable</p>
-            </div>
-          </td>
-          <td>{{item.number_allowances}}</td>
-          <td>{{item.withheld}}</td>
-          <td>{{item.source_hire}}</td>
-          <td><p class="label label-success">{{item.rol}}<p></td>
-          <td><button  (click)="editEmployee(item.$key)" class="btn btn-primary" data-toggle="modal" data-target="#editEmployee">Edit</button></td>
+      </thead>
+      <tbody>
+      <tr  *ngFor="let item of employee | async | employeeSearch: search"   id="">
+        <td>{{item.firts_name}}</td>
+        <td>{{item.last_name}}</td>
+        <td>{{item.restaurant}}
+        </td>
+        <td>{{item.ssn}}</td>
+        <td>{{item.phone}}</td>
+        <td>{{item.birth_day}}</td>
+        <td>{{item.race}}</td>
+        <td >
+          <div [ngSwitch]="item.gender">
+            <p *ngSwitchCase="1">Men</p>
+            <p *ngSwitchCase="2">Women</p>
+          </div>
+        </td>
+        <td>
+          <div [ngSwitch]="item.medical_coverage">
+            <p class="label label-success" *ngSwitchCase="1">Si</p>
+            <p class="label label-danger" *ngSwitchCase="2">No</p>
+          </div>
+        </td>
+        <td>{{item.pay_frecuency}}</td>
+        <td>
+          <div [ngSwitch]="item.status">
+            <p class="label label-success" *ngSwitchCase="1">Active</p>
+            <p *ngSwitchCase="2">Disable</p>
+          </div>
+        </td>
+        <td>{{item.number_allowances}}</td>
+        <td>{{item.withheld}}</td>
+        <td>{{item.source_hire}}</td>
+        <td><p class="label label-success">{{item.rol}}<p></td>
+        <td><button  (click)="editEmployee(item.$key)" class="btn btn-primary" data-toggle="modal" data-target="#editEmployee">Edit</button></td>
 
 
       </tr>
-    </tbody>
-  </table>
+      </tbody>
+    </table>
+  </div>
 </div>
+
 
 
 
@@ -496,4 +499,4 @@
     </div>
   </div>
   <!-- ./ -->
-
+</div>

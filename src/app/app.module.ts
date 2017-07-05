@@ -29,6 +29,9 @@ import { LoopObjectPipe } from './loop-object.pipe';
 import { AuthGuard } from './auth.guard';
 import { AuthService } from './providers/auth.service';
 import { FilterPipe } from './pipes/filter.pipe';
+import { EmployeeSearchPipe } from './pipes/employee-search.pipe';
+import { UserPipe } from './pipes/user.pipe';
+import { AbsencesPipe } from './pipes/absences.pipe';
 
 
 
@@ -50,6 +53,9 @@ import { FilterPipe } from './pipes/filter.pipe';
     RolComponent,
     LoopObjectPipe,
     FilterPipe,
+    EmployeeSearchPipe,
+    UserPipe,
+    AbsencesPipe,
   ],
   imports: [
     BrowserModule,

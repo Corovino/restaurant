@@ -3,6 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import { DatauserService } from '../providers/datauser.service';
+import { AbsencesPipe } from '../pipes/absences.pipe';
 import { Subject } from 'rxjs/Subject';
 
 
@@ -80,6 +81,11 @@ export class AbsencesComponent implements OnInit {
 
     console.log( this.employeeData );
 
+  }
+
+  editaAbsences(key: any)
+  {
+     console.log(key);
   }
 
 

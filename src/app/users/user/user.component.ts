@@ -3,6 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import { Subject } from 'rxjs/Subject';
+import { UserPipe } from '../../pipes/user.pipe';
 import { AuthService } from '../../providers/auth.service';
 
 

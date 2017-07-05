@@ -35,7 +35,6 @@ export class RestaurantComponent implements OnInit {
   }
 
 
-
   restaurantInfo(value : any)
   {
       console.log(value);

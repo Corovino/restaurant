@@ -19,31 +19,29 @@
           <div class="table-responsive">
             <table class="table">
               <thead>
-              <tr>
-                <th>Store</th>
-                <th>Address</th>
-                <th>State</th>
-                <th>Zip</th>
-                <th>Manager name</th>
-                <th>Manager phone</th>
-                <th>Email</th>
-                <th>EIN</th>
-              </tr>
+                <tr>
+                  <th>Store</th>
+                  <th>Address</th>
+                  <th>State</th>
+                  <th>Zip</th>
+                  <th>Manager name</th>
+                  <th>Manager phone</th>
+                  <th>Email</th>
+                  <th>EIN</th>
+                </tr>
               </thead>
               <tbody>
-              <tr *ngFor="let item of restaurant | async | filter: search " id="">
-                <td>{{ item.store }}</td>
-                <td>{{ item.addres }}</td>
-                <td>{{ item.state }}</td>
-                <td>{{ item.zip }}</td>
-                <td>{{ item.manager_name }}</td>
-                <td>{{ item.manager_phone }}</td>
-                <td>{{ item.email }}</td>
-                <td>{{ item.ein }}</td>
-                <td><button  (click)="editaRestaurant(item.$key)" class="btn btn-primary" data-toggle="modal" data-target="#editRestauran">Edit</button></td>
-
-              </tr>
-
+                <tr *ngFor="let item of restaurant | async | filter: search " id="">
+                  <td>{{ item.store }}</td>
+                  <td>{{ item.addres }}</td>
+                  <td>{{ item.state }}</td>
+                  <td>{{ item.zip }}</td>
+                  <td>{{ item.manager_name }}</td>
+                  <td>{{ item.manager_phone }}</td>
+                  <td>{{ item.email }}</td>
+                  <td>{{ item.ein }}</td>
+                  <td><button  (click)="editaRestaurant(item.$key)" class="btn btn-primary" data-toggle="modal" data-target="#editRestauran">Edit</button></td>
+                </tr>
               </tbody>
             </table>
           </div>
