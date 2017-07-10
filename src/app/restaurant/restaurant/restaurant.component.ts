@@ -53,7 +53,6 @@ export class RestaurantComponent implements OnInit {
 
               if ( data.$key === key) {
 
-
                       this.val = {
                          store: data.store,
                          addres: data.addres,

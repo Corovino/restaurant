@@ -1,0 +1,342 @@
+<div class="col-md-10 content">
+  <div class="row user-infos cyruxx">
+    <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-xs-offset-0 col-sm-offset-0 col-md-offset-1 col-lg-offset-1">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title">Acount Settings</h3>
+        </div>
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-md-3 col-lg-3 hidden-xs hidden-sm">
+              <img class="img-circle"
+                   src="{{user.imgUrl}}"
+                   alt="User Pic">
+            </div>
+
+            <div class="col-xs-10 col-sm-10 hidden-md hidden-lg">
+              <strong></strong><br>
+              <dl>
+                <dt>User level:</dt>
+                <dd>Administrator</dd>
+                <dt>Registered since:</dt>
+                <dd>11/12/2013</dd>
+                <dt>Name</dt>
+                <dd>Phone</dd>
+                <dt>email</dt>
+                <dd>0</dd>
+              </dl>
+            </div>
+            <div class=" col-md-9 col-lg-9 hidden-xs hidden-sm">
+              <strong></strong><br>
+              <table class="table table-user-information">
+                <tbody  >
+                <tr>
+                  <td>User level:</td>
+                  <td >
+                      <div [ngSwitch]="user.rol">
+                        <p class="label label-success" *ngSwitchCase="1">Aadministrator</p>
+                        <p *ngSwitchCase="2">Disable</p>
+                      </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Registered since:</td>
+                  <td>01/06/2017</td>
+                </tr>
+                <tr>
+                  <td>Name</td>
+                  <td>{{user.name}}  {{user.last_name}}</td>
+                </tr>
+                <tr>
+                  <td>Phone</td>
+                  <td>{{user.phone}}</td>
+                </tr>
+                <tr>
+                  <td>Email</td>
+                  <td>{{user.email}}</td>
+                </tr>
+                <tr>
+                  <td>Warnings</td>
+                  <td>0</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="panel-footer">
+          <button class="btn btn-sm btn-primary" type="button"
+                  data-toggle="modal" data-target="#editPass"
+                  data-original-title="Change password" >Change Pass</button>
+          <span class="pull-right">
+                            <button class="btn btn-sm btn-warning" type="button"
+                                    data-toggle="modal" data-target="#editAcount"
+                                    data-original-title="Edit this user"><i class="glyphicon glyphicon-edit"></i></button>
+
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- Modal  Edit Account-->
+  <div id="editAcount" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Edit account</h4>
+        </div>
+          <div class="modal-body">
+
+            <form action="" class="form-horizontal" #userInfoForm='ngForm' (ngSubmit)="accountInfo(userInfoForm.value)" >
+              <div class="col-md-12 content">
+                <div class="col-md-6 form-group col-md-offset-2">
+                  <div class="control-group">
+                      <label class="control-label"  for="firts_name">Name</label>
+                      <div class="controls">
+                        <input type="text" id="firts_name" #nameRef="ngModel" minlength="4" required name="name" placeholder="" class="input-xlarge" [(ngModel)]="user.name"  >
+                        <div *ngIf="nameRef.errors && (nameRef.dirty || nameRef.touched ) "  class="alert alert-danger">
+                          <div [hidden]="!nameRef.errors.required" >
+                            Please enter a Name.
+                          </div>
+                          <div [hidden]="!nameRef.errors.minlength" >
+                            Please enter atleast 4 characters.
+                          </div>
+                        </div>
+                      </div>
+                  </div>
+                  <div class="control-group">
+                    <div>
+                      <input type="hidden" id="user_key"  #keyRef="ngModel" minlength="4" required name="uid" placeholder="" class="input-xlarge" [(ngModel)]="user.uid" >
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <label class="control-label"  for="firts_name">Phone</label>
+                    <div class="controls">
+                      <input type="text" id="firts_name" #phoneRef="ngModel" minlength="4" required name="phone" placeholder="" class="input-xlarge" [(ngModel)]="user.phone">
+                      <div *ngIf="phoneRef.errors && (phoneRef.dirty || phoneRef.touched ) "  class="alert alert-danger">
+                        <div [hidden]="!phoneRef.errors.required" >
+                          Please enter a Name.
+                        </div>
+                        <div [hidden]="!phoneRef.errors.minlength" >
+                          Please enter atleast 4 characters.
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <label class="control-label"  for="firts_name">Email</label>
+                    <div class="controls">
+                      <input type="text" id="firts_name" #emailRef="ngModel" minlength="4" required name="email" placeholder="" class="input-xlarge" [(ngModel)]="user.email" disabled>
+                      <div *ngIf="emailRef.errors && (emailRef.dirty || emailRef.touched ) "  class="alert alert-danger">
+                        <div [hidden]="!emailRef.errors.required" >
+                          Please enter a Email
+                        </div>
+                        <div [hidden]="!emailRef.errors.minlength" >
+                          Please enter a valid Email.
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <label class="control-label"  for="firts_name">Profile photo</label>
+                    <div class="col-md-9">
+
+                      <h3>Select files</h3>
+
+                      <div appNgdropfile
+                           [ngClass]="{'file-over': isDropZoneOver}"
+                           (fileOver)="fileOverDropZone($event)"
+                           [files]="files"
+                           class="well drop-zone">
+                        <h4>Drop your files here</h4>
+                        <img src="/assets/images/drop-images.png"/>
+                      </div>
+
+                    </div>
+
+                    <div class="col-md-3" style="margin-bottom: 40px">
+
+                      <h3>Upload Files</h3>
+
+                      <button type="button" class="btn btn-success" (click)="uploadImagesToFirebase()" [disabled]="files?.length == 0 || !isEnabledUpload">
+                        <span class="glyphicon glyphicon-upload"></span> Upload files to Firebase
+                      </button>
+                      <button type="button" class="btn btn-danger" (click)="clearFiles()">
+                        <span class="glyphicon glyphicon-trash"></span> Clear files
+                      </button>
+
+                      <table class="table" *ngIf="files.length > 0">
+                        <thead>
+                        <tr>
+                          <th>Name</th>
+                          <th>Size</th>
+                          <th>Progress</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let item of files">
+                          <td [ngClass]="{'text-green': item.isUploading}"><strong>{{ item?.file?.name }}</strong></td>
+                          <td nowrap>{{ item?.file?.size / 1024 / 1024 | number:'.2' }} MB</td>
+                          <td>
+                            <div class="progress" style="margin-bottom: 0;">
+                              <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': item.progress + '%' }"></div>
+                            </div>
+                          </td>
+                        </tr>
+                        </tbody>
+                      </table>
+
+                    </div>
+                  </div>
+                  <div class="control-group">
+
+                    <div class="controls" style="padding-top: 10px;">
+                      <button type="submit"  class="btn btn-primary">Save changes</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+
+
+
+
+
+          </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <!-- ./ -->
+
+
+  <!-- Modal  Edit Pass
+  <div id="editPass" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Edit Pass</h4>
+        </div>
+        <div class="modal-body">
+
+          <form action="" class="form-horizontal"   [formGroup]="form" (ngSubmit)="changePassInfo()" >
+            <div class="col-md-12 content">
+              <div class="col-md-6 form-group col-md-offset-2">
+                <div class="control-group">
+                  <label class="control-label"  for="new_pass">New Password</label>
+                  <div class="controls">
+                    <input
+                      type="password"
+                      id="password"
+                      class="form-control"
+                      formControlName="password"
+                      [formGroup]="form" >
+                  </div>
+                </div>
+                <div class="control-group">
+                  <div>
+                    <input type="hidden" id="user_key"  #keyRef="ngModel" minlength="4" required name="uid" placeholder="" class="input-xlarge" [(ngModel)]="user.uid" >
+                  </div>
+                </div>
+                <div class="control-group">
+                  <label class="control-label"  for="confirm_pass">Confirm Password</label>
+                  <div class="controls">
+                    <input
+                      type="password"
+                      class="form-control"
+                      id="confirmPassword"
+                      formControlName="confirmPassword"
+                      [formGroup]="form">
+                    <!--div class="alert alert-danger" *ngIf="form.controls.confirmPassword.errors?.MutchPassword">Password not match</div>
+                  </div>
+                </div>
+              </div>
+              <div class="control-group">
+                <div class="controls" style="padding-top: 10px;">
+                  <button type="submit" [disabled]="!changePassInfo" class="btn btn-primary">Save changes</button>
+                </div>
+              </div>
+            </div>
+          </form>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!--./-->
+
+
+
+  <!-- Modal Edit Pass -->
+  <div class="modal fade" id="editPass" [hidden]="hideModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Edit Employee</h4>
+        </div>
+        <div class="modal-body">
+          <form action="" class="form-horizontal" #passUpdate='ngForm' (ngSubmit)="updatePass(passUpdate.value)" >
+            <fieldset>
+              <!-- Name -->
+              <div class="col-md-12 content">
+                <div class="col-md-6 form-group col-md-offset-2">
+                  <div class="control-group">
+                    <label class="control-label"  for="new_pass">New Password</label>
+                    <div class="controls">
+                      <input type="password" id="new_pass" #newPassRef="ngModel" minlength="6" required name="new_pass" placeholder="" class="input-xlarge" ngModel>
+                      <div *ngIf="newPassRef.errors && (newPassRef.dirty || newPassRef.touched ) "  class="alert alert-danger">
+                        <div [hidden]="!newPassRef.errors.required" >
+                          Please enter a NewPass.
+                        </div>
+                        <div [hidden]="!newPassRef.errors.minlength" >
+                          Please enter atleast 8 characters.
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                  <div class="control-group">
+
+                    <div class="controls" style="padding-top: 10px;">
+                      <button type="submit" [disabled]="!passUpdate.valid" class="btn btn-primary">Save changes</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </fieldset>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default"    data-dismiss="modal">Close</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ./ -->
+
+
+
+
+
+</div>

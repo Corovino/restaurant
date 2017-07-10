@@ -38,6 +38,8 @@ export class DashboardComponent implements OnInit {
       }
     });
 
+    this.userRestaurant.getRestauranUser();
+
     let employee = this.userRestaurant.getRestauranUser().subscribe( data => {
 
       return data.map( data => {

@@ -11,6 +11,7 @@ import { UserComponent } from '../users/user/user.component';
 import { EmployeeComponent } from '../employee/employee.component';
 import { AbsencesComponent } from '../absences/absences.component';
 import { RolComponent } from '../rol/rol.component';
+import { ProfileComponent } from '../profile/profile/profile.component';
 
 
 const routes : Routes =
@@ -21,12 +22,13 @@ const routes : Routes =
    {path: 'dashboard', component: DashboardComponent,  children:[
       {path:'**', redirectTo:'dashboard', pathMatch:'full'},
       {path: 'addrestaurant', component: RestaurantComponent  },
+      {path: 'profile', component: ProfileComponent  },
       {path: 'adduser', component: UserComponent  },
       {path: 'addemployee', component: EmployeeComponent  },
       {path: 'absences', component: AbsencesComponent  },
       {path: 'rol', component: RolComponent }
    ] },
-  {path:'**', redirectTo:'login', pathMatch:'full'}
+
 
 ];
 

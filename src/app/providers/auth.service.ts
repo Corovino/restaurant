@@ -5,6 +5,7 @@ import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable }
 import { Subject } from 'rxjs/Subject';
 import { RouterModule, Router,  ActivatedRoute } from '@angular/router';
 import { CanActivate }    from '@angular/router';
+
 import * as firebase from 'firebase/app';
 
 @Injectable()

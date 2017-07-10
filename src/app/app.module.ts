@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { ApproutingModule } from './approuting/approuting.module';
@@ -32,6 +32,8 @@ import { FilterPipe } from './pipes/filter.pipe';
 import { EmployeeSearchPipe } from './pipes/employee-search.pipe';
 import { UserPipe } from './pipes/user.pipe';
 import { AbsencesPipe } from './pipes/absences.pipe';
+import { ProfileComponent } from './profile/profile/profile.component';
+import { NgdropfileDirective } from './directives/ngdropfile.directive';
 
 
 
@@ -56,6 +58,9 @@ import { AbsencesPipe } from './pipes/absences.pipe';
     EmployeeSearchPipe,
     UserPipe,
     AbsencesPipe,
+    ProfileComponent,
+    NgdropfileDirective,
+
   ],
   imports: [
     BrowserModule,
@@ -64,7 +69,8 @@ import { AbsencesPipe } from './pipes/absences.pipe';
     ApproutingModule,
     AngularFireModule.initializeApp(firebaseConfig.firebase),
     AngularFireDatabaseModule, // imports firebase/database, only needed for database features
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    ReactiveFormsModule
     //PopupModule.forRoot()
   ],
   providers: [AuthGuard, AuthService],

@@ -25,7 +25,7 @@ export class NavComponent implements OnInit {
   constructor(private af : AngularFireAuth, private  authService : AuthService, private restaurant : DatauserService )
   {
       this.au = firebase.auth();
-      this.restaurantName = "Restaurant App";
+      this.restaurantName = "Grubiz";
 
   }
 
