@@ -109,6 +109,4 @@ export class ProfileComponent implements OnInit {
        document.getElementById("editPass").click();
   }
 
-
-
 }

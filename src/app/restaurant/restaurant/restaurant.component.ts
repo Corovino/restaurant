@@ -74,6 +74,7 @@ export class RestaurantComponent implements OnInit {
 
   }
 
+
   restauranEdit($event, data: any)
   {
       console.log(this.key);
