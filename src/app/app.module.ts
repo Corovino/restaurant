@@ -34,6 +34,7 @@ import { UserPipe } from './pipes/user.pipe';
 import { AbsencesPipe } from './pipes/absences.pipe';
 import { ProfileComponent } from './profile/profile/profile.component';
 import { NgdropfileDirective } from './directives/ngdropfile.directive';
+import { HomeComponent } from './home/home.component';
 
 
 
@@ -60,6 +61,7 @@ import { NgdropfileDirective } from './directives/ngdropfile.directive';
     AbsencesPipe,
     ProfileComponent,
     NgdropfileDirective,
+    HomeComponent,
 
   ],
   imports: [

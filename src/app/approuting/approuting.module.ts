@@ -12,6 +12,7 @@ import { EmployeeComponent } from '../employee/employee.component';
 import { AbsencesComponent } from '../absences/absences.component';
 import { RolComponent } from '../rol/rol.component';
 import { ProfileComponent } from '../profile/profile/profile.component';
+import { HomeComponent } from '../home/home.component';
 
 
 const routes : Routes =
@@ -21,6 +22,7 @@ const routes : Routes =
    {path: 'register', component: RegisterComponent  },
    {path: 'dashboard', component: DashboardComponent,  children:[
       {path:'**', redirectTo:'dashboard', pathMatch:'full'},
+      {path: 'home', component: HomeComponent },
       {path: 'addrestaurant', component: RestaurantComponent  },
       {path: 'profile', component: ProfileComponent  },
       {path: 'adduser', component: UserComponent  },

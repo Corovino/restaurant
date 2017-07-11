@@ -15,13 +15,7 @@ export class LoginComponent implements OnInit {
   constructor(private authService : AuthService,  private au :AngularFireAuth, private router : Router)
   {
       this.auth = firebase.auth();
-      /*this.auth.onAuthStateChanged( login => {
-          if(login){
-            this.router.navigate(['/dashboard']);
-          }else{
 
-          }
-      });*/
   }
 
   ngOnInit() {
@@ -37,7 +31,7 @@ export class LoginComponent implements OnInit {
 
 
         this.auth.sendPasswordResetEmail(mailAddres.email).then( response => {
-            alert('Se envio un correo a su cuenta.');
+            alert('An email has been sent to your account to retrieve your password');
             console.log('Se envio un correo a su cuenta.',response);
         }).catch( error => {
            alert('');

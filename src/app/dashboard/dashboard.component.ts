@@ -4,6 +4,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import { AuthService } from '../providers/auth.service';
 import { DatauserService } from '../providers/datauser.service';
+import { Router, NavigationStart, Event as NavigationEvent } from '@angular/router';
 
 
 import { NavComponent } from '../partials/nav/nav.component';
@@ -21,13 +22,12 @@ import * as firebase from 'firebase/app';
 export class DashboardComponent implements OnInit {
   private au: any;
   private user : any;
-  private employess : any;
-  private employeCount : any;
-  private absence : any;
-  private countAbsence : any;
-  constructor(private  authService : AuthService, private af : AngularFireAuth, private dataBase : AngularFireDatabase, private userRestaurant : DatauserService )
+  private currentUrl: string = '/';
+
+  constructor(private  authService : AuthService, private af : AngularFireAuth, private dataBase : AngularFireDatabase, private userRestaurant : DatauserService, private router: Router )
   {
       this.au = firebase.auth();
+
   }
 
   ngOnInit() {
@@ -38,36 +38,13 @@ export class DashboardComponent implements OnInit {
       }
     });
 
-    this.userRestaurant.getRestauranUser();
-
-    let employee = this.userRestaurant.getRestauranUser().subscribe( data => {
-
-      return data.map( data => {
-        console.log(data.restaurant);
-        this.employess = this.dataBase.list('/employees',{
-          query:{
-            orderByChild: 'restaurant',
-            equalTo: data.restaurant
-          }
-        }).subscribe( data => {
-            this.employeCount = data.length;
-        });
-
-        this.absence = this.dataBase.list('/absences', {
-          query : {
-            orderByChild: 'restaurant',
-            equalTo: data.restaurant
-          }
-        }).subscribe( data => {
-            this.countAbsence = data.length;
-        });
-      });
+    this.router.events.forEach((event: NavigationEvent) => {
+      if(event instanceof NavigationStart)
+      {
+        this.currentUrl = event.url;
+        console.log(this.currentUrl);
+      }
     });
-
-
-
-
-
 
   }
 

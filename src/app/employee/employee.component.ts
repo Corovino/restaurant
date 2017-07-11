@@ -35,17 +35,15 @@ export class EmployeeComponent implements OnInit {
 
   ngOnInit() {
 
-
-      this.restaurant = this.af.list('/restaurant');
-      this.rol = this.af.list('/rol');
-      this.employees= {};
-
-
-
+    this.restaurant = this.af.list('/restaurant');
+    this.rol = this.af.list('/rol');
+    this.employees= {};
 
       let test = this.userRestaurant.getRestauranUser().subscribe( data => {
 
-          return data.map( data => {
+
+
+           data.map( data => {
                  console.log(data.restaurant);
                  this.employee = this.af.list('/employees',{
                    query:{
@@ -54,8 +52,19 @@ export class EmployeeComponent implements OnInit {
                    }
                  });
 
-             });
+                 this.restaurant = this.af.list('/restaurant',{
+                   query:{
+                     orderByChild: 'store',
+                     equalTo: data.restaurant
+                   }
+                  });
+            });
+
       });
+
+
+
+
 
   }
 

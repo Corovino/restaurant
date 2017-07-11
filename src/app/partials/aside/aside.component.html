@@ -1,7 +1,8 @@
 	<!--div class="container-fluid main-container"-->
 		<div class="col-md-2 sidebar">
 			<ul class="nav nav-pills nav-stacked" [ngSwitch]="user">
-				  <li class="active"><a href="#" routerLink="dashboard" routerLinkActive="active">Dashboard</a></li>
+				  <li class="active"><a href="#" >Dashboard</a></li>
+            <li [ngClass]="{'active': currentUrl == '/home'}"><a routerLink="home"routerLinkActive="active">Home</a></li>
             <li *ngSwitchCase="1">
                <ul class="nav nav-pills nav-stacked">
                  <li><a routerLink="addrestaurant" routerLinkActive="active">Add Restaurant</a></li>
@@ -10,9 +11,10 @@
             </li>
             <li *ngSwitchCase="2">
             <ul class="nav nav-pills nav-stacked">
-                  <li><a routerLink="addemployee"routerLinkActive="active">Add Employee</a></li>
-                  <li><a routerLink="absences"routerLinkActive="active">Add Absence</a></li>
-                  <li><a routerLink="rol"routerLinkActive="active">Add Roll</a></li>
+
+                  <li [ngClass]="{'active': currentUrl == '/addemployee'}"><a routerLink="addemployee"routerLinkActive="active">Add Employee</a></li>
+                  <li [ngClass]="{'active': currentUrl == '/absences'}"><a routerLink="absences"routerLinkActive="active">Add Absence</a></li>
+                  <li [ngClass]="{'active': currentUrl == '/rol'}"><a routerLink="rol"routerLinkActive="active">Add Roll</a></li>
 
               </ul>
             </li>

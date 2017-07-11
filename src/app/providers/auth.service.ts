@@ -27,13 +27,14 @@ export class AuthService  {
 
 
      this.auth.signInWithEmailAndPassword(email, password).then( login => {
+
        console.log(this.user);
 
        if(login){
-         console.log(login);
+
          this.getUserLoggedIn();
        }
-         console.log(login);
+
 
 
 
@@ -83,8 +84,8 @@ export class AuthService  {
     this.auth.onAuthStateChanged( login => {
      console.log(login);
      if(login){
-       console.log(login);
-       this.router.navigate(['/dashboard']);
+
+       this.router.navigate(['/dashboard/home']);
      }else{
        console.log(login);
      }
