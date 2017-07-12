@@ -35,6 +35,9 @@ import { AbsencesPipe } from './pipes/absences.pipe';
 import { ProfileComponent } from './profile/profile/profile.component';
 import { NgdropfileDirective } from './directives/ngdropfile.directive';
 import { HomeComponent } from './home/home.component';
+import { ManageEmployeeComponent } from './manage-employee/manage-employee/manage-employee.component';
+import { RecurtingEmployeeComponent } from './manage-employee/recurting-employee/recurting-employee.component';
+import { VacationComponent } from './manage-employee/vacation/vacation.component';
 
 
 
@@ -62,6 +65,9 @@ import { HomeComponent } from './home/home.component';
     ProfileComponent,
     NgdropfileDirective,
     HomeComponent,
+    ManageEmployeeComponent,
+    RecurtingEmployeeComponent,
+    VacationComponent,
 
   ],
   imports: [

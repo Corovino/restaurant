@@ -13,7 +13,14 @@
             <ul class="nav nav-pills nav-stacked">
 
                   <li [ngClass]="{'active': currentUrl == '/addemployee'}"><a routerLink="addemployee"routerLinkActive="active">Add Employee</a></li>
-                  <li [ngClass]="{'active': currentUrl == '/absences'}"><a routerLink="absences"routerLinkActive="active">Add Absence</a></li>
+                  <li [ngClass]="{'active': currentUrl == 'manageEmployee'}"><a routerLink="manageEmployee"routerLinkActive="active">Manage Employee</a>
+                    <ul class="nav nav-pills nav-stacked">
+                        <li [ngClass]="{'active': currentUrl == 'manageEmployee/absences'}"><a routerLink="manageEmployee/absences" routerLinkActive="active">Add Absence</a></li>
+                        <li [ngClass]="{'active': currentUrl == 'manageEmployee/recruitingEmployee'}"><a routerLink="manageEmployee/recruitingEmployee"routerLinkActive="active">recruiting employee</a></li>
+                        <li [ngClass]="{'active': currentUrl == 'manageEmployee/vacationEmployee'}"><a routerLink="manageEmployee/vacationEmployee"routerLinkActive="active">vacation Employee</a></li>
+                    </ul>
+                  </li>
+
                   <li [ngClass]="{'active': currentUrl == '/rol'}"><a routerLink="rol"routerLinkActive="active">Add Roll</a></li>
 
               </ul>

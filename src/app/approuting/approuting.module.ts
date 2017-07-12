@@ -13,7 +13,9 @@ import { AbsencesComponent } from '../absences/absences.component';
 import { RolComponent } from '../rol/rol.component';
 import { ProfileComponent } from '../profile/profile/profile.component';
 import { HomeComponent } from '../home/home.component';
-
+import { ManageEmployeeComponent } from '../manage-employee/manage-employee/manage-employee.component';
+import { RecurtingEmployeeComponent } from '../manage-employee/recurting-employee/recurting-employee.component';
+import { VacationComponent } from '../manage-employee/vacation/vacation.component';
 
 const routes : Routes =
 [
@@ -27,7 +29,12 @@ const routes : Routes =
       {path: 'profile', component: ProfileComponent  },
       {path: 'adduser', component: UserComponent  },
       {path: 'addemployee', component: EmployeeComponent  },
-      {path: 'absences', component: AbsencesComponent  },
+      {path: 'manageEmployee', component: ManageEmployeeComponent, children:[
+        //{path: '', redirectTo: '/manageEmployee'  },
+        {path: 'absences', component: AbsencesComponent  },
+        {path: 'recruitingEmployee', component: RecurtingEmployeeComponent  },
+        {path: 'vacationEmployee', component: VacationComponent  },
+      ]},
       {path: 'rol', component: RolComponent }
    ] },
 

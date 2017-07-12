@@ -202,6 +202,36 @@
                           </div>
                         </div>
                         <div class="control-group">
+                          <label class="control-label"  for="star_work">Start work</label>
+                          <div class="controls">
+                            <input type="date" id="star_work" #starWorkRef="ngModel" name="start_work" required placeholder="" class="input-xlarge" ngModel>
+
+                            <div [hidden]="starWorkRef.valid || starWorkRef.pristine" class="alert alert-danger">
+                              Please enter a Valid Date.
+                            </div>
+                          </div>
+                        </div>
+                        <div class="control-group">
+                          <label class="control-label"  for="finis_work">Finish work</label>
+                          <div class="controls">
+                            <input type="date" id="finis_work" #finishWorkRef="ngModel" name="finish_work" required placeholder="" class="input-xlarge" ngModel>
+
+                            <div [hidden]="finishWorkRef.valid || finishWorkRef.pristine" class="alert alert-danger">
+                              Please enter a Valid Date.
+                            </div>
+                          </div>
+                        </div>
+                        <div class="control-group">
+                          <label class="control-label"  for="salary">Salary</label>
+                          <div class="controls">
+                            <input type="text" id="salary" #salaryRef="ngModel" name="salary" required placeholder="" class="input-xlarge" ngModel>
+
+                            <div [hidden]="salaryRef.valid || salaryRef.pristine" class="alert alert-danger">
+                              Please enter a Salary.
+                            </div>
+                          </div>
+                        </div>
+                      <div class="control-group">
 
                           <div class="controls" style="padding-top: 10px;">
                               <button type="submit" [disabled]="!employeeForm.valid" class="btn btn-primary">Save changes</button>

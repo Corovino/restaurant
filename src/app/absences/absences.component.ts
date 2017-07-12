@@ -26,13 +26,13 @@ export class AbsencesComponent implements OnInit {
 
   ngOnInit() {
 
-    /**/
+
     this.absenc = {};
     this.nameRestaurant = '';
 
     let test = this.userRestaurant.getRestauranUser().subscribe( data => {
 
-      return data.map( data => {
+       data.map( data => {
         this.nameRestaurant = data.restaurant;
         console.log(this.nameRestaurant);
 
@@ -45,15 +45,13 @@ export class AbsencesComponent implements OnInit {
 
         this.absence = this.af.list('/absences',{
           query :{
-            orderBychild : 'restaurant',
+            orderByChild : 'restaurant',
             equalTo : data.restaurant
           }
         });
 
       });
     });
-
-
 
   }
 

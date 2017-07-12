@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import { DatauserService } from '../providers/datauser.service';
-import { EmployeeSearchPipe } from '../pipes/employee-search.pipe';
-import { Subject } from 'rxjs/Subject';
-import * as firebase from 'firebase/app';
+
 
 
 
@@ -62,15 +59,11 @@ export class EmployeeComponent implements OnInit {
 
       });
 
-
-
-
-
   }
 
   employeeInfo(value : any)
   {
-          console.log(value.social_security_number);
+          console.log(value);
           let enc = window.btoa(value.social_security_number);
           console.log(enc);
 
@@ -93,6 +86,9 @@ export class EmployeeComponent implements OnInit {
                     ssn:value.ssn,
                     rol:value.rol,
                     status:value.status,
+                    start_wor: value.start_work,
+                    end_work : value.finish_work,
+                    salary:value.salary,
                     withheld:value.withheld
 
       			});
