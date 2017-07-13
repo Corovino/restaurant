@@ -42,6 +42,7 @@ import { VacationComponent } from './manage-employee/vacation/vacation.component
 import { PaymentComponent } from './settings/payment/payment.component';
 import { RaceComponent } from './settings/race/race.component';
 import { JobPositionComponent } from './settings/job-position/job-position.component';
+import { AbsenceComponent } from './settings/absence/absence.component';
 
 
 
@@ -75,6 +76,7 @@ import { JobPositionComponent } from './settings/job-position/job-position.compo
     PaymentComponent,
     RaceComponent,
     JobPositionComponent,
+    AbsenceComponent,
 
   ],
   imports: [
