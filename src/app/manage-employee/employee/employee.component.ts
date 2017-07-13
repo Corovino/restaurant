@@ -21,6 +21,7 @@ export class EmployeeComponent implements OnInit {
   private rol : FirebaseListObservable<any[]>;
   private payFrecuency : FirebaseListObservable<any[]>;
   private race : FirebaseListObservable<any[]>;
+  private sourceHire : FirebaseListObservable<any[]>;
   private au : any;
 
 
@@ -70,6 +71,12 @@ export class EmployeeComponent implements OnInit {
                    }
                  });
                  this.rol = this.af.list('rol',{
+                   query : {
+                     orderByChild : 'restaurant',
+                     equalTo : data.restaurant
+                   }
+                 });
+                 this.sourceHire = this.af.list('sourceHire',{
                    query : {
                      orderByChild : 'restaurant',
                      equalTo : data.restaurant

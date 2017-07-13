@@ -241,7 +241,10 @@
                         <div class="control-group">
                           <label class="control-label"  for="source_hire">Source of Hire</label>
                           <div class="controls">
-                            <input type="text" id="source_hire" #sourceHireRef="ngModel" name="source_hire" required placeholder="" class="input-xlarge" ngModel>
+                            <!--input type="text" id="source_hire" #sourceHireRef="ngModel" name="source_hire" required placeholder="" class="input-xlarge" ngModel-->
+                            <select #sourceHireRef="ngModel" name="source_hire"  required ngModel>
+                              <option selected="selected" *ngFor="let item of sourceHire | async" value="{{item.source_name}}">{{item.source_name}}</option>
+                            </select>
 
                              <div [hidden]="sourceHireRef.valid || sourceHireRef.pristine" class="alert alert-danger">
                                 Please enter a Source of Hire.
