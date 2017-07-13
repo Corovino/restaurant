@@ -272,6 +272,20 @@
                           </div>
                         </div>
                         <div class="control-group">
+                          <label class="control-label"  for="job_position">Job Position</label>
+                          <div class="controls">
+                            <!--input type="text" id="source_hire" #sourceHireRef="ngModel" name="source_hire" required placeholder="" class="input-xlarge" ngModel-->
+                            <select #jobPositionRef="ngModel" name="job_position"  required ngModel>
+                              <option selected="selected" *ngFor="let item of sourceHire | async" value="{{item.job_name}}">{{item.job_name}}</option>
+                            </select>
+
+                            <div [hidden]="jobPositionRef.valid || jobPositionRef.pristine" class="alert alert-danger">
+                              Please enter a Source of Hire.
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="control-group">
                           <label class="control-label"  for="salary">Salary</label>
                           <div class="controls">
                             <input type="text" id="salary" #salaryRef="ngModel" name="salary" required placeholder="" class="input-xlarge"  ngModel>
@@ -555,14 +569,96 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title">Modal title</h4>
+          <h4 class="modal-title">Edit Administrative Data</h4>
         </div>
         <div class="modal-body">
-          <p>One fine body&hellip;</p>
+          <h2>{{employees.firts_name}} {{employees.last_name}}</h2>
+          <form  #employeAdminData="ngForm" (submit)="updateAdminData(employeAdminData.value)">
+
+              <div class="control-group">
+                <label class="control-label"  for="phone">Dependant Medical Coverage</label>
+                <div class="controls">
+
+                  <select #medicalCoverageRef="ngModel" name="medical_coverage" name="medical_coverage" required [(ngModel)]="employees.medical_coverage">
+                    <option value="1">Yes</option>
+                    <option value="2">No</option>
+                  </select>
+                  <div [hidden]="medicalCoverageRef.valid || medicalCoverageRef.pristine" class="alert alert-danger">
+                    Please select a Dependant Medical Coverage.
+                  </div>
+                </div>
+              </div>
+              <div class="control-group">
+                <label class="control-label"  for="salary">Salary</label>
+                <div class="controls">
+                  <input type="text" id="salary" #salaryRef="ngModel" name="salary" required  class="input-xlarge"  [(ngModel)]="employees.salary">
+
+                  <div [hidden]="salaryRef.valid || salaryRef.pristine" class="alert alert-danger">
+                    Please enter a Salary.
+                  </div>
+                </div>
+              </div>
+              <div class="control-group">
+                <label class="control-label"  for="pay_frecuency">Pay Frequency</label>
+                <div class="controls">
+                  <input type="text" id="pay_frecuency" #payFrecuencyRef="ngModel" name="pay_frecuency" required placeholder="" class="input-xlarge" [(ngModel)]="employees.pay_frecuency">
+                  <div [hidden]="payFrecuencyRef.valid || payFrecuencyRef.pristine" class="alert alert-danger">
+                    Please enter a Pay Frequency.
+                  </div>
+                </div>
+              </div>
+              <div class="control-group">
+                <label class="control-label"  for="source_hire">Source of Hire</label>
+                <div class="controls">
+                  <!--input type="text" id="source_hire" #sourceHireRef="ngModel" name="source_hire" required placeholder="" class="input-xlarge" ngModel-->
+                  <select #sourceHireRef="ngModel" name="source_hire"  required ngModel  [(ngModel)]="employees.source_name">
+                    <option  *ngFor="let item of sourceHire | async"  [disabled]="item.source_name == employees.source_name" value="{{item.source_name}}">{{item.source_name}}</option>
+                  </select>
+
+                  <div [hidden]="sourceHireRef.valid || sourceHireRef.pristine" class="alert alert-danger">
+                    Please enter a Source of Hire.
+                  </div>
+                </div>
+              </div>
+              <div class="control-group">
+                <label class="control-label"  for="job_position">Job Position</label>
+                <div class="controls">
+                  <!--input type="text" id="source_hire" #sourceHireRef="ngModel" name="source_hire" required placeholder="" class="input-xlarge" ngModel-->
+                  <select #jobPositionRef="ngModel" name="job_position"  required ngModel [(ngModel)]="employees.job_position">
+                    <option  *ngFor="let item of jobPosition | async" [disabled]="item.job_name == employees.job_position" value="{{item.job_name}}">{{item.job_name}}</option>
+                  </select>
+
+                  <div [hidden]="jobPositionRef.valid || jobPositionRef.pristine" class="alert alert-danger">
+                    Please enter a Source of Hire.
+                  </div>
+                </div>
+              </div>
+              <div class="control-group">
+                <label class="control-label"  for="start_work">Start Work</label>
+                <div class="controls">
+                  <input type="date" id="start_work" #startWorkRef="ngModel" name="start_work" required  class="input-xlarge"  [(ngModel)]="employees.start_work">
+
+                  <div [hidden]="startWorkRef.valid || startWorkRef.pristine" class="alert alert-danger">
+                    Please enter a Start Work.
+                  </div>
+                </div>
+              </div>
+              <div class="control-group">
+                <label class="control-label"  for="end_work">Finish Work</label>
+                <div class="controls">
+                  <input type="date" id="end_work" #endWorkRef="ngModel" name="end_work" required  class="input-xlarge"  [(ngModel)]="employees.end_work">
+
+                  <div [hidden]="endWorkRef.valid || endWorkRef.pristine" class="alert alert-danger">
+                    Please enter a End Work.
+                  </div>
+                </div>
+              </div>
+
+                <button type="submit"  [disabled]="!employeAdminData.valid" class="btn btn-primary">Save changes</button>
+          </form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
         </div>
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
@@ -583,6 +679,28 @@
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+  <!-- ./-->
+
+
+
+  <!--Modal Re Auth usuario acciones -->
+  <div class="modal fade" tabindex="-1" role="dialog" id="reauthUser">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Modal title</h4>
+        </div>
+        <div class="modal-body">
+          <p>One fine body&hellip;</p>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->

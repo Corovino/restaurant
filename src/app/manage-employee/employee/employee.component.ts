@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import { DatauserService } from '../../providers/datauser.service';
+import { AuthService } from '../../providers/auth.service';
 import {DropdownModule} from "ngx-dropdown";
 
 
@@ -22,14 +23,16 @@ export class EmployeeComponent implements OnInit {
   private payFrecuency : FirebaseListObservable<any[]>;
   private race : FirebaseListObservable<any[]>;
   private sourceHire : FirebaseListObservable<any[]>;
-  private au : any;
+  private jobPosition : FirebaseListObservable<any[]>;
+  private pass : any;
+
 
 
 
   private employees: any;
   private key:any;
 
-  constructor(private af : AngularFireDatabase, private auth: AngularFireAuth, private userRestaurant : DatauserService  ) {
+  constructor(private af : AngularFireDatabase, private auth: AngularFireAuth, private userRestaurant : DatauserService, private au : AuthService  ) {
 
 
   }
@@ -82,6 +85,12 @@ export class EmployeeComponent implements OnInit {
                      equalTo : data.restaurant
                    }
                  });
+                 this.jobPosition = this.af.list('jobPosition',{
+                   query : {
+                     orderByChild : 'restaurant',
+                     equalTo : data.restaurant
+                   }
+                 });
             });
 
       });
@@ -119,7 +128,8 @@ export class EmployeeComponent implements OnInit {
                     salary:value.salary,
                     withheld:value.withheld,
                     city:value.city,
-                    address: value.address
+                    address: value.address,
+                    job_position : value.job_position
 
       			});
       		} ).catch( error => {
@@ -156,7 +166,12 @@ export class EmployeeComponent implements OnInit {
                       ssn: data.ssn,
                       relationship_status:data.relationship_status,
                       employee_status:data.employee_status,
-                      withheld:data.withheld
+                      withheld:data.withheld,
+                      job_position: data.job_position,
+                      salary : data.salary,
+                      start_work: data.start_work,
+                      end_work : data.end_work
+
                     }
                }
             });
@@ -170,6 +185,29 @@ export class EmployeeComponent implements OnInit {
 
        (auth !="") ?  this.employee.update(this.key, data) : alert ('Fallo de auth'+auth);
 
+  }
+
+  updateAdminData( data : any)
+  {
+       let pass = prompt('Ingrese su clave para ejecutar la acción');
+       let reaur = this.reauthUser(pass);
+
+       if (!reaur)
+       {
+          alert('No tiene permiso apra ejecutar esta acción');
+       }else{
+
+          console.log(data);
+          alert('Se actualizaron los datos correctamente');
+       }
+
+       console.log(pass);
+  }
+
+  reauthUser(data : any)
+  {
+       //document.getElementById('reauthUser').click();
+       return this.au.reAuthUserCredentials(data);
   }
 
 

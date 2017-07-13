@@ -14,12 +14,15 @@ export class AuthService  {
   private auth;
   private  response : boolean;
   loggedIn: boolean = false;
+  private reAuth;
 
 
   constructor( public afAuth: AngularFireAuth, private router : Router)
   {
        this.user = afAuth.authState;
        this.auth = firebase.auth();
+       this.reAuth = firebase.auth().currentUser;
+
   }
 
 
@@ -90,6 +93,11 @@ export class AuthService  {
        console.log(login);
      }
      });
+  }
+
+  reAuthUserCredentials(data : any)
+  {
+       return this.reAuth.reauthenticate(data);
   }
 
 }
