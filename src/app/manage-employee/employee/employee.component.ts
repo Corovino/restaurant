@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
-import { DatauserService } from '../providers/datauser.service';
+import { DatauserService } from '../../providers/datauser.service';
 
 
 
@@ -85,8 +85,9 @@ export class EmployeeComponent implements OnInit {
                     source_hire:value.source_hire,
                     ssn:value.ssn,
                     rol:value.rol,
-                    status:value.status,
-                    start_wor: value.start_work,
+                    relationship_status:value.relationship_status,
+                    employee_status:value.employee_status,
+                    start_work: value.start_work,
                     end_work : value.finish_work,
                     salary:value.salary,
                     withheld:value.withheld
@@ -105,6 +106,7 @@ export class EmployeeComponent implements OnInit {
         let promises = this.employee.subscribe(data => {
 
             data.forEach(data => {
+
                if ( data.$key == value)
                {
 
@@ -118,25 +120,26 @@ export class EmployeeComponent implements OnInit {
                       pay_frecuency : data.pay_frecuency,
                       phone:data.phone,
                       race:data.race,
-                      restauran:data.restaurant,
+                      restaurant:data.restaurant,
                       rol:data.rol,
                       social_security_number:data.social_security_number,
                       source_hire:data.source_hire,
                       ssn: data.ssn,
-                      status:data.status,
+                      relationship_status:data.relationship_status,
+                      employee_status:data.employee_status,
                       withheld:data.withheld
                     }
                }
             });
         });
 
-
   }
-
 
   updateEmployee(data : any){
        console.log(data);
-       this.employee.update(this.key, data);
+       let auth = prompt("Porfavor autentiquese para actualizar los datos ");
+
+       (auth !="") ?  this.employee.update(this.key, data) : alert ('Fallo de auth'+auth);
 
   }
 

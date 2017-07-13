@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { ApproutingModule } from './approuting/approuting.module';
+import { DropdownModule } from "ngx-dropdown";
 
 
 import { AngularFireModule } from 'angularfire2';
@@ -22,9 +23,9 @@ import { RestaurantComponent } from './restaurant/restaurant/restaurant.componen
 import { FooterComponent } from './partials/footer/footer.component';
 import { UserComponent } from './users/user/user.component';
 import { ModalsComponent } from './modals/modals.component';
-import { EmployeeComponent } from './employee/employee.component';
+import { EmployeeComponent } from './manage-employee/employee/employee.component';
 import { AbsencesComponent } from './absences/absences.component';
-import { RolComponent } from './rol/rol.component';
+import { RolComponent } from './settings/rol/rol.component';
 import { LoopObjectPipe } from './loop-object.pipe';
 import { AuthGuard } from './auth.guard';
 import { AuthService } from './providers/auth.service';
@@ -38,6 +39,9 @@ import { HomeComponent } from './home/home.component';
 import { ManageEmployeeComponent } from './manage-employee/manage-employee/manage-employee.component';
 import { RecurtingEmployeeComponent } from './manage-employee/recurting-employee/recurting-employee.component';
 import { VacationComponent } from './manage-employee/vacation/vacation.component';
+import { PaymentComponent } from './settings/payment/payment.component';
+import { RaceComponent } from './settings/race/race.component';
+import { JobPositionComponent } from './settings/job-position/job-position.component';
 
 
 
@@ -68,6 +72,9 @@ import { VacationComponent } from './manage-employee/vacation/vacation.component
     ManageEmployeeComponent,
     RecurtingEmployeeComponent,
     VacationComponent,
+    PaymentComponent,
+    RaceComponent,
+    JobPositionComponent,
 
   ],
   imports: [
@@ -78,7 +85,8 @@ import { VacationComponent } from './manage-employee/vacation/vacation.component
     AngularFireModule.initializeApp(firebaseConfig.firebase),
     AngularFireDatabaseModule, // imports firebase/database, only needed for database features
     AngularFireAuthModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    DropdownModule
     //PopupModule.forRoot()
   ],
   providers: [AuthGuard, AuthService],

@@ -146,19 +146,33 @@
                           </div>
                         </div>
                         <div class="control-group">
-                          <label class="control-label"  for="status">Status</label>
+                          <label class="control-label"  for="status">Relationship Status</label>
                           <div class="controls">
                             <!--input type="text" id="phone" #cellphoneRef="ngModel" name="cellphone" required placeholder="" class="input-xlarge" ngModel-->
-                            <select  #statusRef="ngModel" name="status" required ngModel>
+                            <select  #relationShipStatusRef="ngModel" name="relationship_status" required ngModel>
                               <option value="1">Single</option>
-                              <option value="1">Married</option>
-                              <option value="1">Divorced</option>
+                              <option value="2">Married</option>
+                              <option value="3">Divorced</option>
                             </select>
-                             <div [hidden]="statusRef.valid || statusRef.pristine" class="alert alert-danger">
-                                Please enter a Status.
+                               <div [hidden]="relationShipStatusRef.valid || relationShipStatusRef.pristine" class="alert alert-danger">
+                                Please enter a Relationship Status.
                             </div>
                           </div>
                         </div>
+                      <div class="control-group">
+                        <label class="control-label"  for="employee_status">Employee Status</label>
+                        <div class="controls">
+                          <!--input type="text" id="phone" #cellphoneRef="ngModel" name="cellphone" required placeholder="" class="input-xlarge" ngModel-->
+                          <select  #employeeStatusRef="ngModel" name="employee_status" required ngModel>
+                            <option value="1">Active</option>
+                            <option value="2">Inactive</option>
+                            <option value="3">Other</option>
+                          </select>
+                          <div [hidden]="employeeStatusRef.valid || employeeStatusRef.pristine" class="alert alert-danger">
+                            Please enter a Employee Status.
+                          </div>
+                        </div>
+                      </div>
                         <div class="control-group">
                           <label class="control-label"  for="status">Rol</label>
                           <div class="controls">
@@ -267,7 +281,8 @@
         <th>Gender</th>
         <th>Dependant medical coverage</th>
         <th>Pay frecuency</th>
-        <th>Status</th>
+        <th>Relationship Status</th>
+        <th>Employee Status</th>
         <th>Number of allowances</th>
         <th>Additional witheld</th>
         <th>Source of hire</th>
@@ -300,16 +315,33 @@
         </td>
         <td>{{item.pay_frecuency}}</td>
         <td>
-          <div [ngSwitch]="item.status">
+          <div [ngSwitch]="item.relationship_status">
+            <p class="label label-success" *ngSwitchCase="1">Single</p>
+            <p *ngSwitchCase="2">Married</p>
+            <p *ngSwitchCase="3">Divorced</p>
+          </div>
+        </td>
+        <td>
+          <div [ngSwitch]="item.employee_status">
             <p class="label label-success" *ngSwitchCase="1">Active</p>
-            <p *ngSwitchCase="2">Disable</p>
+            <p class="label label-danger"*ngSwitchCase="2">Disable</p>
+            <p *ngSwitchCase="3">Other</p>
           </div>
         </td>
         <td>{{item.number_allowances}}</td>
         <td>{{item.withheld}}</td>
         <td>{{item.source_hire}}</td>
         <td><p class="label label-success">{{item.rol}}<p></td>
-        <td><button  (click)="editEmployee(item.$key)" class="btn btn-primary" data-toggle="modal" data-target="#editEmployee">Edit</button></td>
+        <td>
+          <div class="dropdown" dropdown>
+              <button  (click)="editEmployee(item.$key)" class="btn btn-primary" data-toggle="modal" data-target="#editEmployee">Edit</button>
+              <ul class="dropdown-menu">
+                <li><a href="#" (click)="select()">Badman</a></li>
+                <li><a href="http://google.com">Sadman</a></li>
+                <li><a href="#">Lieman</a></li>
+              </ul>
+          </div>
+        </td>
 
 
       </tr>
@@ -363,7 +395,7 @@
                     <label class="control-label"  for="restaurant">Restaurant / Store </label>
                     <div class="controls">
                       <!--input type="text" id="password" #passwordRef="ngModel" name="password" required  placeholder="" class="input-xlarge" ngModel-->
-                      <select #restaurantdRef="ngModel" name="restaurant" name="restaurant" required [(ngModel)]="employees.restauran">
+                      <select #restaurantdRef="ngModel" name="restaurant" name="restaurant" required [(ngModel)]="employees.restaurant">
                         <option *ngFor="let item of restaurant | async" value="{{item.store}}">{{item.store}}</option>
 
                       </select>
@@ -453,13 +485,27 @@
                     </div>
                   </div>
                   <div class="control-group">
-                    <label class="control-label"  for="status">Status</label>
+                    <label class="control-label"  for="status">Relationship Status</label>
                     <div class="controls">
                       <!--input type="text" id="phone" #cellphoneRef="ngModel" name="cellphone" required placeholder="" class="input-xlarge" ngModel-->
-                      <select  #statusRef="ngModel" name="status" required  [(ngModel)]="employees.status">
+                      <select  #statusRef="ngModel" name="ralationship_status" required  [(ngModel)]="employees.relationship_status">
                         <option value="1">Single</option>
-                        <option value="1">Married</option>
-                        <option value="1">Divorced</option>
+                        <option value="2">Married</option>
+                        <option value="3">Divorced</option>
+                      </select>
+                      <div [hidden]="statusRef.valid || statusRef.pristine" class="alert alert-danger">
+                        Please enter a Status.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <label class="control-label"  for="status">Employee Status</label>
+                    <div class="controls">
+                      <!--input type="text" id="phone" #cellphoneRef="ngModel" name="cellphone" required placeholder="" class="input-xlarge" ngModel-->
+                      <select  #statusRef="ngModel" name="employee_status" required  [(ngModel)]="employees.employee_status">
+                        <option value="1">Active</option>
+                        <option value="2">Inactive</option>
+                        <option value="3">Other</option>
                       </select>
                       <div [hidden]="statusRef.valid || statusRef.pristine" class="alert alert-danger">
                         Please enter a Status.

@@ -1,0 +1,145 @@
+<div class="col-md-10 content">
+  <!-- Form ModAL Create Rol -->
+  <button type="button"   type="button" class="btn btn-primary" data-toggle="modal" data-target="#payFrecuency"  >Add Race</button>
+  <!-- Modal Create Rol-->
+  <div class="modal fade" id="payFrecuency" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Add Race</h4>
+        </div>
+        <div class="modal-body">
+          <form action="" class="form-horizontal" #race='ngForm' (ngSubmit)="createRace(race.value)">
+            <fieldset>
+              <!-- Name -->
+              <div class="control-group">
+                <label class="control-label"  for="payment_name">Race Name</label>
+                <div class="controls">
+                  <input type="text" id="race_name" #raceNameRef="ngModel" minlength="4" required name="race_name" placeholder="" class="input-xlarge" ngModel>
+                  <div *ngIf="raceNameRef.errors && (raceNameRef.dirty || raceNameRef.touched ) "  class="alert alert-danger">
+                    <div [hidden]="!raceNameRef.errors.required" >
+                      Please enter a Race.
+                    </div>
+                    <div [hidden]="!raceNameRef.errors.minlength" >
+                      Please enter atleast 4 characters.
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+              <div class="control-group">
+                <label class="control-label"  for="description">Description</label>
+                <div class="controls">
+                  <input type="text" id="description" #descriptionRef="ngModel" name="description" required  placeholder="" class="input-xlarge" ngModel>
+                  <div [hidden]="descriptionRef.valid || descriptionRef.pristine" class="alert alert-danger">
+                    Please enter a Rol Description.
+                  </div>
+                </div>
+              </div>
+              <div class="control-group">
+
+                <div class="controls">
+                  <input type="text" id="restaurant" #restaurantRef="ngModel" name="restaurant"   value="{{restaurant.restaurant}}" class="input-xlarge" ngModel>
+                </div>
+              </div>
+
+              <div class="control-group">
+
+                <div class="controls" style="padding-top: 10px;">
+                  <button type="submit" [disabled]="!race.valid" class="btn btn-primary">Save changes</button>
+                </div>
+              </div>
+
+            </fieldset>
+
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default"    data-dismiss="modal">Close</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ./ -->
+
+  <!--  show list restaurant -->
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+      <tr>
+        <th>Name Payment</th>
+        <th>Description</th>
+        <th>Edit</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let item of test | async" id="">
+        <td ><p>{{ item.race_name }}</p></td>
+        <td><p >{{ item.description }}</p></td>
+        <td><button  (click)="editRace(item.$key)" class="btn btn-primary" data-toggle="modal" data-target="#editRestauran">Edit</button></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <!--  ./ -->
+
+</div>
+
+<!-- Modal Edit Rol-->
+<div class="modal fade" id="editRestauran" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Edit Roll</h4>
+      </div>
+      <div class="modal-body">
+        <form action="" class="form-horizontal" #raceUpdateForm='ngForm' (ngSubmit)="updateRace(raceUpdateForm.value)" >
+          <fieldset>
+            <!-- Name -->
+            <div class="control-group">
+              <label class="control-label"  for="rol_name">Name</label>
+              <div class="controls">
+                <input type="text" id="rol_name" #rolRef="ngModel" minlength="4" required name="rol_name" placeholder="" class="input-xlarge" [(ngModel)]="raceData.race_name">
+                <div *ngIf="rolRef.errors && (rolRef.dirty || rolRef.touched ) "  class="alert alert-danger">
+                  <div [hidden]="!rolRef.errors.required" >
+                    Please enter a Race.
+                  </div>
+                  <div [hidden]="!rolRef.errors.minlength" >
+                    Please enter atleast 4 characters.
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label"  for="description">Description</label>
+              <div class="controls">
+                <input type="text" id="description" #descriptionRef="ngModel" name="description" required  placeholder="" class="input-xlarge" [(ngModel)]="raceData.description">
+                <div [hidden]="descriptionRef.valid || descriptionRef.pristine" class="alert alert-danger">
+                  Please enter a  Description.
+                </div>
+              </div>
+            </div>
+
+            <div class="control-group">
+
+              <div class="controls" style="padding-top: 10px;">
+                <button type="submit" [disabled]="!raceUpdateForm.valid" class="btn btn-primary">Save changes</button>
+              </div>
+            </div>
+
+          </fieldset>
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default"    data-dismiss="modal">Close</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ./ -->

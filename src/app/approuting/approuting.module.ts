@@ -8,14 +8,17 @@ import { RegisterComponent } from '../register/register.component';
 import { DashboardComponent } from '../dashboard/dashboard.component';
 import { RestaurantComponent } from '../restaurant/restaurant/restaurant.component';
 import { UserComponent } from '../users/user/user.component';
-import { EmployeeComponent } from '../employee/employee.component';
+import { EmployeeComponent } from '../manage-employee/employee/employee.component';
 import { AbsencesComponent } from '../absences/absences.component';
-import { RolComponent } from '../rol/rol.component';
+import { RolComponent } from '../settings/rol/rol.component';
 import { ProfileComponent } from '../profile/profile/profile.component';
 import { HomeComponent } from '../home/home.component';
 import { ManageEmployeeComponent } from '../manage-employee/manage-employee/manage-employee.component';
 import { RecurtingEmployeeComponent } from '../manage-employee/recurting-employee/recurting-employee.component';
 import { VacationComponent } from '../manage-employee/vacation/vacation.component';
+import { PaymentComponent } from '../settings/payment/payment.component';
+import { RaceComponent } from '../settings/race/race.component';
+import { JobPositionComponent } from '../settings/job-position/job-position.component';
 
 const routes : Routes =
 [
@@ -35,7 +38,12 @@ const routes : Routes =
         {path: 'recruitingEmployee', component: RecurtingEmployeeComponent  },
         {path: 'vacationEmployee', component: VacationComponent  },
       ]},
-      {path: 'rol', component: RolComponent }
+     {path: 'settings', children:[
+        {path: 'rol', component: RolComponent },
+        {path: 'payment', component: PaymentComponent },
+        {path: 'race', component: RaceComponent },
+        {path: 'jobPosition', component: JobPositionComponent }
+     ]},
    ] },
 
 
