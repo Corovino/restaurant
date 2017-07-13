@@ -20,6 +20,7 @@ import { PaymentComponent } from '../settings/payment/payment.component';
 import { RaceComponent } from '../settings/race/race.component';
 import { JobPositionComponent } from '../settings/job-position/job-position.component';
 import { AbsenceComponent } from '../settings/absence/absence.component';
+import { SourceHireComponent } from '../settings/source-hire/source-hire.component';
 
 const routes : Routes =
 [
@@ -44,7 +45,8 @@ const routes : Routes =
         {path: 'payment', component: PaymentComponent },
         {path: 'race', component: RaceComponent },
         {path: 'jobPosition', component: JobPositionComponent },
-        {path: 'absence', component: AbsenceComponent }
+        {path: 'absence', component: AbsenceComponent },
+        {path: 'sourceHire', component: SourceHireComponent }
      ]},
    ] },
 

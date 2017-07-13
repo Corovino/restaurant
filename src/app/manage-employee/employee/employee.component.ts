@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import { DatauserService } from '../../providers/datauser.service';
+import {DropdownModule} from "ngx-dropdown";
 
 
 
@@ -18,6 +19,8 @@ export class EmployeeComponent implements OnInit {
   private restaurant : FirebaseListObservable<any[]>;
   private users :  FirebaseListObservable<any[]>;
   private rol : FirebaseListObservable<any[]>;
+  private payFrecuency : FirebaseListObservable<any[]>;
+  private race : FirebaseListObservable<any[]>;
   private au : any;
 
 
@@ -33,7 +36,6 @@ export class EmployeeComponent implements OnInit {
   ngOnInit() {
 
     this.restaurant = this.af.list('/restaurant');
-    this.rol = this.af.list('/rol');
     this.employees= {};
 
       let test = this.userRestaurant.getRestauranUser().subscribe( data => {
@@ -55,6 +57,24 @@ export class EmployeeComponent implements OnInit {
                      equalTo: data.restaurant
                    }
                   });
+                 this.payFrecuency = this.af.list('paymentFrecuency',{
+                    query : {
+                       orderByChild : 'restaurant',
+                        equalTo : data.restaurant
+                    }
+                 });
+                 this.race = this.af.list('race',{
+                   query : {
+                     orderByChild : 'restaurant',
+                     equalTo : data.restaurant
+                   }
+                 });
+                 this.rol = this.af.list('rol',{
+                   query : {
+                     orderByChild : 'restaurant',
+                     equalTo : data.restaurant
+                   }
+                 });
             });
 
       });
@@ -90,7 +110,9 @@ export class EmployeeComponent implements OnInit {
                     start_work: value.start_work,
                     end_work : value.finish_work,
                     salary:value.salary,
-                    withheld:value.withheld
+                    withheld:value.withheld,
+                    city:value.city,
+                    address: value.address
 
       			});
       		} ).catch( error => {

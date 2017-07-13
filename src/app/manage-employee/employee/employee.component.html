@@ -91,6 +91,15 @@
                           </div>
                         </div>
                         <div class="control-group">
+                          <label class="control-label"  for="email">Email</label>
+                          <div class="controls">
+                            <input type="text" id="email" #emailRef="ngModel" name="email" required placeholder="" class="input-xlarge" ngModel>
+                            <div [hidden]="emailRef.valid || emailRef.pristine" class="alert alert-danger">
+                              Please enter a  Email.
+                            </div>
+                          </div>
+                        </div>
+                        <div class="control-group">
                           <label class="control-label"  for="birth_day">Date of Birth</label>
                           <div class="controls">
                             <input type="text" id="birth_day" #birthDayRef="ngModel" name="birth_day" required placeholder="" class="input-xlarge" ngModel>
@@ -102,9 +111,30 @@
                         <div class="control-group">
                           <label class="control-label"  for="race">Race</label>
                           <div class="controls">
-                            <input type="text" id="race" #raceRef="ngModel" name="race" required placeholder="" class="input-xlarge" ngModel>
+                            <!--input type="text" id="race" #raceRef="ngModel" name="race" required placeholder="" class="input-xlarge" ngModel-->
+                            <select #raceRef="ngModel" name="race"  required ngModel>
+                              <option *ngFor="let item of race | async" value="{{item.race_name}}">{{item.race_name}}</option>
+                            </select>
                              <div [hidden]="raceRef.valid || raceRef.pristine" class="alert alert-danger">
                                 Please enter a Race.
+                            </div>
+                          </div>
+                        </div>
+                        <div class="control-group">
+                          <label class="control-label"  for="city">CIty</label>
+                          <div class="controls">
+                            <input type="text" id="city" #cityRef="ngModel" name="city" required placeholder="" class="input-xlarge" ngModel>
+                            <div [hidden]="cityRef.valid || cityRef.pristine" class="alert alert-danger">
+                              Please enter a  City.
+                            </div>
+                          </div>
+                        </div>
+                        <div class="control-group">
+                          <label class="control-label"  for="address">Address</label>
+                          <div class="controls">
+                            <input type="text" id="address" #addressRef="ngModel" name="address" required placeholder="" class="input-xlarge" ngModel>
+                            <div [hidden]="addressRef.valid || addressRef.pristine" class="alert alert-danger">
+                              Please enter a  Address.
                             </div>
                           </div>
                         </div>
@@ -114,7 +144,7 @@
                           <label class="control-label"  for="gender">Gender</label>
                           <div class="controls">
                             <!--input type="text" id="phone" #cellphoneRef="ngModel" name="cellphone" required placeholder="" class="input-xlarge" ngModel-->
-                            <select #genderRef="ngModel" name="gender" name="gender" required ngModel>
+                            <select #genderRef="ngModel"  name="gender" required ngModel>
                                <option value="1">M</option>
                                <option value="2">F</option>
                             </select>
@@ -139,7 +169,10 @@
                         <div class="control-group">
                           <label class="control-label"  for="pay_frecuency">Pay Frequency</label>
                           <div class="controls">
-                            <input type="text" id="pay_frecuency" #payFrecuencyRef="ngModel" name="pay_frecuency" required placeholder="" class="input-xlarge" ngModel>
+                            <!--input type="text" id="pay_frecuency" #payFrecuencyRef="ngModel" name="pay_frecuency" required placeholder="" class="input-xlarge" ngModel-->
+                            <select #payFrecuencyRef="ngModel" name="pay_frecuency"  required ngModel>
+                              <option selected="selected" *ngFor="let item of payFrecuency | async" value="{{item.payment_name}}">{{item.payment_name}}</option>
+                            </select>
                              <div [hidden]="payFrecuencyRef.valid || payFrecuencyRef.pristine" class="alert alert-danger">
                                 Please enter a Pay Frequency.
                             </div>
@@ -238,7 +271,7 @@
                         <div class="control-group">
                           <label class="control-label"  for="salary">Salary</label>
                           <div class="controls">
-                            <input type="text" id="salary" #salaryRef="ngModel" name="salary" required placeholder="" class="input-xlarge" ngModel>
+                            <input type="text" id="salary" #salaryRef="ngModel" name="salary" required placeholder="" class="input-xlarge"  ngModel>
 
                             <div [hidden]="salaryRef.valid || salaryRef.pristine" class="alert alert-danger">
                               Please enter a Salary.
@@ -334,11 +367,11 @@
         <td><p class="label label-success">{{item.rol}}<p></td>
         <td>
           <div class="dropdown" dropdown>
-              <button  (click)="editEmployee(item.$key)" class="btn btn-primary" data-toggle="modal" data-target="#editEmployee">Edit</button>
+              <button  (click)="editEmployee(item.$key)" class="btn btn-primary" data-toggle="modal" data-target="" dropdown-open>Edit</button>
               <ul class="dropdown-menu">
-                <li><a href="#" (click)="select()">Badman</a></li>
-                <li><a href="http://google.com">Sadman</a></li>
-                <li><a href="#">Lieman</a></li>
+                <li><a href="#" data-toggle="modal" data-target="#editEmployee">Edit Personal Data</a></li>
+                <li><a href="#" data-toggle="modal" data-target="#administrativeDataEmployee">Edit Addministrative data </a></li>
+                <li><a href="#" data-toggle="modal" data-target="#absenceEmployee" >Add Absence</a></li>
               </ul>
           </div>
         </td>
@@ -353,7 +386,7 @@
 
 
 
-  <!-- Modal Edit Employee -->
+  <!-- Modal Edit Personal data Employee -->
   <div class="modal fade" id="editEmployee" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -462,28 +495,8 @@
                       </div>
                     </div>
                   </div>
-                  <div class="control-group">
-                    <label class="control-label"  for="phone">Dependant Medical Coverage</label>
-                    <div class="controls">
-                      <!--input type="text" id="phone" #medicalCoverageRef="ngModel" name="cellphone" required placeholder="" class="input-xlarge" ngModel-->
-                      <select #medicalCoverageRef="ngModel" name="medical_coverage" name="medical_coverage" required [(ngModel)]="employees.medical_coverage">
-                        <option value="1">Yes</option>
-                        <option value="2">No</option>
-                      </select>
-                      <div [hidden]="medicalCoverageRef.valid || medicalCoverageRef.pristine" class="alert alert-danger">
-                        Please select a Dependant Medical Coverage.
-                      </div>
-                    </div>
-                  </div>
-                  <div class="control-group">
-                    <label class="control-label"  for="pay_frecuency">Pay Frequency</label>
-                    <div class="controls">
-                      <input type="text" id="pay_frecuency" #payFrecuencyRef="ngModel" name="pay_frecuency" required placeholder="" class="input-xlarge" [(ngModel)]="employees.pay_frecuency">
-                      <div [hidden]="payFrecuencyRef.valid || payFrecuencyRef.pristine" class="alert alert-danger">
-                        Please enter a Pay Frequency.
-                      </div>
-                    </div>
-                  </div>
+
+
                   <div class="control-group">
                     <label class="control-label"  for="status">Relationship Status</label>
                     <div class="controls">
@@ -498,32 +511,8 @@
                       </div>
                     </div>
                   </div>
-                  <div class="control-group">
-                    <label class="control-label"  for="status">Employee Status</label>
-                    <div class="controls">
-                      <!--input type="text" id="phone" #cellphoneRef="ngModel" name="cellphone" required placeholder="" class="input-xlarge" ngModel-->
-                      <select  #statusRef="ngModel" name="employee_status" required  [(ngModel)]="employees.employee_status">
-                        <option value="1">Active</option>
-                        <option value="2">Inactive</option>
-                        <option value="3">Other</option>
-                      </select>
-                      <div [hidden]="statusRef.valid || statusRef.pristine" class="alert alert-danger">
-                        Please enter a Status.
-                      </div>
-                    </div>
-                  </div>
-                  <div class="control-group">
-                    <label class="control-label"  for="status">Rol</label>
-                    <div class="controls">
-                      <!--input type="text" id="phone" #cellphoneRef="ngModel" name="cellphone" required placeholder="" class="input-xlarge" ngModel-->
-                      <select  #statusRef="ngModel" name="rol" required   [(ngModel)]="employees.rol">
-                        <option *ngFor="let item of rol | async" value="{{item.rol_name}}">{{item.rol_name}}</option>
-                      </select>
-                      <!--div [hidden]="statusRef.valid || statusRef.pristine" class="alert alert-danger">
-                        Please enter a Status.
-                      </div-->
-                    </div>
-                  </div>
+
+
                   <div class="control-group">
                     <label class="control-label"  for="allowances">Number of Allowances</label>
                     <div class="controls">
@@ -534,26 +523,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="control-group">
-                    <label class="control-label"  for="withheld">Additional withheld</label>
-                    <div class="controls">
-                      <input type="text" id="withheld" #withheldRef="ngModel" name="withheld" required placeholder="" class="input-xlarge" [(ngModel)]="employees.withheld">
 
-                      <div [hidden]="withheldRef.valid || withheldRef.pristine" class="alert alert-danger">
-                        Please enter a Addiotional withheld.
-                      </div>
-                    </div>
-                  </div>
-                  <div class="control-group">
-                    <label class="control-label"  for="source_hire">Source of Hire</label>
-                    <div class="controls">
-                      <input type="text" id="source_hire" #sourceHireRef="ngModel" name="source_hire" required placeholder="" class="input-xlarge" [(ngModel)]="employees.withheld">
-
-                      <div [hidden]="sourceHireRef.valid || sourceHireRef.pristine" class="alert alert-danger">
-                        Please enter a Source of Hire.
-                      </div>
-                    </div>
-                  </div>
                   <div class="control-group">
 
                     <div class="controls" style="padding-top: 10px;">
@@ -575,5 +545,48 @@
     </div>
   </div>
   <!-- ./ -->
+
+  <!--Modal Edit Administrative data Employee -->
+  <div class="modal fade" tabindex="-1" role="dialog" id="administrativeDataEmployee">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Modal title</h4>
+        </div>
+        <div class="modal-body">
+          <p>One fine body&hellip;</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+  <!-- ./-->
+
+  <!--Modal Add Absence data Employee -->
+  <div class="modal fade" tabindex="-1" role="dialog" id="absenceEmployee">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Modal title</h4>
+        </div>
+        <div class="modal-body">
+          <p>One fine body&hellip;</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+  <!-- ./-->
+
+
+
 
 </div>

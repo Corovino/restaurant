@@ -1,0 +1,145 @@
+<div class="col-md-10 content">
+  <!-- Form ModAL Create Source of hire -->
+  <button type="button"   type="button" class="btn btn-primary" data-toggle="modal" data-target="#payFrecuency"  >Add Source of Hire</button>
+  <!-- Modal Create Source of hire-->
+  <div class="modal fade" id="payFrecuency" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Add Source of Hire</h4>
+        </div>
+        <div class="modal-body">
+          <form action="" class="form-horizontal" #source='ngForm' (ngSubmit)="createSource(source.value)">
+            <fieldset>
+              <!-- Name -->
+              <div class="control-group">
+                <label class="control-label"  for="source_name">Source Name</label>
+                <div class="controls">
+                  <input type="text" id="source_name" #sourceNameRef="ngModel" minlength="4" required name="source_name" placeholder="" class="input-xlarge" ngModel>
+                  <div *ngIf="sourceNameRef.errors && (sourceNameRef.dirty || sourceNameRef.touched ) "  class="alert alert-danger">
+                    <div [hidden]="!sourceNameRef.errors.required" >
+                      Please enter a Source Name.
+                    </div>
+                    <div [hidden]="!sourceNameRef.errors.minlength" >
+                      Please enter atleast 4 characters.
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+              <div class="control-group">
+                <label class="control-label"  for="description">Description</label>
+                <div class="controls">
+                  <input type="text" id="description" #descriptionRef="ngModel" name="description" required  placeholder="" class="input-xlarge" ngModel>
+                  <div [hidden]="descriptionRef.valid || descriptionRef.pristine" class="alert alert-danger">
+                    Please enter a Rol Description.
+                  </div>
+                </div>
+              </div>
+              <div class="control-group">
+
+                <div class="controls">
+                  <input type="hidden" id="restaurant" #restaurantRef="ngModel" name="restaurant"   value="{{restaurant.restaurant}}" class="input-xlarge" ngModel>
+                </div>
+              </div>
+
+              <div class="control-group">
+
+                <div class="controls" style="padding-top: 10px;">
+                  <button type="submit" [disabled]="!source.valid" class="btn btn-primary">Save changes</button>
+                </div>
+              </div>
+
+            </fieldset>
+
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default"    data-dismiss="modal">Close</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ./ -->
+
+  <!--  show list restaurant -->
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+      <tr>
+        <th>Sorce Of Hire</th>
+        <th>Description</th>
+        <th>Edit</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let item of test | async" id="">
+        <td ><p>{{ item.source_name }}</p></td>
+        <td><p >{{ item.description }}</p></td>
+        <td><button  (click)="editSource(item.$key)" class="btn btn-primary" data-toggle="modal" data-target="#editRestauran">Edit</button></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <!--  ./ -->
+
+</div>
+
+<!-- Modal Edit Source of Hire-->
+<div class="modal fade" id="editRestauran" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Edit Roll</h4>
+      </div>
+      <div class="modal-body">
+        <form action="" class="form-horizontal" #sourceUpdateForm='ngForm' (ngSubmit)="updateSource(sourceUpdateForm.value)" >
+          <fieldset>
+            <!-- Name -->
+            <div class="control-group">
+              <label class="control-label"  for="source_name">Name Source</label>
+              <div class="controls">
+                <input type="text" id="source_name" #sourceRef="ngModel" minlength="4" required name="source_name" placeholder="" class="input-xlarge" [(ngModel)]="sourceData.source_name">
+                <div *ngIf="sourceRef.errors && (sourceRef.dirty || sourceRef.touched ) "  class="alert alert-danger">
+                  <div [hidden]="!sourceRef.errors.required" >
+                    Please enter a Source.
+                  </div>
+                  <div [hidden]="!rsourceRef.errors.minlength" >
+                    Please enter atleast 4 characters.
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label"  for="description">Description</label>
+              <div class="controls">
+                <input type="text" id="description" #descriptionRef="ngModel" name="description" required  placeholder="" class="input-xlarge" [(ngModel)]="sourceData.description">
+                <div [hidden]="descriptionRef.valid || descriptionRef.pristine" class="alert alert-danger">
+                  Please enter a  Description.
+                </div>
+              </div>
+            </div>
+
+            <div class="control-group">
+
+              <div class="controls" style="padding-top: 10px;">
+                <button type="submit" [disabled]="!sourceUpdateForm.valid" class="btn btn-primary">Save changes</button>
+              </div>
+            </div>
+
+          </fieldset>
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default"  data-dismiss="modal">Close</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ./ -->
