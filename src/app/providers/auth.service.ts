@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
-import { Subject } from 'rxjs/Subject';
 import { RouterModule, Router,  ActivatedRoute } from '@angular/router';
 import { CanActivate }    from '@angular/router';
+import { Subject } from 'rxjs/Subject';
 
 import * as firebase from 'firebase/app';
 
@@ -12,6 +12,7 @@ import * as firebase from 'firebase/app';
 export class AuthService  {
   public user : Observable<firebase.User>;
   private auth;
+  private au : any;
   private  response : boolean;
   loggedIn: boolean = false;
   private reAuth;
@@ -21,7 +22,8 @@ export class AuthService  {
   {
        this.user = afAuth.authState;
        this.auth = firebase.auth();
-       this.reAuth = firebase.auth().currentUser;
+       this.au = firebase.auth().currentUser;
+
 
   }
 
@@ -38,9 +40,6 @@ export class AuthService  {
          this.getUserLoggedIn();
        }
 
-
-
-
      }).catch( error => {
 
            let errorCode = error.code;
@@ -53,7 +52,6 @@ export class AuthService  {
            }
            console.log(error);
      });
-
 
 
   }
@@ -95,9 +93,33 @@ export class AuthService  {
      });
   }
 
-  reAuthUserCredentials(data : any)
+
+  getUserCredentials(email: string, password: string)
   {
-       return this.reAuth.reauthenticate(data);
+
+    //let email =  this.au = firebase.auth().currentUser;
+      /*var user = this.afAuth.auth.Auth().currentUser;
+      const credential = firebase.auth.EmailAuthProvider.credential(email, password);
+      this.auth.reauthenticate(credential).then(function() {
+        // User re-authenticated.
+      }, function(error) {
+        // An error happened.
+        console.log(error);
+      });*/
+
+     console.log(email);
+     console.log(password);
+     const credential = this.auth.EmailAuthProvider.credential(email, password);
+     console.log(credential);
+     this.au.reauthenticate(credential)
+       .then((_) => {
+         console.log('User reauthenticated');
+
+       })
+       .catch((error) => {
+         console.log(error);
+     });
+
   }
 
 }

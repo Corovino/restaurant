@@ -5,7 +5,7 @@ import { DatauserService } from '../../providers/datauser.service';
 import { AuthService } from '../../providers/auth.service';
 import {DropdownModule} from "ngx-dropdown";
 
-
+import * as firebase from 'firebase/app';
 
 
 @Component({
@@ -32,7 +32,7 @@ export class EmployeeComponent implements OnInit {
   private employees: any;
   private key:any;
 
-  constructor(private af : AngularFireDatabase, private auth: AngularFireAuth, private userRestaurant : DatauserService, private au : AuthService  ) {
+  constructor(private af : AngularFireDatabase, private auth: AngularFireAuth, private userRestaurant : DatauserService, private authService : AuthService  ) {
 
 
   }
@@ -190,16 +190,20 @@ export class EmployeeComponent implements OnInit {
   updateAdminData( data : any)
   {
        let pass = prompt('Ingrese su clave para ejecutar la acción');
-       let reaur = this.reauthUser(pass);
 
-       if (!reaur)
+        //let reaur = firebase.auth().currentUser.reauthenticate(firebase.auth.EmailAuthProvider.credential('r_sastoque@hotmail.com', data);
+        /*var user = firebase.auth().currentUser;
+        var credentials = firebase.auth.EmailAuthProvider.credential('puf@firebaseui.com', 'firebase');
+        //user.reauthenticate(credentials);*/
+
+       /*if (!user)
        {
           alert('No tiene permiso apra ejecutar esta acción');
        }else{
 
           console.log(data);
           alert('Se actualizaron los datos correctamente');
-       }
+       }*/
 
        console.log(pass);
   }
@@ -207,7 +211,8 @@ export class EmployeeComponent implements OnInit {
   reauthUser(data : any)
   {
        //document.getElementById('reauthUser').click();
-       return this.au.reAuthUserCredentials(data);
+       console.log(data);
+       //return this.au.getUserCredentials(data);
   }
 
 
