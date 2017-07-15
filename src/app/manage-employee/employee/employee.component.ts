@@ -3,6 +3,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import { DatauserService } from '../../providers/datauser.service';
 import { AuthService } from '../../providers/auth.service';
+import { Absence } from '../../model/absence';
 import {DropdownModule} from "ngx-dropdown";
 
 import * as firebase from 'firebase/app';
@@ -24,6 +25,7 @@ export class EmployeeComponent implements OnInit {
   private race : FirebaseListObservable<any[]>;
   private sourceHire : FirebaseListObservable<any[]>;
   private jobPosition : FirebaseListObservable<any[]>;
+  private absence : FirebaseListObservable<any[]>;
   private pass : any;
 
 
@@ -91,6 +93,13 @@ export class EmployeeComponent implements OnInit {
                      equalTo : data.restaurant
                    }
                  });
+                 this.absence = this.af.list('absence',{
+                   query : {
+                     orderByChild : 'restaurant',
+                     equalTo : data.restaurant
+                   }
+                 });
+
             });
 
       });
@@ -150,6 +159,8 @@ export class EmployeeComponent implements OnInit {
                {
 
                     this.employees = {
+
+                      id_employee:data.$key,
                       birth_day : data.birth_day,
                       firts_name : data.firts_name,
                       gender : data.gender,
@@ -176,6 +187,13 @@ export class EmployeeComponent implements OnInit {
                }
             });
         });
+
+  }
+
+
+  createAbsences( data : any){
+
+      console.log(data);
 
   }
 

@@ -389,8 +389,6 @@
                 <li><a href="#" data-toggle="modal" data-target="#editEmployee">Edit Personal Data</a></li>
                 <li><a href="#" data-toggle="modal" data-target="#administrativeDataEmployee">Edit Addministrative data </a></li>
                 <li><a href="#" data-toggle="modal" data-target="#absenceEmployee" >Add Absence</a></li>
-                <li><a href="#" data-toggle="modal" data-target="#suspensionEmployee" >Add Suspension</a></li>
-                <li><a href="#" data-toggle="modal" data-target="#vacationEmployee" >Add Vacation</a></li>
                 <li><a href="#" data-toggle="modal" data-target="#terminationEmployee" >Add Termination</a></li>
               </ul>
           </div>
@@ -628,7 +626,7 @@
                 <div class="controls">
                   <!--input type="text" id="source_hire" #sourceHireRef="ngModel" name="source_hire" required placeholder="" class="input-xlarge" ngModel-->
                   <select #jobPositionRef="ngModel" name="job_position"  required ngModel [(ngModel)]="employees.job_position">
-                    <option  *ngFor="let item of jobPosition | async" [disabled]="item.job_name == employees.job_position" value="{{item.job_name}}">{{item.job_name}}</option>
+                    <option  *ngFor="let item of jobPosition | async"  value="{{item.job_name}}">{{item.job_name}}</option>
                   </select>
 
                   <div [hidden]="jobPositionRef.valid || jobPositionRef.pristine" class="alert alert-danger">
@@ -683,7 +681,7 @@
   <!-- ./-->
 
   <!--Modal Add Absence data Employee -->
-  <div class="modal fade" tabindex="-1" role="dialog" id="absenceEmployee">
+  <!--div class="modal fade" tabindex="-1" role="dialog" id="absenceEmployee">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -694,38 +692,27 @@
         <div class="modal-body">
           <form action="" class="form-horizontal" #absenceForm='ngForm' (ngSubmit)="createAbsences(absenceForm.value)" >
             <fieldset>
-              <!-- Name -->
+              <!-- Name
               <div class="control-group">
-                <label class="control-label"  for="employee">Employee</label>
-                <div class="controls">
-                  <!--input type="text" id="password" #passwordRef="ngModel" name="password" required  placeholder="" class="input-xlarge" ngModel-->
-                  <select #employeeRef="ngModel" name="employee"  required ngModel>
-                    <option *ngFor="let item of employee | async" value="{{item.firts_name}}{{item.last_name}}">{{item.firts_name}} {{item.last_name}}</option>
-                  </select>
 
+                <div class="controls">
+                  <input type="text"  #idEmployeeRef="ngModel" name="id_employee" required  value="{{employees.id_employee}}" class="input-xlarge" ngModel>
+                  <input type="text"  #nameEmployeeRef="ngModel" name="name_employee" required   value="{{employees.firts_name}}" class="input-xlarge" ngModel>
                 </div>
               </div>
 
               <div class="control-group">
                 <label class="control-label"  for="category">Category</label>
                 <div class="controls">
-
-                  <select #restaurantdRef="ngModel" name="category"  required ngModel>
-                    <option value="vacation">Vacation</option>
-                    <option value="Maternity">Maternity</option>
-                    <option value="Military">Military</option>
-                    <option value="Suspension">Suspension</option>
-                    <option value="Sick">Sick</option>
-                    <option value="Medical">Medical</option>
-                    <option value="Other">Other</option>
+                  <select #categoryRef="ngModel" name="category"  required ngModel>
+                    <option *ngFor="let item of absence | async" value="{{item.absence_name}}">{{item.absence_name}}</option>
                   </select>
-
                 </div>
               </div>
               <div class="control-group">
-                <label class="control-label"  for="start_sate">Star Date</label>
+                <label class="control-label"  for="start_sate">Begin Date</label>
                 <div class="controls">
-                  <input type="date" id="rol_name" #startDateRef="ngModel" minlength="4" required name="start_date" placeholder="" class="input-xlarge" ngModel>
+                  <input type="date" id="start_date" #startDateRef="ngModel" minlength="4" required name="start_date" placeholder="" class="input-xlarge" ngModel>
                   <div *ngIf="startDateRef.errors && (startDateRef.dirty || startDateRef.touched ) "  class="alert alert-danger">
                     <div [hidden]="!startDateRef.errors.required" >
                       Please enter a Start Date.
@@ -770,7 +757,7 @@
               <div class="control-group">
 
                 <div class="controls" style="padding-top: 10px;">
-                  <button type="submit" [disabled]="!absenceForm.valid" class="btn btn-primary">Save changes</button>
+                  <button type="submit"  class="btn btn-primary">Save changes</button>
                 </div>
               </div>
 
@@ -780,196 +767,20 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+
         </div>
       </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-  </div><!-- /.modal -->
+    <!--/div><!-- /.modal-dialog -->
+  <!--/div><!-- /.modal -->
   <!-- ./-->
 
-  <!--Modal Add Suspension data Employee -->
-  <div class="modal fade" tabindex="-1" role="dialog" id="suspensionEmployee">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title">Suspension employee</h4>
-        </div>
-        <h2>{{employees.firts_name}} {{employees.last_name}}</h2>
-        <div class="modal-body">
-          <form action="" class="form-horizontal" #absenceForm='ngForm' (ngSubmit)="createAbsences(absenceForm.value)" >
-            <fieldset>
-              <!-- Name -->
-              <div class="control-group">
-                <label class="control-label"  for="employee">Employee</label>
-                <div class="controls">
-                  <!--input type="text" id="password" #passwordRef="ngModel" name="password" required  placeholder="" class="input-xlarge" ngModel-->
-                  <select #employeeRef="ngModel" name="employee"  required ngModel>
-                    <option *ngFor="let item of employee | async" value="{{item.firts_name}}{{item.last_name}}">{{item.firts_name}} {{item.last_name}}</option>
-                  </select>
 
-                </div>
-              </div>
+  <app-absence-employee
+    [firts_name]="employees.firts_name"
+    [last_name]="employees.last_name"
+    [id_employee]="employees.id_employee"
+  ></app-absence-employee>
 
-
-              <div class="control-group">
-                <label class="control-label"  for="start_sate">From Date</label>
-                <div class="controls">
-                  <input type="date" id="rol_name" #startDateRef="ngModel" minlength="4" required name="start_date" placeholder="" class="input-xlarge" ngModel>
-                  <div *ngIf="startDateRef.errors && (startDateRef.dirty || startDateRef.touched ) "  class="alert alert-danger">
-                    <div [hidden]="!startDateRef.errors.required" >
-                      Please enter a Start Date.
-                    </div>
-                    <div [hidden]="!startDateRef.errors.minlength" >
-                      Please enter atleast 4 characters.
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-              <div class="control-group">
-                <label class="control-label"  for="end_date">To Date</label>
-                <div class="controls">
-                  <input type="date" id="end_date" #endDateRef="ngModel" name="end_date" required  placeholder="" class="input-xlarge" ngModel>
-                  <div [hidden]="endDateRef.valid || endDateRef.pristine" class="alert alert-danger">
-                    Please enter a End Date.
-                  </div>
-                </div>
-              </div>
-              <div class="control-group">
-                <label class="control-label"  for="employee_status">Employee Status</label>
-                <div class="controls">
-                  <!--input type="text" id="phone" #cellphoneRef="ngModel" name="cellphone" required placeholder="" class="input-xlarge" ngModel-->
-                  <select  #employeeStatusRef="ngModel" name="employee_status" required [(ngModel)]="employees.employee_status">
-                    <option value="1">Active</option>
-                    <option value="2">Inactive</option>
-                    <option value="3">Other</option>
-                  </select>
-                  <div [hidden]="employeeStatusRef.valid || employeeStatusRef.pristine" class="alert alert-danger">
-                    Please enter a Employee Status.
-                  </div>
-                </div>
-              </div>
-
-              <div class="control-group">
-                <label class="control-label"  for="remarks">Remarks</label>
-                <div class="controls">
-
-                  <textarea class="form-control" #remarksRef="ngModel" name="remarks" required    ngModelrows="5" ngModel></textarea>
-                  <div [hidden]="remarksRef.valid || remarksRef.pristine" class="alert alert-danger">
-                    Please enter a Remarks.
-                  </div>
-                </div>
-              </div>
-
-              <div class="control-group">
-
-                <div class="controls" style="padding-top: 10px;">
-                  <button type="submit" [disabled]="!absenceForm.valid" class="btn btn-primary">Save changes</button>
-                </div>
-              </div>
-
-            </fieldset>
-
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-      </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-  </div><!-- /.modal -->
-  <!-- ./-->
-
-  <!--Modal Add Vacation data Employee -->
-  <div class="modal fade" tabindex="-1" role="dialog" id="vacationEmployee">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title">Vacation Employee</h4>
-        </div>
-        <h2>{{employees.firts_name}} {{employees.last_name}}</h2>
-        <div class="modal-body">
-          <form action="" class="form-horizontal" #absenceForm='ngForm' (ngSubmit)="createAbsences(absenceForm.value)" >
-            <fieldset>
-              <!-- Name -->
-              <div class="control-group">
-                <label class="control-label"  for="employee">Employee</label>
-                <div class="controls">
-                  <!--input type="text" id="password" #passwordRef="ngModel" name="password" required  placeholder="" class="input-xlarge" ngModel-->
-                  <select #employeeRef="ngModel" name="employee"  required ngModel>
-                    <option *ngFor="let item of employee | async" value="{{item.firts_name}}{{item.last_name}}">{{item.firts_name}} {{item.last_name}}</option>
-                  </select>
-
-                </div>
-              </div>
-
-              <div class="control-group">
-                <label class="control-label"  for="start_sate">From Date</label>
-                <div class="controls">
-                  <input type="date" id="rol_name" #startDateRef="ngModel" minlength="4" required name="start_date" placeholder="" class="input-xlarge" ngModel>
-                  <div *ngIf="startDateRef.errors && (startDateRef.dirty || startDateRef.touched ) "  class="alert alert-danger">
-                    <div [hidden]="!startDateRef.errors.required" >
-                      Please enter a Start Date.
-                    </div>
-                    <div [hidden]="!startDateRef.errors.minlength" >
-                      Please enter atleast 4 characters.
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-              <div class="control-group">
-                <label class="control-label"  for="end_date">To Date</label>
-                <div class="controls">
-                  <input type="date" id="end_date" #endDateRef="ngModel" name="end_date" required  placeholder="" class="input-xlarge" ngModel>
-                  <div [hidden]="endDateRef.valid || endDateRef.pristine" class="alert alert-danger">
-                    Please enter a End Date.
-                  </div>
-                </div>
-              </div>
-              <div class="control-group">
-                <label class="control-label"  for="approved">Approved</label>
-                <div class="controls">
-
-                  <select #restaurantdRef="ngModel" name="approved"  required ngModel>
-                    <option value="Yes">Yes</option>
-                    <option value="No">No</option>
-                  </select>
-                </div>
-              </div>
-              <div class="control-group">
-                <label class="control-label"  for="remarks">Remarks</label>
-                <div class="controls">
-
-                  <textarea class="form-control" #remarksRef="ngModel" name="remarks" required    ngModelrows="5" ngModel></textarea>
-                  <div [hidden]="remarksRef.valid || remarksRef.pristine" class="alert alert-danger">
-                    Please enter a Remarks.
-                  </div>
-                </div>
-              </div>
-
-              <div class="control-group">
-
-                <div class="controls" style="padding-top: 10px;">
-                  <button type="submit" [disabled]="!absenceForm.valid" class="btn btn-primary">Save changes</button>
-                </div>
-              </div>
-
-            </fieldset>
-
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-      </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-  </div><!-- /.modal -->
-  <!-- ./-->
 
   <!--Modal Add Termination data Employee -->
   <div class="modal fade" tabindex="-1" role="dialog" id="terminationEmployee">

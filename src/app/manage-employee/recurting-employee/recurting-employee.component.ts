@@ -52,4 +52,9 @@ export class RecurtingEmployeeComponent implements OnInit {
 
   }
 
+  createAbsences( data : any)
+  {
+      console.log(data);
+  }
+
 }

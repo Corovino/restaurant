@@ -7,7 +7,7 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title">Add Absence</h4>
       </div>
-      <h2>{{employees.firts_name}} {{employees.last_name}}</h2>
+      <h2>{{firts_name}} {{last_name}}</h2>
       <div class="modal-body">
         <form action="" class="form-horizontal" #absenceForm='ngForm' (ngSubmit)="createAbsences(absenceForm.value)" >
           <fieldset>
@@ -15,13 +15,13 @@
             <div class="control-group">
 
               <div class="controls">
-                <input type="text"  #idEmployeeRef="ngModel" name="id_employee" required  value="{{employees.id_employee}}" class="input-xlarge" ngModel>
-                <input type="text"  #nameEmployeeRef="ngModel" name="name_employee" required   value="{{employees.firts_name}}" class="input-xlarge" ngModel>
+                <input type="text"  #idEmployeeRef="ngModel" name="id_employee" required  value="{{id_employee}}" class="input-xlarge" [(ngModel)]="id_employee">
+                <input type="text"  #nameEmployeeRef="ngModel" name="name_employee" required   value="{{firts_name}}" class="input-xlarge" [(ngModel)]="firts_name">
               </div>
             </div>
 
             <div class="control-group">
-              <label class="control-label"  for="category">Category</label>
+              <label class="control-label"  for="category">Absence Category</label>
               <div class="controls">
                 <select #categoryRef="ngModel" name="category"  required ngModel>
                   <option *ngFor="let item of absence | async" value="{{item.absence_name}}">{{item.absence_name}}</option>

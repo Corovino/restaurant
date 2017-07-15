@@ -44,6 +44,7 @@ import { RaceComponent } from './settings/race/race.component';
 import { JobPositionComponent } from './settings/job-position/job-position.component';
 import { AbsenceComponent } from './settings/absence/absence.component';
 import { SourceHireComponent } from './settings/source-hire/source-hire.component';
+import { AbsenceEmployeeComponent } from './manage-employee/absence-employee/absence-employee.component';
 
 
 
@@ -79,6 +80,7 @@ import { SourceHireComponent } from './settings/source-hire/source-hire.componen
     JobPositionComponent,
     AbsenceComponent,
     SourceHireComponent,
+    AbsenceEmployeeComponent,
 
   ],
   imports: [
