@@ -5,7 +5,7 @@ import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { ApproutingModule } from './approuting/approuting.module';
 import { DropdownModule } from "ngx-dropdown";
-
+import { MomentModule } from 'angular2-moment';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
@@ -92,7 +92,8 @@ import { AbsenceEmployeeComponent } from './manage-employee/absence-employee/abs
     AngularFireDatabaseModule, // imports firebase/database, only needed for database features
     AngularFireAuthModule,
     ReactiveFormsModule,
-    DropdownModule
+    DropdownModule,
+    MomentModule
     //PopupModule.forRoot()
   ],
   providers: [AuthGuard, AuthService],

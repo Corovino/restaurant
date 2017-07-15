@@ -75,7 +75,7 @@ export class AbsencesComponent implements OnInit {
 
       } ).catch( err => {
          console.log(err);
-      })
+      });
 
   }
 
