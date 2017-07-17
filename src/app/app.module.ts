@@ -45,6 +45,8 @@ import { JobPositionComponent } from './settings/job-position/job-position.compo
 import { AbsenceComponent } from './settings/absence/absence.component';
 import { SourceHireComponent } from './settings/source-hire/source-hire.component';
 import { AbsenceEmployeeComponent } from './manage-employee/absence-employee/absence-employee.component';
+import { TerminationWorkEmployeeComponent } from './manage-employee/termination-work-employee/termination-work-employee.component';
+
 
 
 
@@ -81,6 +83,8 @@ import { AbsenceEmployeeComponent } from './manage-employee/absence-employee/abs
     AbsenceComponent,
     SourceHireComponent,
     AbsenceEmployeeComponent,
+    TerminationWorkEmployeeComponent,
+
 
   ],
   imports: [

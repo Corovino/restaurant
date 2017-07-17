@@ -3,8 +3,9 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import { DatauserService } from '../../providers/datauser.service';
 import { AuthService } from '../../providers/auth.service';
-import { Absence } from '../../model/absence';
-import {DropdownModule} from "ngx-dropdown";
+import { LogsUserService } from '../../providers/logs-user.service';
+import * as moment from 'moment/moment';
+
 
 import * as firebase from 'firebase/app';
 
@@ -13,7 +14,7 @@ import * as firebase from 'firebase/app';
   selector: 'app-employee',
   templateUrl: './employee.component.html',
   styleUrls: ['./employee.component.css'],
-  providers : [ DatauserService ]
+  providers : [ DatauserService, LogsUserService ]
 })
 export class EmployeeComponent implements OnInit {
 
@@ -26,6 +27,10 @@ export class EmployeeComponent implements OnInit {
   private sourceHire : FirebaseListObservable<any[]>;
   private jobPosition : FirebaseListObservable<any[]>;
   private absence : FirebaseListObservable<any[]>;
+  private employeeUpdate : any;
+  private dateNow : any;
+  private dataLogUser : any;
+  private nameRestaurant : any;
   private pass : any;
 
 
@@ -34,7 +39,7 @@ export class EmployeeComponent implements OnInit {
   private employees: any;
   private key:any;
 
-  constructor(private af : AngularFireDatabase, private auth: AngularFireAuth, private userRestaurant : DatauserService, private authService : AuthService  ) {
+  constructor(private af : AngularFireDatabase, private auth: AngularFireAuth, private userRestaurant : DatauserService, private  logUser : LogsUserService  ) {
 
 
   }
@@ -43,12 +48,15 @@ export class EmployeeComponent implements OnInit {
 
     this.restaurant = this.af.list('/restaurant');
     this.employees= {};
+    this.nameRestaurant = '';
+    this.dateNow = moment().format('lLT');
 
       let test = this.userRestaurant.getRestauranUser().subscribe( data => {
 
 
 
            data.map( data => {
+                 this.nameRestaurant = data.restaurant;
                  console.log(data.restaurant);
                  this.employee = this.af.list('/employees',{
                    query:{
@@ -138,9 +146,13 @@ export class EmployeeComponent implements OnInit {
                     withheld:value.withheld,
                     city:value.city,
                     address: value.address,
-                    job_position : value.job_position
+                    job_position : value.job_position,
+                    created_at : this.dateNow,
+                    update_at : this.dateNow
 
       			});
+
+            this.logUserAction(this.key, this.nameRestaurant , 'Create', 'Employee')
       		} ).catch( error => {
               console.log('Error promesa postRestaurant', error);
       		});
@@ -191,47 +203,55 @@ export class EmployeeComponent implements OnInit {
   }
 
 
-  createAbsences( data : any){
 
-      console.log(data);
-
-  }
 
   updateEmployee(data : any){
-       console.log(data);
-       let auth = prompt("Porfavor autentiquese para actualizar los datos ");
 
-       (auth !="") ?  this.employee.update(this.key, data) : alert ('Fallo de auth'+auth);
+
+      this.employee.update(this.key, data);
+      this.logUserAction(this.key, this.nameRestaurant , 'Update', 'Employee data')
 
   }
 
   updateAdminData( data : any)
   {
-       let pass = prompt('Ingrese su clave para ejecutar la acción');
 
-        //let reaur = firebase.auth().currentUser.reauthenticate(firebase.auth.EmailAuthProvider.credential('r_sastoque@hotmail.com', data);
-        /*var user = firebase.auth().currentUser;
-        var credentials = firebase.auth.EmailAuthProvider.credential('puf@firebaseui.com', 'firebase');
-        //user.reauthenticate(credentials);*/
 
-       /*if (!user)
-       {
-          alert('No tiene permiso apra ejecutar esta acción');
-       }else{
+      console.log(this.key);
+      this.employeeUpdate = {
 
-          console.log(data);
-          alert('Se actualizaron los datos correctamente');
-       }*/
+           employee_status : data.employee_status,
+           end_work : data.end_work,
+           job_position : data.job_position,
+           medical_coverage :data.medical_coverage,
+           pay_frecuency : data.pay_frecuency,
+           salary : data.salary,
+           source_hire : data.source_hire,
+           start_work : data.start_work,
+           update_at : this.dateNow
 
-       console.log(pass);
-  }
+      }
 
-  reauthUser(data : any)
-  {
-       //document.getElementById('reauthUser').click();
+      this.employee.update(this.key, this.employeeUpdate);
+      this.logUserAction(this.key, this.nameRestaurant , 'Update', 'Administrative data')
        console.log(data);
-       //return this.au.getUserCredentials(data);
+
   }
+
+  logUserAction(userKey : any, restaurant : any, action_user: any , from_action:any){
+
+    this.dataLogUser = {
+
+      id_currentUser :userKey,
+      mane_user : restaurant,
+      action_user : action_user,
+      from_action :from_action,
+    };
+    this.logUser.createLogUser(this.dataLogUser);
+  }
+
+
+
 
 
 

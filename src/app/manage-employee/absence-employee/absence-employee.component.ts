@@ -74,7 +74,7 @@ export class AbsenceEmployeeComponent implements OnInit {
         created_at : this.dateNow,
         update_at : this.dateNow
 
-      })
+      });
 
           console.log(this.nameRestaurant);
           this.dataLogUser = {
