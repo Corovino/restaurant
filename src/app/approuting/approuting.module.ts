@@ -21,6 +21,7 @@ import { RaceComponent } from '../settings/race/race.component';
 import { JobPositionComponent } from '../settings/job-position/job-position.component';
 import { AbsenceComponent } from '../settings/absence/absence.component';
 import { SourceHireComponent } from '../settings/source-hire/source-hire.component';
+import { LogsUserComponent } from '../manage-employee/logs-user/logs-user.component';
 
 const routes : Routes =
 [
@@ -39,6 +40,7 @@ const routes : Routes =
         {path: 'absences', component: AbsencesComponent  },
         {path: 'recruitingEmployee', component: RecurtingEmployeeComponent  },
         {path: 'vacationEmployee', component: VacationComponent  },
+        {path: 'logsUser', component: LogsUserComponent  },
       ]},
      {path: 'settings', children:[
         {path: 'rol', component: RolComponent },

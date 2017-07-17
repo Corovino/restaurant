@@ -46,6 +46,7 @@ import { AbsenceComponent } from './settings/absence/absence.component';
 import { SourceHireComponent } from './settings/source-hire/source-hire.component';
 import { AbsenceEmployeeComponent } from './manage-employee/absence-employee/absence-employee.component';
 import { TerminationWorkEmployeeComponent } from './manage-employee/termination-work-employee/termination-work-employee.component';
+import { LogsUserComponent } from './manage-employee/logs-user/logs-user.component';
 
 
 
@@ -84,6 +85,7 @@ import { TerminationWorkEmployeeComponent } from './manage-employee/termination-
     SourceHireComponent,
     AbsenceEmployeeComponent,
     TerminationWorkEmployeeComponent,
+    LogsUserComponent,
 
 
   ],

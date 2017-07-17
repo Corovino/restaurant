@@ -39,4 +39,15 @@ export class LogsUserService {
        })
   }
 
+  getLogsUserActions( userKey : any)
+  {
+
+      return  this.logUser = this.af.list('logsUser', {
+            query:{
+              orderByChild:'id_currentUser',
+              equalTo : userKey
+            }
+        });
+  }
+
 }

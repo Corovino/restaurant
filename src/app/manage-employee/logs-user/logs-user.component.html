@@ -1,0 +1,23 @@
+<!--  show Logs User -->
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+    <tr>
+      <th>User</th>
+      <th>Action</th>
+      <th>Source Action</th>
+      <th>Created at</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of logsUser | async">
+      <td ><p>{{ item.id_currentUser }}</p></td>
+      <td><p >{{ item.action_user }}</p></td>
+      <td><p >{{ item.from_action }}</p></td>
+      <td><p >{{ item.created_at }}</p></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<!--  ./ -->
