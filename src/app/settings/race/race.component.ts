@@ -21,7 +21,6 @@ export class RaceComponent implements OnInit {
   private  raceData : any;
   private  test : FirebaseListObservable<any[]>;
   private  jobData : any;
-  private  dateNow;
   private  dataLogUser : any;
 
   constructor( private af : AngularFireDatabase, private du : DatauserService, private logsUser : LogsUserService  ) { }

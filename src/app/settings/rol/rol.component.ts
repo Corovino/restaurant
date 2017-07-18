@@ -3,12 +3,14 @@ import { Observable } from 'rxjs/Observable';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import { DatauserService } from '../../providers/datauser.service';
-import { Subject } from 'rxjs/Subject';
+import { LogsUserService } from '../../providers/logs-user.service';
+import * as moment from 'moment/moment';
 
 @Component({
   selector: 'app-rol',
   templateUrl: './rol.component.html',
-  styleUrls: ['./rol.component.css']
+  styleUrls: ['./rol.component.css'],
+  providers : [DatauserService, LogsUserService ]
 })
 export class RolComponent implements OnInit {
 
@@ -16,19 +18,25 @@ export class RolComponent implements OnInit {
   private  key: any;
   private  rolData:any;
   private  restaurant : any;
-  constructor(private af : AngularFireDatabase, private du : DatauserService ) { }
+  private  dateNow;
+  private  dataLogUser : any;
+
+  constructor(private af : AngularFireDatabase, private du : DatauserService, private logsUser : LogsUserService ) { }
 
 
   ngOnInit() {
 
   	  this.rolData= {};
       this.restaurant = {};
+      this.dateNow = moment().format('lLT');
+
       this.du.getRestauranUser().subscribe( data => {
 
               data.map( data => {
 
                     this.restaurant={
-                        restaurant: data.restaurant
+                        restaurant: data.restaurant,
+                        key:data.$key
                     }
                     this.rol = this.af.list('/rol', {
                        query:{
@@ -57,6 +65,8 @@ export class RolComponent implements OnInit {
 
               }
         );
+
+      this.logUserAction(this.restaurant.key, this.restaurant.restaurant, 'Create', 'Rol');
   }
 
   editRol(value : any)
@@ -84,7 +94,25 @@ export class RolComponent implements OnInit {
   {
 
        this.rol.update(this.key, data);
+       this.logUserAction(this.restaurant.key, this.restaurant.restaurant, 'Update', 'Rol');
+  }
+
+  deleteRol(data)
+  {
+      this.rol.remove(data);
+      this.logUserAction(this.restaurant.key, this.restaurant.restaurant, 'Delete', 'Rol');
   }
 
 
+  logUserAction(userKey : any, restaurant : any, action_user: any , from_action:any){
+
+    this.dataLogUser = {
+
+      id_currentUser :userKey,
+      mane_user : restaurant,
+      action_user : action_user,
+      from_action :from_action,
+    };
+    this.logsUser.createLogUser(this.dataLogUser);
+  }
 }

@@ -79,6 +79,7 @@
         <td ><p>{{ item.source_name }}</p></td>
         <td><p >{{ item.description }}</p></td>
         <td><button  (click)="editSource(item.$key)" class="btn btn-primary" data-toggle="modal" data-target="#editRestauran">Edit</button></td>
+        <td><button  (click)="deleteSource(item.$key)" class="btn btn-danger">Delete</button></td>
       </tr>
       </tbody>
     </table>

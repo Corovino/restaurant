@@ -17,7 +17,6 @@ export class PaymentComponent implements OnInit {
   private  restaurant : any;
   private  paymentData : any;
   private  test : FirebaseListObservable<any[]>;
-  private  jobData : any;
   private  dateNow;
   private  dataLogUser : any;
 
