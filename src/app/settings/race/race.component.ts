@@ -1,12 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import { DatauserService } from '../../providers/datauser.service';
+import { LogsUserService } from '../../providers/logs-user.service';
+import * as moment from 'moment/moment';
+
 
 
 @Component({
   selector: 'app-race',
   templateUrl: './race.component.html',
-  styleUrls: ['./race.component.css']
+  styleUrls: ['./race.component.css'],
+  providers : [DatauserService, LogsUserService ]
 })
 
 export class RaceComponent implements OnInit {
@@ -16,8 +20,11 @@ export class RaceComponent implements OnInit {
   private  restaurant : any;
   private  raceData : any;
   private  test : FirebaseListObservable<any[]>;
+  private  jobData : any;
+  private  dateNow;
+  private  dataLogUser : any;
 
-  constructor( private af : AngularFireDatabase, private du : DatauserService  ) { }
+  constructor( private af : AngularFireDatabase, private du : DatauserService, private logsUser : LogsUserService  ) { }
 
   ngOnInit() {
 
@@ -29,7 +36,8 @@ export class RaceComponent implements OnInit {
       data.map( data => {
 
         this.restaurant={
-          restaurant: data.restaurant
+          restaurant: data.restaurant,
+          key : data.$key
         }
         this.test = this.af.list('/race', {
           query:{
@@ -61,7 +69,7 @@ export class RaceComponent implements OnInit {
 
       }
     );
-
+    this.logUserAction(this.restaurant.key, this.restaurant.restaurant, 'Create', 'Race');
   }
 
 
@@ -88,8 +96,26 @@ export class RaceComponent implements OnInit {
 
   updateRace(data: any)
   {
-
     this.test.update(this.key, data);
+    this.logUserAction(this.restaurant.key, this.restaurant.restaurant, 'Update', 'Absence');
+  }
+
+  deleteRace( data : any)
+  {
+     this.test.remove(data);
+     this.logUserAction(this.restaurant.key, this.restaurant.restaurant, 'Delete', 'Race');
+  }
+
+  logUserAction(userKey : any, restaurant : any, action_user: any , from_action:any){
+
+    this.dataLogUser = {
+
+      id_currentUser :userKey,
+      mane_user : restaurant,
+      action_user : action_user,
+      from_action :from_action,
+    };
+    this.logsUser.createLogUser(this.dataLogUser);
   }
 
 }

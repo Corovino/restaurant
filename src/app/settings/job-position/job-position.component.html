@@ -7,7 +7,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title" id="myModalLabel">Add Race</h4>
+          <h4 class="modal-title" id="myModalLabel">Add Job</h4>
         </div>
         <div class="modal-body">
           <form action="" class="form-horizontal" #job='ngForm' (ngSubmit)="createJob(job.value)">
@@ -40,7 +40,7 @@
               <div class="control-group">
 
                 <div class="controls">
-                  <input type="text" id="restaurant" #restaurantRef="ngModel" name="restaurant"   value="{{restaurant.restaurant}}" class="input-xlarge" ngModel>
+                  <input type="hidden" id="restaurant" #restaurantRef="ngModel" name="restaurant"   value="{{restaurant.restaurant}}" class="input-xlarge" ngModel>
                 </div>
               </div>
 
@@ -78,7 +78,8 @@
       <tr *ngFor="let item of test | async" id="">
         <td ><p>{{ item.job_name }}</p></td>
         <td><p >{{ item.description }}</p></td>
-        <td><button  (click)="editRace(item.$key)" class="btn btn-primary" data-toggle="modal" data-target="#editRestauran">Edit</button></td>
+        <td><button  (click)="editJob(item.$key)" class="btn btn-primary" data-toggle="modal" data-target="#editRestauran">Edit</button></td>
+        <td><button  (click)="deleteJob(item.$key)" class="btn btn-danger">Edit</button></td>
       </tr>
       </tbody>
     </table>
