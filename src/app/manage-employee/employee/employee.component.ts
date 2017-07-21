@@ -4,6 +4,7 @@ import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable }
 import { DatauserService } from '../../providers/datauser.service';
 import { AuthService } from '../../providers/auth.service';
 import { LogsUserService } from '../../providers/logs-user.service';
+import { Angular2Csv } from 'angular2-csv/Angular2-csv';
 import * as moment from 'moment/moment';
 
 
@@ -248,6 +249,40 @@ export class EmployeeComponent implements OnInit {
       from_action :from_action,
     };
     this.logUser.createLogUser(this.dataLogUser);
+  }
+
+  importCsvEmployee(){
+
+    let test = this.userRestaurant.getRestauranUser().subscribe( data => {
+
+
+      data.map(data => {
+        this.nameRestaurant = data.restaurant;
+        console.log(data.restaurant);
+        this.employee = this.af.list('/employees', {
+          query: {
+            orderByChild: 'restaurant',
+            equalTo: data.restaurant
+          }
+
+        });
+
+        this.employee.subscribe( data => {
+          data.map( data => {
+            console.log(data);
+            let excelReport = [{
+               firts_name : data.firts_namegit
+            }]
+            console.log(excelReport);
+            new Angular2Csv( excelReport, 'report Employee');
+          })
+        });
+
+      });
+
+    });
+
+
   }
 
 

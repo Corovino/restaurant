@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import { DatauserService } from '../../providers/datauser.service';
 import { LogsUserService } from '../../providers/logs-user.service';
+import { Angular2Csv } from 'angular2-csv/Angular2-csv';
 import * as moment from 'moment/moment';
 
 @Component({
@@ -61,6 +62,7 @@ export class TerminationWorkEmployeeComponent implements OnInit {
            restaurant: this.nameRestaurant,
            name_employee : data.name_employee,
            remarks : data.remarks,
+           lastDay_worked: data.lastDay_worked,
            created_at : this.dateNow,
            update_at : this.dateNow
       });
@@ -78,6 +80,43 @@ export class TerminationWorkEmployeeComponent implements OnInit {
       from_action :"Termiantion Contract",
     };
     this.logUser.createLogUser(this.dataLogUser);
+  }
+
+  importCsv(){
+
+    console.log('data')
+
+    let test = this.dataUser.getRestauranUser().subscribe( data => {
+
+      data.map( data => {
+
+        this.nameRestaurant = data.restaurant;
+        this.userKey =data.$key;
+        this.terminationWork = this.af.list('terminationWork',{
+          query : {
+            orderByChild : 'restaurant',
+            equalTo : data.restaurant
+          }
+        });
+        console.log(this.terminationWork);
+        this.terminationWork.subscribe( data => {
+             data.map( data => {
+                console.log(data);
+                let excelReport = [{
+                   name_employee : data.name_employee,
+                   lastDay_worked: data.lastDay_worked,
+                   remarks: data.remarks,
+                   created_at : data.created_at
+                }]
+                console.log(excelReport);
+                new Angular2Csv( excelReport, 'report Termination work');
+             })
+        });
+
+      });
+
+    });
+
   }
 
 }

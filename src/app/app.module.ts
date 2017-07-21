@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { ApproutingModule } from './approuting/approuting.module';
 import { DropdownModule } from "ngx-dropdown";
 import { MomentModule } from 'angular2-moment';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
@@ -99,7 +100,8 @@ import { LogsUserComponent } from './manage-employee/logs-user/logs-user.compone
     AngularFireAuthModule,
     ReactiveFormsModule,
     DropdownModule,
-    MomentModule
+    MomentModule,
+    NgbModule.forRoot()
     //PopupModule.forRoot()
   ],
   providers: [AuthGuard, AuthService],
