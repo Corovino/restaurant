@@ -23,6 +23,7 @@ import { AbsenceComponent } from '../settings/absence/absence.component';
 import { SourceHireComponent } from '../settings/source-hire/source-hire.component';
 import { LogsUserComponent } from '../manage-employee/logs-user/logs-user.component';
 import { TerminationWorkEmployeeComponent } from '../manage-employee/termination-work-employee/termination-work-employee.component';
+import { TerminationEmployeeComponent } from '../manage-employee/termination-employee/termination-employee.component';
 
 const routes : Routes =
 [
@@ -40,7 +41,7 @@ const routes : Routes =
         //{path: '', redirectTo: '/manageEmployee'  },
         {path: 'absences', component: AbsencesComponent  },
         {path: 'recruitingEmployee', component: RecurtingEmployeeComponent  },
-        {path: 'tesrminationWork', component: TerminationWorkEmployeeComponent  },
+        {path: 'tesrminationWork', component: TerminationEmployeeComponent  },
         {path: 'logsUser', component: LogsUserComponent  },
       ]},
      {path: 'settings', children:[
