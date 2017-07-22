@@ -28,7 +28,7 @@ import { EmployeeComponent } from './manage-employee/employee/employee.component
 import { AbsencesComponent } from './absences/absences.component';
 import { RolComponent } from './settings/rol/rol.component';
 import { LoopObjectPipe } from './loop-object.pipe';
-import { AuthGuard } from './auth.guard';
+import { AuthGuard } from './config/auth.guard';
 import { AuthService } from './providers/auth.service';
 import { FilterPipe } from './pipes/filter.pipe';
 import { EmployeeSearchPipe } from './pipes/employee-search.pipe';
@@ -106,7 +106,7 @@ import { TerminationEmployeeComponent } from './manage-employee/termination-empl
     NgbModule.forRoot()
     //PopupModule.forRoot()
   ],
-  providers: [AuthGuard, AuthService],
+  providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

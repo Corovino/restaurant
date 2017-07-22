@@ -13,11 +13,8 @@ import 'rxjs/add/operator/take';
 export class AuthGuard implements CanActivate {
 
   constructor(private auth : AuthService, private router : Router ){}
-  canActivate(
-    next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean> | boolean {
-
-    /*return this.auth.getUserLoggedIn().map((auth) => {
+  canActivate(){
+     this.auth.getUserLoggedIn().map((auth) => {
       if (!auth) {
         console.log(auth);
         this.router.navigate(['/login']);
@@ -25,7 +22,12 @@ export class AuthGuard implements CanActivate {
       }
       this.router.navigate(['/dashboard']);
       return true;
-    });*/
+    });
     return true;
   }
+
+
+
+
+
 }

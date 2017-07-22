@@ -14,9 +14,9 @@ export class AuthService  {
   private auth;
   private au : any;
   private  response : boolean;
-  loggedIn: boolean = false;
+  //loggedIn: boolean = false;
   private reAuth;
-
+  public redirectUrl: string;
 
   constructor( public afAuth: AngularFireAuth, private router : Router)
   {
@@ -59,7 +59,9 @@ export class AuthService  {
   logout() {
     this.auth.signOut().then(() =>{
 
+        localStorage.removeItem('isLoggedin');
         this.router.navigate(['/login']);
+
     }).catch(e =>{
         console.log(e);
     });
@@ -86,7 +88,9 @@ export class AuthService  {
      console.log(login);
      if(login){
 
-       this.router.navigate(['/dashboard/home']);
+        localStorage.setItem('isLoggedin', 'true');
+        this.router.navigate(['/dashboard/home']);
+
      }else{
        console.log(login);
      }

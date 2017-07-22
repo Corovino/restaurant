@@ -37,7 +37,7 @@ export class NavComponent implements OnInit {
         }
       });
 
-    this.restaurant.getRestauranUser().subscribe( data => {
+     this.restaurant.getRestauranUser().subscribe( data => {
 
            data.map( data => {
 

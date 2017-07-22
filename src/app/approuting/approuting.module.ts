@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from '../auth.guard';
+
 
 import { LoginComponent } from '../login/login.component';
 import { RegisterComponent } from '../register/register.component';
@@ -24,14 +24,15 @@ import { SourceHireComponent } from '../settings/source-hire/source-hire.compone
 import { LogsUserComponent } from '../manage-employee/logs-user/logs-user.component';
 import { TerminationWorkEmployeeComponent } from '../manage-employee/termination-work-employee/termination-work-employee.component';
 import { TerminationEmployeeComponent } from '../manage-employee/termination-employee/termination-employee.component';
+import { AuthGuard } from '../config/auth.guard';
 
 const routes : Routes =
 [
-   {path: '', redirectTo: '/login', pathMatch: 'full' },
+   {path: '', redirectTo: 'login', pathMatch: 'full' },
    {path: 'login', component: LoginComponent },
    {path: 'register', component: RegisterComponent  },
-   {path: 'dashboard', component: DashboardComponent,  children:[
-      {path:'**', redirectTo:'dashboard', pathMatch:'full'},
+   {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard], children:[
+      {path:'', redirectTo:'dashboard', pathMatch:'full'},
       {path: 'home', component: HomeComponent },
       {path: 'addrestaurant', component: RestaurantComponent  },
       {path: 'profile', component: ProfileComponent  },
@@ -65,7 +66,7 @@ const routes : Routes =
    exports: [
     RouterModule
   ],
-  declarations: []
+  //declarations: [AuthGuard]
 })
 export class ApproutingModule { }
 
