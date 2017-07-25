@@ -36,7 +36,8 @@ export class RestaurantService {
                 manager_name : value.manager_name,
                 manager_phone : value.manager_phone,
                 email:value.email,
-                ein: value.ein
+                ein: value.ein,
+                status: value.status
            });
 
       }).catch( error => {
@@ -55,6 +56,7 @@ export class RestaurantService {
 
   updateRestaurant(key: any,data : any)
   {
+      console.log(data);
       return this.restaurant.update(key, data);
   }
 

@@ -62,7 +62,8 @@ export class RestaurantComponent implements OnInit {
                          manager_name :data.manager_name,
                          manager_phone:data.manager_phone,
                          email: data.email,
-                         ein:data.ein
+                         ein:data.ein,
+                         status : data.status
 
                       };
               }
@@ -75,10 +76,10 @@ export class RestaurantComponent implements OnInit {
   }
 
 
-  restauranEdit($event, data: any)
+  restauranEdit( data: any)
   {
       console.log(this.key);
-      console.log("re",data);
+      console.log(data);
       this.resService.updateRestaurant( this.key, data );
   }
 

@@ -103,6 +103,20 @@
                       </div>
                     </div>
                     <div class="control-group">
+                      <label class="control-label"  for="status">Status</label>
+                      <div class="controls">
+                        <select  #statusRef="ngModel" name="status" required ngModel>
+                          <option value="1">Active</option>
+                          <option value="2">Inactive</option>
+                          <option value="3">Other</option>
+                        </select>
+                        <div [hidden]="statusRef.valid || statusRef.pristine" class="alert alert-danger">
+                          Please enter a User Status.
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="control-group">
 
                       <div class="controls" style="padding-top: 10px;">
                           <button type="submit" [disabled]="!userForm.valid" class="btn btn-primary">Save changes</button>
@@ -132,6 +146,7 @@
           <th>email</th>
           <th>Restaurant</th>
           <th>Role</th>
+          <th>Status</th>
           <th>Edit</th>
         </tr>
         </thead>
@@ -148,12 +163,116 @@
               <p *ngSwitchCase="2" class="label label-success">User</p>
             </div>
           </td>
-          <td><button  (click)="editUser(item.$key)" class="btn btn-primary" data-toggle="modal" data-target="#editRestauran">Edit</button></td>
-
+          <td>
+            <div [ngSwitch]="item.status">
+              <p class="label label-success" *ngSwitchCase="1">Active</p>
+              <p class="label label-danger"*ngSwitchCase="2">Disable</p>
+              <p *ngSwitchCase="3">Other</p>
+            </div>
+          </td>
+          <td><button  (click)="editUser(item.$key)" class="btn btn-primary" data-toggle="modal" data-target="#editUser">Edit</button></td>
         </tr>
         </tbody>
       </table>
     </div>
   </div>
+
+
+  <!--Modal edit restaurant-->
+  <div class="modal fade" id="editUser" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Edit User</h4>
+        </div>
+        <div class="modal-body">
+          <form action="" class="form-horizontal" #usersEdit='ngForm' (ngSubmit)="updateUser(usersEdit.value)" >
+            <fieldset>
+              <div>{{item}}</div>
+
+              <div class="control-group">
+                <label class="control-label"  for="username">Firts Name</label>
+                <div class="controls">
+                  <input type="text" id="name" #nameRef="ngModel" minlength="4" required name="name" placeholder="" [(ngModel)]="userEdit.name" class="input-xlarge" >
+                  <div *ngIf="nameRef.errors && (nameRef.dirty || nameRef.touched ) "  class="invalid">
+                    <div [hidden]="!nameRef.errors.required" >
+                      Please enter a User Name.
+                    </div>
+                    <div [hidden]="!nameRef.errors.minlength" >
+                      Please enter atleast 4 characters.
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+              <div class="control-group">
+                <label class="control-label"  for="last_name">last Name</label>
+                <div class="controls">
+                  <input type="text" id="last_name" #lastNameRef="ngModel" minlength="4" required name="last_name" placeholder="" [(ngModel)]="userEdit.last_name" class="input-xlarge" >
+                  <div *ngIf="lastNameRef.errors && (lastNameRef.dirty || lastNameRef.touched ) "  class="invalid">
+                    <div [hidden]="!lastNameRef.errors.required" >
+                      Please enter a User Last Name.
+                    </div>
+                    <div [hidden]="!lastNameRef.errors.minlength" >
+                      Please enter atleast 4 characters.
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+              <div class="control-group">
+                <label class="control-label"  for="phone">Phone</label>
+                <div class="controls">
+                  <input type="text" id="phone" #phoneRef="ngModel" name="cell_phone" required placeholder="" class="input-xlarge" [(ngModel)]="userEdit.cell_phone">
+                  <div [hidden]="phoneRef.valid || phoneRef.pristine" class="alert alert-danger">
+                    Please enter a  Phone Number.
+                  </div>
+                </div>
+              </div>
+              <div class="control-group">
+                <label class="control-label"  for="email">Email</label>
+                <div class="controls">
+                  <input type="text" id="email" #emailRef="ngModel" name="email" required  placeholder="" [(ngModel)]="userEdit.email" class="input-xlarge" disabled>
+                  <div [hidden]="emailRef.valid || emailRef.pristine" class="alert alert-danger">
+                    Please enter a Email.
+                  </div>
+                </div>
+              </div>
+              <div class="control-group">
+                <label class="control-label"  for="status">Status</label>
+                <div class="controls">
+                  <select  #statusRef="ngModel" name="status" required [(ngModel)]="userEdit.status">
+                    <option value="1">Active</option>
+                    <option value="2">Inactive</option>
+                    <option value="3">Other</option>
+                  </select>
+                  <div [hidden]="statusRef.valid || statusRef.pristine" class="alert alert-danger">
+                    Please enter a Employee Status.
+                  </div>
+                </div>
+              </div>
+
+              <div class="control-group">
+
+                <div class="controls" style="padding-top: 10px;">
+                  <button type="submit" [disabled]="!usersEdit.valid" class="btn btn-primary">Save changes</button>
+                </div>
+              </div>
+              <!-- Name -->
+            </fieldset>
+
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default"  data-dismiss="modal">Close</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ./ -->
+
+
 
 </div>

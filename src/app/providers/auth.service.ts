@@ -11,26 +11,24 @@ import * as firebase from 'firebase/app';
 @Injectable()
 export class AuthService  {
   public user : Observable<firebase.User>;
+  private userStatus : any;
+  private restaurantStatus :any;
   private auth;
   private au : any;
-  private  response : boolean;
-  //loggedIn: boolean = false;
-  private reAuth;
-  public redirectUrl: string;
+  private userEmail : string;
 
-  constructor( public afAuth: AngularFireAuth, private router : Router)
+
+  constructor( public afAuth: AngularFireAuth, private router : Router, private af : AngularFireDatabase)
   {
        this.user = afAuth.authState;
        this.auth = firebase.auth();
        this.au = firebase.auth().currentUser;
-
-
   }
 
 
   login(email : string, password : string ) {
 
-
+     this.userEmail = email;
      this.auth.signInWithEmailAndPassword(email, password).then( login => {
 
        console.log(this.user);
@@ -53,8 +51,8 @@ export class AuthService  {
            console.log(error);
      });
 
-
   }
+
 
   logout() {
     this.auth.signOut().then(() =>{
@@ -87,9 +85,48 @@ export class AuthService  {
     this.auth.onAuthStateChanged( login => {
      console.log(login);
      if(login){
+        console.log(this.userEmail);
 
-        localStorage.setItem('isLoggedin', 'true');
-        this.router.navigate(['/dashboard/home']);
+        if(this.userEmail === "hjr@iqthink.com")
+        {
+            localStorage.setItem('isLoggedin', 'true');
+            this.router.navigate(['/dashboard/home']);
+        }else{
+
+            this.validStatusUser( this.userEmail ).subscribe( data => {
+
+                 data.map(  data => {
+                   console.log(data.email);
+
+                       let restaurant = this.af.list('/restaurant', {
+                         query:{
+                            orderByChild:'store',
+                            equalTo : data.restaurant
+                         }
+                       }).subscribe( value => {
+                           value.map( resp => {
+                             console.log(resp.status);
+                             console.log(data.status);
+                             if ( data.status === "1" && resp.status === "1")
+                             {
+                               localStorage.setItem('isLoggedin', 'true');
+                               this.router.navigate(['/dashboard/home']);
+                             }else{
+
+                               alert('No es posible acceder en este momento. Comuniquese con el administrador');
+                               this.logout();
+                             }
+
+
+                           });
+                       });
+
+
+
+                 });
+            });
+        }
+
 
      }else{
        console.log(login);
@@ -97,33 +134,18 @@ export class AuthService  {
      });
   }
 
-
-  getUserCredentials(email: string, password: string)
+  validStatusUser( email : string)
   {
 
-    //let email =  this.au = firebase.auth().currentUser;
-      /*var user = this.afAuth.auth.Auth().currentUser;
-      const credential = firebase.auth.EmailAuthProvider.credential(email, password);
-      this.auth.reauthenticate(credential).then(function() {
-        // User re-authenticated.
-      }, function(error) {
-        // An error happened.
-        console.log(error);
-      });*/
+    this.userStatus = this.af.list('/users', {
+      query : {
+        orderByChild : 'email',
+        equalTo : email
+      }
+    })
 
-     console.log(email);
-     console.log(password);
-     const credential = this.auth.EmailAuthProvider.credential(email, password);
-     console.log(credential);
-     this.au.reauthenticate(credential)
-       .then((_) => {
-         console.log('User reauthenticated');
-
-       })
-       .catch((error) => {
-         console.log(error);
-     });
-
+    return this.userStatus;
   }
+
 
 }

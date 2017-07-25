@@ -28,6 +28,7 @@
                   <th>Manager phone</th>
                   <th>Email</th>
                   <th>EIN</th>
+                  <th>Status</th>
                 </tr>
               </thead>
               <tbody>
@@ -40,6 +41,13 @@
                   <td>{{ item.manager_phone }}</td>
                   <td>{{ item.email }}</td>
                   <td>{{ item.ein }}</td>
+                  <td>
+                    <div [ngSwitch]="item.status">
+                      <p class="label label-success" *ngSwitchCase="1">Active</p>
+                      <p class="label label-danger"*ngSwitchCase="2">Disable</p>
+                      <p *ngSwitchCase="3">Other</p>
+                    </div>
+                  </td>
                   <td><button  (click)="editaRestaurant(item.$key)" class="btn btn-primary" data-toggle="modal" data-target="#editRestauran">Edit</button></td>
                 </tr>
               </tbody>
@@ -152,6 +160,19 @@
                         <input type="text" id="username" #einRef="ngModel" required  name="ein" placeholder="" class="input-xlarge" ngModel>
                         <div [hidden]="einRef.valid || einRef.pristine" class="alert alert-danger">
                           Please enter a EIN.
+                        </div>
+                      </div>
+                    </div>
+                    <div class="control-group">
+                      <label class="control-label"  for="status">Status</label>
+                      <div class="controls">
+                        <select  #statusRef="ngModel" name="status" required ngModel>
+                          <option value="1">Active</option>
+                          <option value="2">Inactive</option>
+                          <option value="3">Other</option>
+                        </select>
+                        <div [hidden]="statusRef.valid || statusRef.pristine" class="alert alert-danger">
+                          Please enter a User Status.
                         </div>
                       </div>
                     </div>
@@ -278,6 +299,19 @@
                         <input type="text" id="username" #einRef="ngModel" required  name="ein" placeholder=""  [(ngModel)]="val.ein" class="input-xlarge" ngModel>
                         <div [hidden]="einRef.valid || einRef.pristine" class="alert alert-danger">
                           Please enter a EIN.
+                        </div>
+                      </div>
+                    </div>
+                    <div class="control-group">
+                      <label class="control-label"  for="status">Status</label>
+                      <div class="controls">
+                        <select  #statusRef="ngModel" name="status" required [(ngModel)]="val.status">
+                          <option value="1">Active</option>
+                          <option value="2">Inactive</option>
+                          <option value="3">Other</option>
+                        </select>
+                        <div [hidden]="statusRef.valid || statusRef.pristine" class="alert alert-danger">
+                          Please enter a User Status.
                         </div>
                       </div>
                     </div>
