@@ -11,6 +11,7 @@ import * as firebase from 'firebase/app';
 @Injectable()
 export class AuthService  {
   public user : Observable<firebase.User>;
+  private userAttemp : FirebaseListObservable<any[]>;
   private userStatus : any;
   private restaurantStatus :any;
   private auth;
@@ -26,7 +27,7 @@ export class AuthService  {
   }
 
 
-  login(email : string, password : string ) {
+  login(email : string, password : string, appVerifier :any ) {
 
      this.userEmail = email;
      this.auth.signInWithEmailAndPassword(email, password).then( login => {
@@ -35,7 +36,7 @@ export class AuthService  {
 
        if(login){
 
-         this.getUserLoggedIn();
+         this.getUserLoggedIn(appVerifier);
        }
 
      }).catch( error => {
@@ -79,13 +80,12 @@ export class AuthService  {
 
   }
 
-  getUserLoggedIn()
+  getUserLoggedIn( appVerifier :any)
   {
 
     this.auth.onAuthStateChanged( login => {
-     console.log(login);
+
      if(login){
-        console.log(this.userEmail);
 
         if(this.userEmail === "hjr@iqthink.com")
         {
@@ -96,7 +96,6 @@ export class AuthService  {
             this.validStatusUser( this.userEmail ).subscribe( data => {
 
                  data.map(  data => {
-                   console.log(data.email);
 
                        let restaurant = this.af.list('/restaurant', {
                          query:{
@@ -105,24 +104,28 @@ export class AuthService  {
                          }
                        }).subscribe( value => {
                            value.map( resp => {
-                             console.log(resp.status);
-                             console.log(data.status);
+
                              if ( data.status === "1" && resp.status === "1")
                              {
-                               localStorage.setItem('isLoggedin', 'true');
-                               this.router.navigate(['/dashboard/home']);
+
+                                if (!data.firts_login)
+                                {
+                                  console.log(data.firts_login);
+                                  this.router.navigate(['code']);
+                                  this.loginSendSms(data.cell_phone, appVerifier);
+
+                                }
+
+                                localStorage.setItem('isLoggedin', 'true');
+                                this.router.navigate(['/dashboard/home']);
+
                              }else{
 
                                alert('No es posible acceder en este momento. Comuniquese con el administrador');
                                this.logout();
                              }
-
-
                            });
                        });
-
-
-
                  });
             });
         }
@@ -146,6 +149,24 @@ export class AuthService  {
 
     return this.userStatus;
   }
+
+
+  loginSendSms( phoneNumber : string, appVerifier : any  )
+  {
+    console.log(phoneNumber);
+    console.log(appVerifier);
+    firebase.auth().signInWithPhoneNumber(phoneNumber, appVerifier)
+      .then(function (confirmationResult) {
+
+        console.log(confirmationResult);
+
+      }).catch(function (error) {
+
+         console.log(error);
+    });
+
+  }
+
 
 
 }

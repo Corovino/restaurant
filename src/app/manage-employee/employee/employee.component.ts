@@ -52,9 +52,8 @@ export class EmployeeComponent implements OnInit {
     this.nameRestaurant = '';
     this.dateNow = moment().format('lLT');
 
+
       let test = this.userRestaurant.getRestauranUser().subscribe( data => {
-
-
 
            data.map( data => {
                  this.nameRestaurant = data.restaurant;
@@ -197,10 +196,11 @@ export class EmployeeComponent implements OnInit {
                       end_work : data.end_work
 
                     }
+
+
                }
             });
         });
-
   }
 
 
@@ -217,6 +217,9 @@ export class EmployeeComponent implements OnInit {
   updateAdminData( data : any)
   {
 
+      if ( document.getElementById('btnReauthUser').click()){
+         console.log('xx');
+      }
 
       console.log(this.key);
       this.employeeUpdate = {

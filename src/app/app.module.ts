@@ -7,6 +7,7 @@ import { ApproutingModule } from './approuting/approuting.module';
 import { DropdownModule } from "ngx-dropdown";
 import { MomentModule } from 'angular2-moment';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { ReCaptchaModule } from 'angular2-recaptcha';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
@@ -49,6 +50,9 @@ import { AbsenceEmployeeComponent } from './manage-employee/absence-employee/abs
 import { TerminationWorkEmployeeComponent } from './manage-employee/termination-work-employee/termination-work-employee.component';
 import { LogsUserComponent } from './manage-employee/logs-user/logs-user.component';
 import { TerminationEmployeeComponent } from './manage-employee/termination-employee/termination-employee.component';
+import { VerificationCodeComponent } from './verification-code/verification-code.component';
+import { ReAuthUserComponent } from './manage-employee/re-auth-user/re-auth-user.component';
+
 
 
 
@@ -89,7 +93,8 @@ import { TerminationEmployeeComponent } from './manage-employee/termination-empl
     TerminationWorkEmployeeComponent,
     LogsUserComponent,
     TerminationEmployeeComponent,
-
+    VerificationCodeComponent,
+    ReAuthUserComponent,
 
   ],
   imports: [
@@ -103,6 +108,7 @@ import { TerminationEmployeeComponent } from './manage-employee/termination-empl
     ReactiveFormsModule,
     DropdownModule,
     MomentModule,
+    ReCaptchaModule,
     NgbModule.forRoot()
     //PopupModule.forRoot()
   ],

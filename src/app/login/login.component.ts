@@ -2,17 +2,20 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../providers/auth.service';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { RouterModule, Router,  ActivatedRoute } from '@angular/router';
+import { ViewChild } from '@angular/core';
+import { ReCaptchaComponent } from 'angular2-recaptcha';
 import * as firebase from 'firebase/app';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
-  providers:[ AuthService ]
+  providers:[ AuthService, ReCaptchaComponent ]
 })
 export class LoginComponent implements OnInit {
   private auth: any;
-  constructor(private authService : AuthService,  private au :AngularFireAuth, private router : Router)
+  @ViewChild(ReCaptchaComponent) captcha: ReCaptchaComponent;
+  constructor(private authService : AuthService,  private au :AngularFireAuth, private router : Router, private component: ReCaptchaComponent)
   {
       this.auth = firebase.auth();
 
@@ -23,7 +26,10 @@ export class LoginComponent implements OnInit {
 
   loginUser(value: any)
   {
-        let promise = this.authService.login(value.email, value.password);
+
+        //let recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container');
+        console.log(this.captcha);
+        let promise = this.authService.login(value.email, value.password, this.captcha);
 
   }
 
@@ -38,5 +44,15 @@ export class LoginComponent implements OnInit {
            console.log('error', error);
         });
   }
+
+  handleCorrectCaptcha(event)
+  {
+
+     return this.captcha = event.subscribe( data => {
+        console.log(data);
+     });
+    //this.captcha = event.getResponse(); console.log(event.getResponse());
+  }
+
 
 }

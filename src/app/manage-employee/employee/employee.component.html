@@ -448,23 +448,12 @@
                   <div class="control-group">
                     <label class="control-label"  for="restaurant">Restaurant / Store </label>
                     <div class="controls">
-                      <!--input type="text" id="password" #passwordRef="ngModel" name="password" required  placeholder="" class="input-xlarge" ngModel-->
                       <select #restaurantdRef="ngModel" name="restaurant" name="restaurant" required [(ngModel)]="employees.restaurant">
                         <option *ngFor="let item of restaurant | async" value="{{item.store}}">{{item.store}}</option>
-
                       </select>
-
                     </div>
                   </div>
-                  <!--div   class="control-group">
-                    <label class="control-label"  for="social_security_number">Social Security Number</label>
-                    <div class="controls">
-                      <input type="text" id="social_security_number" #securityNumberRef="ngModel" name="social_security_number" required placeholder="" class="input-xlarge" [(ngModel)]="employees.social_security_number">
-                      <div [hidden]="securityNumberRef.valid || securityNumberRef.pristine" class="alert alert-danger">
-                        Please enter a Social Security Number.
-                      </div>
-                    </div>
-                  </div-->
+
                   <div class="control-group">
                     <label class="control-label"  for="ssn">SSN</label>
                     <div class="controls">
@@ -559,7 +548,7 @@
           </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default"    data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-default"    data-dismiss="modal" #closeBtn >Close</button>
 
         </div>
       </div>
@@ -614,8 +603,8 @@
               <div class="control-group">
                 <label class="control-label"  for="source_hire">Source of Hire</label>
                 <div class="controls">
-                  <!--input type="text" id="source_hire" #sourceHireRef="ngModel" name="source_hire" required placeholder="" class="input-xlarge" ngModel-->
-                  <select #sourceHireRef="ngModel" name="source_hire"  required ngModel  [(ngModel)]="employees.source_name">
+
+                  <select #sourceHireRef="ngModel" name="source_hire"  required   [(ngModel)]="employees.source_hire">
                     <option  *ngFor="let item of sourceHire | async"  [disabled]="item.source_name == employees.source_name" value="{{item.source_name}}">{{item.source_name}}</option>
                   </select>
 
@@ -627,7 +616,7 @@
               <div class="control-group">
                 <label class="control-label"  for="job_position">Job Position</label>
                 <div class="controls">
-                  <!--input type="text" id="source_hire" #sourceHireRef="ngModel" name="source_hire" required placeholder="" class="input-xlarge" ngModel-->
+
                   <select #jobPositionRef="ngModel" name="job_position"  required ngModel [(ngModel)]="employees.job_position">
                     <option  *ngFor="let item of jobPosition | async"  value="{{item.job_name}}">{{item.job_name}}</option>
                   </select>
@@ -700,27 +689,10 @@
 
   </app-termination-work-employee>
 
+  <app-re-auth-user></app-re-auth-user>
 
 
-  <!--Modal Re Auth usuario acciones -->
-  <div class="modal fade" tabindex="-1" role="dialog" id="reauthUser">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title">Modal title</h4>
-        </div>
-        <div class="modal-body">
-          <p>One fine body&hellip;</p>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-      </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-  </div><!-- /.modal -->
-  <!-- ./-->
+
 
 
 

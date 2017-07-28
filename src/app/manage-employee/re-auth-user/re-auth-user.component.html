@@ -1,0 +1,37 @@
+<!--Modal Re Auth usuario acciones -->
+<button type="button"  type="button" class="btn btn-primary" data-toggle="modal" data-target="#reauthUser"  id="btnReauthUser"></button>
+<div class="modal fade" tabindex="-1" role="dialog" id="reauthUser">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Auth actions User</h4>
+      </div>
+      <div class="modal-body">
+        <p>Para confirmar La accion porfavor ingrese su contraseña</p>
+        <form class="form-horizontal"  #authUserPass="ngForm" (ngSubmit)="reAuthPass(authUserPass.value)">
+          <div class="control-group">
+            <label class="control-label"  for="password">Ingrese su contraseña</label>
+            <div class="controls">
+              <input type="password" id="password" #reAuthPasswordRef="ngModel" minlength="4" required name="reAuthPassword" placeholder="" class="input-xlarge" ngModel>
+              <div *ngIf="reAuthPasswordRef.errors && (reAuthPasswordRef.dirty || reAuthPasswordRef.touched ) "  class="alert alert-danger">
+                <div [hidden]="!reAuthPasswordRef.errors.required" >
+                  Please enter a Name.
+                </div>
+                <div [hidden]="!reAuthPasswordRef.errors.minlength" >
+                  Please enter atleast 4 characters.
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <button type="submit"  [disabled]="!authUserPass.valid"  class="btn btn-primary">Auth user</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal"  #closeBtn>Close</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<!-- ./-->

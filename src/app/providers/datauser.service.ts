@@ -37,8 +37,6 @@ export class DatauserService {
         equalTo: this.au.email
       }
     });
-    console.log(this.au.email);
-    console.log(this.users);
     return this.users;
   }
 

@@ -25,12 +25,14 @@ import { LogsUserComponent } from '../manage-employee/logs-user/logs-user.compon
 import { TerminationWorkEmployeeComponent } from '../manage-employee/termination-work-employee/termination-work-employee.component';
 import { TerminationEmployeeComponent } from '../manage-employee/termination-employee/termination-employee.component';
 import { AuthGuard } from '../config/auth.guard';
+  import { VerificationCodeComponent } from '../verification-code/verification-code.component';
 
 const routes : Routes =
 [
    {path: '', redirectTo: 'login', pathMatch: 'full' },
    {path: 'login', component: LoginComponent },
    {path: 'register', component: RegisterComponent  },
+   {path: 'code', component :VerificationCodeComponent },
    {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard], children:[
       {path:'', redirectTo:'dashboard', pathMatch:'full'},
       {path: 'home', component: HomeComponent },
