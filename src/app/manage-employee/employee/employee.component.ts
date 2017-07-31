@@ -271,9 +271,42 @@ export class EmployeeComponent implements OnInit {
         });
 
         this.employee.subscribe( data => {
+          let excelReportFinal = [];
+          var options = {
+            fieldSeparator: ',',
+            quoteStrings: '"',
+            decimalseparator: '.',
+            showLabels: true,
+            showTitle: true,
+            useBom: true
+          };
+
+          let label = {
+              birth_day : "birth_day",
+              firts_name : "firts_name",
+              gender : "gender",
+              last_name: "last_name",
+              medical_coverage: "medical_coverage",
+              number_allowances: "number_allowances",
+              pay_frecuency : "pay_frecuency",
+              phone:"phone",
+              race:"race",
+              restaurant:"restaurant",
+              rol:"rol",
+              social_security_number:"social_security_number",
+              source_hire:"source_hire",
+              ssn: "ssn",
+              relationship_status:"relationship_status",
+              employee_status:"employee_status",
+              withheld:"withheld",
+              job_position: "job_position",
+              salary : "salary",
+              start_work: "start_work",
+              end_work : "end_work"
+          }
           data.map( data => {
             console.log(data);
-            let excelReport = [{
+            /*let excelReport = [{
 
                 birth_day : data.birth_day,
                 firts_name : data.firts_name,
@@ -297,10 +330,14 @@ export class EmployeeComponent implements OnInit {
                 start_work: data.start_work,
                 end_work : data.end_work
 
-            }]
-            console.log(excelReport);
-            new Angular2Csv( excelReport, 'report Employee');
-          })
+            }]*/
+
+            excelReportFinal.push(data);
+            console.log(excelReportFinal);
+
+          });
+
+            new Angular2Csv( excelReportFinal, 'report Employee',options);
         });
 
       });
