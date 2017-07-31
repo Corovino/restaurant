@@ -1,52 +1,66 @@
 <!--  show Logs User -->
-<div class="table-responsive">
-  <table class="table">
-    <thead>
-    <tr>
-      <th>User</th>
-      <th>Action</th>
-      <th>Source Action</th>
-      <th>Created at</th>
-
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let item of logsUser | async">
-      <td ><p>{{ item.id_currentUser }}</p></td>
-      <td><p >{{ item.action_user }}</p></td>
-      <td><p >{{ item.from_action }}</p></td>
-      <td><p >{{ item.created_at }}</p></td>
-    </tr>
-    </tbody>
-  </table>
-</div>
-<!--  ./ -->
-<div>
-  <div class="container">
-    <div class="text-center">
-
-      <!-- items being paged -->
-      <div *ngFor="let item of pagedItems">{{item.name}}</div>
-
-      <!-- pager -->
-      <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
-        <li [ngClass]="{disabled:pager.currentPage === 1}">
-          <a (click)="setPage(1)">First</a>
-        </li>
-        <li [ngClass]="{disabled:pager.currentPage === 1}">
-          <a (click)="setPage(pager.currentPage - 1)">Previous</a>
-        </li>
-        <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
-          <a (click)="setPage(page)">{{page}}</a>
-        </li>
-        <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
-          <a (click)="setPage(pager.currentPage + 1)">Next</a>
-        </li>
-        <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
-          <a (click)="setPage(pager.totalPages)">Last</a>
-        </li>
-      </ul>
-    </div>
+<div class="col-md-10 content">
+  <div  class="col-md-5 ">
+    <form class="navbar-form navbar-left" method="GET" role="search">
+      <div class="form-group">
+        <input type="text" name="q" class="form-control" placeholder="Search" [(ngModel)]="search" >
+      </div>
+      <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
+      <button type="button"  type="button" class="btn btn-primary"  (click)="importLogsReport()">Export</button>
+    </form>
   </div>
+  <div class="col-md-12">
 
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+          <tr>
+            <th>User</th>
+            <th>Action</th>
+            <th>Source Action</th>
+            <th>Created at</th>
+
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let item of logsUser | async">
+            <td ><p>{{ item.id_currentUser }}</p></td>
+            <td><p >{{ item.action_user }}</p></td>
+            <td><p >{{ item.from_action }}</p></td>
+            <td><p >{{ item.created_at }}</p></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <!--  ./ -->
+      <div>
+        <div class="container">
+          <div class="text-center">
+
+            <!-- items being paged -->
+            <div *ngFor="let item of pagedItems">{{item.name}}</div>
+
+            <!-- pager -->
+            <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+              <li [ngClass]="{disabled:pager.currentPage === 1}">
+                <a (click)="setPage(1)">First</a>
+              </li>
+              <li [ngClass]="{disabled:pager.currentPage === 1}">
+                <a (click)="setPage(pager.currentPage - 1)">Previous</a>
+              </li>
+              <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+                <a (click)="setPage(page)">{{page}}</a>
+              </li>
+              <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                <a (click)="setPage(pager.currentPage + 1)">Next</a>
+              </li>
+              <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                <a (click)="setPage(pager.totalPages)">Last</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+  </div>
 </div>

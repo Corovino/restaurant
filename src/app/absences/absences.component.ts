@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import { DatauserService } from '../providers/datauser.service';
-import { AbsencesPipe } from '../pipes/absences.pipe';
-import { Subject } from 'rxjs/Subject';
+import { Angular2Csv } from 'angular2-csv/Angular2-csv';
+
 
 
 @Component({
@@ -125,6 +124,47 @@ export class AbsencesComponent implements OnInit {
   {
     console.log( data );
     this.absence.update(this.key, data);
+  }
+
+
+  importCsvAbsence(){
+
+    let test = this.userRestaurant.getRestauranUser().subscribe( data => {
+
+
+      data.map(data => {
+        this.nameRestaurant = data.restaurant;
+        console.log(data.restaurant);
+        this.absence = this.af.list('/absences', {
+          query: {
+            orderByChild: 'restaurant',
+            equalTo: data.restaurant
+          }
+
+        });
+
+        this.absence.subscribe( data => {
+          let excelReportFinal = [];
+          var options = {
+            fieldSeparator: ',',
+            quoteStrings: '"',
+            decimalseparator: '.',
+            showLabels: true,
+            showTitle: true,
+            useBom: true
+          };
+
+          data.map( data => {
+            excelReportFinal.push(data);
+          });
+
+          new Angular2Csv( excelReportFinal, 'Report Absence Employee',options);
+        });
+
+      });
+
+    });
+
   }
 
 

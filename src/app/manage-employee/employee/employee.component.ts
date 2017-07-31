@@ -305,36 +305,7 @@ export class EmployeeComponent implements OnInit {
               end_work : "end_work"
           }
           data.map( data => {
-            console.log(data);
-            /*let excelReport = [{
-
-                birth_day : data.birth_day,
-                firts_name : data.firts_name,
-                gender : data.gender,
-                last_name: data.last_name,
-                medical_coverage: data.medical_coverage,
-                number_allowances: data.number_allowances,
-                pay_frecuency : data.pay_frecuency,
-                phone:data.phone,
-                race:data.race,
-                restaurant:data.restaurant,
-                rol:data.rol,
-                social_security_number:data.social_security_number,
-                source_hire:data.source_hire,
-                ssn: data.ssn,
-                relationship_status:data.relationship_status,
-                employee_status:data.employee_status,
-                withheld:data.withheld,
-                job_position: data.job_position,
-                salary : data.salary,
-                start_work: data.start_work,
-                end_work : data.end_work
-
-            }]*/
-
             excelReportFinal.push(data);
-            console.log(excelReportFinal);
-
           });
 
             new Angular2Csv( excelReportFinal, 'report Employee',options);

@@ -18,7 +18,7 @@ export class TerminationEmployeeComponent implements OnInit {
   private dateNow : any;
   private userKey : any;
 
-  constructor(private af : AngularFireDatabase, private dataUser : DatauserService,) { }
+  constructor(private af : AngularFireDatabase, private userRestaurant : DatauserService,) { }
 
   ngOnInit() {
 
@@ -27,7 +27,7 @@ export class TerminationEmployeeComponent implements OnInit {
     this.userKey = '';
     this.terminationWork = this.af.list('/terminationWork');
 
-    let test = this.dataUser.getRestauranUser().subscribe( data => {
+    let test = this.userRestaurant.getRestauranUser().subscribe( data => {
 
       data.map( data => {
 
@@ -43,6 +43,46 @@ export class TerminationEmployeeComponent implements OnInit {
 
     });
 
+  }
+
+  exportTerminationCsv()
+  {
+
+    let test = this.userRestaurant.getRestauranUser().subscribe( data => {
+
+
+      data.map(data => {
+        this.nameRestaurant = data.restaurant;
+        console.log(data.restaurant);
+        this.terminationWork = this.af.list('/terminationWork', {
+          query: {
+            orderByChild: 'restaurant',
+            equalTo: data.restaurant
+          }
+
+        });
+
+        this.terminationWork.subscribe( data => {
+          let excelReportFinal = [];
+          var options = {
+            fieldSeparator: ',',
+            quoteStrings: '"',
+            decimalseparator: '.',
+            showLabels: true,
+            showTitle: true,
+            useBom: true
+          };
+
+          data.map( data => {
+            excelReportFinal.push(data);
+          });
+
+          new Angular2Csv( excelReportFinal, 'Report Termination work Employee',options);
+        });
+
+      });
+
+    });
 
   }
 

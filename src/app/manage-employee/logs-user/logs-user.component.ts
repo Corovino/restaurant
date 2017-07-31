@@ -4,6 +4,7 @@ import { DatauserService } from '../../providers/datauser.service';
 import { PagerService } from '../../pager-service';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { AuthService } from '../../providers/auth.service';
+import { Angular2Csv } from 'angular2-csv/Angular2-csv';
 
 
 @Component({
@@ -19,6 +20,7 @@ export class LogsUserComponent implements OnInit {
   private pager: any = {};
   private pagedItems: any[];
   private pagNum : number;
+  private nameRestaurant: any;
 
 
   constructor(
@@ -36,6 +38,7 @@ export class LogsUserComponent implements OnInit {
   ngOnInit() {
 
      this.pagNum = 1;
+     this.nameRestaurant = '';
 
       let logs = this.userRestaurant.getRestauranUser().subscribe( data => {
 
@@ -73,6 +76,47 @@ export class LogsUserComponent implements OnInit {
 
     // get current page of items
     this.pagedItems = this.allItems.slice(this.pager.startIndex, this.pager.endIndex + 1);
+  }
+
+  importLogsReport(){
+
+    let test = this.userRestaurant.getRestauranUser().subscribe( data => {
+
+
+      data.map(data => {
+        this.nameRestaurant = data.restaurant;
+        console.log(data.restaurant);
+        this.logsUser = this.af.list('/logsUser', {
+          query: {
+            orderByChild: 'restaurant',
+            equalTo: data.restaurant
+          }
+
+        });
+
+        this.logsUser.subscribe( data => {
+          let excelReportFinal = [];
+          var options = {
+            fieldSeparator: ',',
+            quoteStrings: '"',
+            decimalseparator: '.',
+            showLabels: true,
+            showTitle: true,
+            useBom: true
+          };
+
+          data.map( data => {
+            console.log(data);
+            excelReportFinal.push(data);
+          });
+
+          new Angular2Csv( excelReportFinal, 'Report LogsUser Administrative Actions',options);
+        });
+
+      });
+
+    });
+
   }
 
 }
