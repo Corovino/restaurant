@@ -14,9 +14,11 @@ export class ReAuthUserComponent implements OnInit {
   @ViewChild('closeBtn') closeBtn: ElementRef;
 
 
+
   constructor(private  dataUser : DatauserService ) { }
 
   ngOnInit() {
+
   }
 
 
@@ -28,9 +30,11 @@ export class ReAuthUserComponent implements OnInit {
                if(reAuthPass.reAuthPassword !== data.password ){
                   alert('Usted no puedo hacer el cambio');
                }else{
-
                  alert('Auth ok. Puede ejecutar el cambio');
+                 //localStorage.setItem('reauthUser', 'true');
                  this.closeModal();
+                 document.getElementById('btnadministrativeDataEmployee').click();
+
                }
 
              });

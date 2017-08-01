@@ -5,6 +5,7 @@ import { DatauserService } from '../../providers/datauser.service';
 import { AuthService } from '../../providers/auth.service';
 import { LogsUserService } from '../../providers/logs-user.service';
 import { Angular2Csv } from 'angular2-csv/Angular2-csv';
+import {ViewChild, ElementRef} from '@angular/core';
 import * as moment from 'moment/moment';
 
 
@@ -32,6 +33,7 @@ export class EmployeeComponent implements OnInit {
   private dateNow : any;
   private dataLogUser : any;
   private nameRestaurant : any;
+  @ViewChild('closeBtn') closeBtn: ElementRef;
   private pass : any;
 
 
@@ -217,11 +219,8 @@ export class EmployeeComponent implements OnInit {
   updateAdminData( data : any)
   {
 
-      if ( document.getElementById('btnReauthUser').click()){
-         console.log('xx');
-      }
 
-      console.log(this.key);
+
       this.employeeUpdate = {
 
            employee_status : data.employee_status,
@@ -238,8 +237,12 @@ export class EmployeeComponent implements OnInit {
 
       this.employee.update(this.key, this.employeeUpdate);
       this.logUserAction(this.key, this.nameRestaurant , 'Update', 'Administrative data')
-       console.log(data);
 
+
+  }
+
+  private closeModal(): void {
+    this.closeBtn.nativeElement.click();
   }
 
   logUserAction(userKey : any, restaurant : any, action_user: any , from_action:any){
@@ -318,9 +321,15 @@ export class EmployeeComponent implements OnInit {
 
   }
 
+  openModal(){
 
-
-
+    document.getElementById('btnReauthUser').click();
+    let authUser = localStorage.getItem('reauthUser');
+    /*console.log(authUser);
+    if (authUser){
+      document.getElementById('btnadministrativeDataEmployee').click();
+    }*/
+  }
 
 
 }

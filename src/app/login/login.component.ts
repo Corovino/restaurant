@@ -15,6 +15,7 @@ import * as firebase from 'firebase/app';
 export class LoginComponent implements OnInit {
   private auth: any;
   @ViewChild(ReCaptchaComponent) captcha: ReCaptchaComponent;
+
   constructor(private authService : AuthService,  private au :AngularFireAuth, private router : Router, private component: ReCaptchaComponent)
   {
       this.auth = firebase.auth();
