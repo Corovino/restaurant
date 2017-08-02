@@ -25,6 +25,9 @@
 
             </div>
           </div>
+          <div class="form-contro">
+            <input type="hidden" value="{{fromAction}}" #fronActionRef="ngModel" name="fromAction" [(ngModel)]="fromAction">
+          </div>
           <button type="submit"  [disabled]="!authUserPass.valid"  class="btn btn-primary">Auth user</button>
         </form>
       </div>

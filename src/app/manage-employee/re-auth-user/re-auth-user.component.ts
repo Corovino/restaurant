@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { DatauserService } from '../../providers/datauser.service';
 import {ViewChild, ElementRef} from '@angular/core';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
@@ -11,6 +11,8 @@ import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable }
 export class ReAuthUserComponent implements OnInit {
 
   private users :  FirebaseListObservable<any[]>;
+  @Input() fromAction : string;
+
   @ViewChild('closeBtn') closeBtn: ElementRef;
 
 
@@ -24,16 +26,25 @@ export class ReAuthUserComponent implements OnInit {
 
   reAuthPass( reAuthPass : any  )
   {
-
+        ;
         this.dataUser.getRestauranUser().subscribe( data => {
              data.map( data => {
                if(reAuthPass.reAuthPassword !== data.password ){
                   alert('Usted no puedo hacer el cambio');
                }else{
-                 alert('Auth ok. Puede ejecutar el cambio');
                  //localStorage.setItem('reauthUser', 'true');
-                 this.closeModal();
-                 document.getElementById('btnadministrativeDataEmployee').click();
+                 switch (reAuthPass.fromAction){
+                   case '1':
+                        this.modalShow('btnadministrativeDataEmployee');
+                    break;
+                   case '2':
+                        this.modalShow('btnabsenceEmployee');
+                     break;
+                   case '3':
+                         this.modalShow('btnterminationEmployee');
+                     break;
+
+                 }
 
                }
 
@@ -41,7 +52,15 @@ export class ReAuthUserComponent implements OnInit {
         });
   }
 
+  private modalShow(idModal : string)
+  {
+    alert('Auth ok. Puede ejecutar el cambio');
+    document.getElementById(idModal).click();
+    this.closeModal();
+  }
+
   private closeModal(): void {
     this.closeBtn.nativeElement.click();
   }
+
 }

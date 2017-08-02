@@ -389,9 +389,9 @@
               <button  (click)="editEmployee(item.$key)" class="btn btn-primary" data-toggle="modal" data-target="" dropdown-open>Edit</button>
               <ul class="dropdown-menu">
                 <li><a  data-toggle="modal" data-target="#editEmployee">Edit Personal Data</a></li>
-                <li><a  data-toggle="modal" data-target="" (click)="openModal()">Edit Addministrative data </a></li>
-                <li><a  data-toggle="modal" data-target="#absenceEmployee" >Add Absence</a></li>
-                <li><a  data-toggle="modal" data-target="#terminationEmployee" >Add Termination</a></li>
+                <li><a  data-toggle="modal" data-target="" (click)="openModal('1')">Edit Addministrative data </a></li>
+                <li><a  data-toggle="modal" data-target="" (click)="openModal('2')">Add Absence</a></li>
+                <li><a  data-toggle="modal" data-target=""  (click)="openModal('3')" >Add Termination</a></li>
               </ul>
           </div>
 
@@ -687,7 +687,7 @@
     [id_employee]="employees.id_employee"
   ></app-termination-work-employee>
 
-  <app-re-auth-user></app-re-auth-user>
+  <app-re-auth-user  [fromAction]="fromAction"  ></app-re-auth-user>
 
 
 

@@ -33,6 +33,7 @@ export class EmployeeComponent implements OnInit {
   private dateNow : any;
   private dataLogUser : any;
   private nameRestaurant : any;
+  private fromAction :string;
   @ViewChild('closeBtn') closeBtn: ElementRef;
   private pass : any;
 
@@ -321,14 +322,13 @@ export class EmployeeComponent implements OnInit {
 
   }
 
-  openModal(){
+  openModal( fromAction : any ){
 
+    console.log(fromAction);
+    this.fromAction = fromAction;
     document.getElementById('btnReauthUser').click();
     let authUser = localStorage.getItem('reauthUser');
-    /*console.log(authUser);
-    if (authUser){
-      document.getElementById('btnadministrativeDataEmployee').click();
-    }*/
+
   }
 
 
