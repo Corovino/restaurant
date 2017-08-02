@@ -23,7 +23,6 @@ export class ReAuthUserComponent implements OnInit {
 
   }
 
-
   reAuthPass( reAuthPass : any  )
   {
         ;
@@ -35,28 +34,28 @@ export class ReAuthUserComponent implements OnInit {
                  //localStorage.setItem('reauthUser', 'true');
                  switch (reAuthPass.fromAction){
                    case '1':
-                        this.modalShow('btnadministrativeDataEmployee');
+                        this.modalShow('btnadministrativeDataEmployee', reAuthPass);
                     break;
                    case '2':
-                        this.modalShow('btnabsenceEmployee');
+                        this.modalShow('btnabsenceEmployee', reAuthPass);
                      break;
                    case '3':
-                         this.modalShow('btnterminationEmployee');
+                         this.modalShow('btnterminationEmployee', reAuthPass);
                      break;
 
                  }
-
                }
 
              });
         });
   }
 
-  private modalShow(idModal : string)
+  private modalShow(idModal : string, reAuthPass : any)
   {
     alert('Auth ok. Puede ejecutar el cambio');
     document.getElementById(idModal).click();
     this.closeModal();
+
   }
 
   private closeModal(): void {

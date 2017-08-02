@@ -34,7 +34,7 @@ export class EmployeeComponent implements OnInit {
   private dataLogUser : any;
   private nameRestaurant : any;
   private fromAction :string;
-  @ViewChild('closeBtn') closeBtn: ElementRef;
+  @ViewChild('btnClose') closeBtn: ElementRef;
   private pass : any;
 
 
@@ -236,15 +236,19 @@ export class EmployeeComponent implements OnInit {
 
       }
 
-      this.employee.update(this.key, this.employeeUpdate);
-      this.logUserAction(this.key, this.nameRestaurant , 'Update', 'Administrative data')
+      if(this.employee.update(this.key, this.employeeUpdate) )
+      {
+          this.logUserAction(this.key, this.nameRestaurant , 'Update', 'Administrative data');
+          setTimeout( () =>{
+            alert('Se actualizaron los datos correctamente');
+            this.closeModal();
+          },3000)
+      }
+
 
 
   }
 
-  private closeModal(): void {
-    this.closeBtn.nativeElement.click();
-  }
 
   logUserAction(userKey : any, restaurant : any, action_user: any , from_action:any){
 
@@ -329,6 +333,10 @@ export class EmployeeComponent implements OnInit {
     document.getElementById('btnReauthUser').click();
     let authUser = localStorage.getItem('reauthUser');
 
+  }
+
+  private closeModal(): void {
+    this.closeBtn.nativeElement.click();
   }
 
 

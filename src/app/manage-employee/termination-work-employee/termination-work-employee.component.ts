@@ -3,6 +3,7 @@ import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable }
 import { DatauserService } from '../../providers/datauser.service';
 import { LogsUserService } from '../../providers/logs-user.service';
 import { Angular2Csv } from 'angular2-csv/Angular2-csv';
+import { ViewChild, ElementRef} from '@angular/core';
 import * as moment from 'moment/moment';
 
 @Component({
@@ -16,6 +17,7 @@ export class TerminationWorkEmployeeComponent implements OnInit {
   @Input()  firts_name : string;
   @Input()  last_name : string;
   @Input()  id_employee : string;
+  @ViewChild('btnCloseTermination')  closebtn : ElementRef;
 
 
   private terminationWork : FirebaseListObservable<any[]>;
@@ -57,7 +59,7 @@ export class TerminationWorkEmployeeComponent implements OnInit {
   createTermination(data :any)
   {
       console.log(data);
-      this.terminationWork.push({
+    let test =  this.terminationWork.push({
            id_employee: data.id_employee,
            restaurant: this.nameRestaurant,
            name_employee : data.name_employee,
@@ -65,9 +67,16 @@ export class TerminationWorkEmployeeComponent implements OnInit {
            lastDay_worked: data.lastDay_worked,
            created_at : this.dateNow,
            update_at : this.dateNow
-      });
+    });
 
+    if (test){
       this.logUserAction(this.userKey, this.nameRestaurant);
+      alert('ha generado fecha finalización de trabajo del empleado correctamente');
+      setTimeout( () => {
+        this.closeModal();
+      },3000)
+    }
+
   }
 
   logUserAction(userKey : any, restaurant : any){
@@ -117,6 +126,11 @@ export class TerminationWorkEmployeeComponent implements OnInit {
 
     });
 
+  }
+
+  closeModal()
+  {
+      this.closebtn.nativeElement.click();
   }
 
 }

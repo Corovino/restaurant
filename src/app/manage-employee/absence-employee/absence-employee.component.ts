@@ -2,6 +2,7 @@ import { Component, OnInit, Input} from '@angular/core';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import { DatauserService } from '../../providers/datauser.service';
 import { LogsUserService } from '../../providers/logs-user.service';
+import { ViewChild, ElementRef } from '@angular/core';
 import * as moment from 'moment/moment';
 
 
@@ -17,6 +18,7 @@ export class AbsenceEmployeeComponent implements OnInit {
   @Input()  firts_name : string;
   @Input()  last_name : string;
   @Input()  id_employee : string;
+  @ViewChild('btnCloseAbsence') closeBtn: ElementRef;
 
   private absence : FirebaseListObservable<any[]>;
   private absences : FirebaseListObservable<any[]>;
@@ -76,7 +78,7 @@ export class AbsenceEmployeeComponent implements OnInit {
 
       });
 
-          console.log(this.nameRestaurant);
+
           this.dataLogUser = {
 
             id_currentUser :this.userKey,
@@ -84,10 +86,20 @@ export class AbsenceEmployeeComponent implements OnInit {
             action_user :"create Absence",
             from_action :"Absence",
           };
-          this.logUser.createLogUser(this.dataLogUser);
+          if(test){
+            this.logUser.createLogUser(this.dataLogUser);
+             alert('Secrea una Ausencia satisfactoriamente');
+             setTimeout( () =>{
+                this.closeModal();
+             },3000)
+          }
 
 
 
+  }
+
+  private closeModal(): void {
+    this.closeBtn.nativeElement.click();
   }
 
 }
