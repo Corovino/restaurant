@@ -19,7 +19,11 @@ export class AuthService  {
   private userEmail : string;
 
 
-  constructor( public afAuth: AngularFireAuth, private router : Router, private af : AngularFireDatabase)
+  constructor(
+               public afAuth: AngularFireAuth,
+               private router : Router,
+               private af : AngularFireDatabase
+             )
   {
        this.user = afAuth.authState;
        this.auth = firebase.auth();

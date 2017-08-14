@@ -7,9 +7,10 @@ import { LogsUserService } from '../../providers/logs-user.service';
 import { Angular2Csv } from 'angular2-csv/Angular2-csv';
 import {ViewChild, ElementRef} from '@angular/core';
 import * as moment from 'moment/moment';
-
-
 import * as firebase from 'firebase/app';
+import {forEach} from "@angular/router/src/utils/collection";
+
+declare var $ : any;
 
 
 @Component({
@@ -34,10 +35,15 @@ export class EmployeeComponent implements OnInit {
   private dataLogUser : any;
   private nameRestaurant : any;
   private fromAction :string;
+
+  showlist:boolean;
+  listExpenses: string [];
+  data_list:any;
+  hashmap:{} = {};
+
   @ViewChild('btnClose') closeBtn: ElementRef;
+  @ViewChild('btnCreateEmployee') btnCreateEmployee :ElementRef;
   private pass : any;
-
-
 
 
   private employees: any;
@@ -125,7 +131,7 @@ export class EmployeeComponent implements OnInit {
 
 
       		let promise = new Promise( (resolve, reject) =>{
-      			this.employee.push({
+      			let test =this.employee.push({
 
                     birth_day:value.birth_day,
                     firts_name:value.firts_name,
@@ -152,10 +158,16 @@ export class EmployeeComponent implements OnInit {
                     job_position : value.job_position,
                     created_at : this.dateNow,
                     update_at : this.dateNow
+            });
 
-      			});
+      			if(test)
+      			{
+                this.logUserAction(this.key, this.nameRestaurant , 'Create', 'Employee')
+                setTimeout( ()=> {
+                   this.btnCreateEmployee.nativeElement.click();
+                },2000)
+            }
 
-            this.logUserAction(this.key, this.nameRestaurant , 'Create', 'Employee')
       		} ).catch( error => {
               console.log('Error promesa postRestaurant', error);
       		});
@@ -337,6 +349,90 @@ export class EmployeeComponent implements OnInit {
 
   private closeModal(): void {
     this.closeBtn.nativeElement.click();
+  }
+
+  fileUploadListener($event:any):void{
+    this.parseCSV($event.target);
+  }
+
+  parseCSV(csv: any):void{
+    var file:File = csv.files[0];
+    var self = this;
+    var reader:FileReader = new FileReader();
+    var hasmap : {} ={};
+    var nameRestaurant = this.nameRestaurant;
+    var created_at = this.dateNow;
+    var update_at = this.dateNow;
+    var employeeFirebase = [];
+
+    reader.readAsText(file);
+    reader.onloadend = function (e) {
+      var csvData = reader.result;
+      var data = $.csv.toArrays(csvData);
+      var employeeCsv :any =[];
+      var employeeSplit : any ;
+      var empoloyeeObject  :any;
+
+
+
+      if (data && data.length > 0) {
+        self.data_list = data;
+
+        for(let i = 1;  i < self.data_list.length; i++){
+          employeeCsv.push(self.data_list[i]);
+
+          employeeCsv.forEach( x => {
+             x.map( data => {
+                employeeSplit= data.split(";");
+                empoloyeeObject = {
+                  firts_name: employeeSplit[0],
+                  last_name: employeeSplit[1],
+                  social_security_number:employeeSplit[2],
+                  ssn:employeeSplit[3],
+                  phone:employeeSplit[4],
+                  email:employeeSplit[5],
+                  birth_day:employeeSplit[6],
+                  race:employeeSplit[7],
+                  city:employeeSplit[8],
+                  address:employeeSplit[9],
+                  gender:employeeSplit[10],
+                  medical_coverage:employeeSplit[11],
+                  pay_frecuency:employeeSplit[12],
+                  relationship_status:employeeSplit[13],
+                  employee_status:employeeSplit[14],
+                  rol:employeeSplit[15],
+                  number_allowances:employeeSplit[16],
+                  withheld:employeeSplit[17],
+                  source_hire:employeeSplit[18],
+                  start_work: employeeSplit[19],
+                  end_work :employeeSplit[20],
+                  job_position : employeeSplit[21],
+                  salary:employeeSplit[22],
+                  restaurant: nameRestaurant,
+                  created_at : created_at,
+                  update_at : update_at
+                }
+
+                employeeFirebase.push(empoloyeeObject);
+             });
+          });
+
+        }
+
+    };
+
+    reader.onerror = function () {
+      console.log('Unable to read ' + file);
+    };
+  }
+
+    console.log(employeeFirebase);
+    this.employee = this.af.list('/employees');
+    this.employee.push(employeeFirebase).then( data => {
+        console.log("succes", data);
+    }).catch( error => {
+      console.log('Error employee csv ', error);
+    });;
   }
 
 

@@ -25,7 +25,8 @@ import { LogsUserComponent } from '../manage-employee/logs-user/logs-user.compon
 import { TerminationWorkEmployeeComponent } from '../manage-employee/termination-work-employee/termination-work-employee.component';
 import { TerminationEmployeeComponent } from '../manage-employee/termination-employee/termination-employee.component';
 import { AuthGuard } from '../config/auth.guard';
-  import { VerificationCodeComponent } from '../verification-code/verification-code.component';
+import { StoreComponent } from '../manage-employee/store/store.component';
+import { VerificationCodeComponent } from '../verification-code/verification-code.component';
 
 const routes : Routes =
 [
@@ -53,7 +54,9 @@ const routes : Routes =
         {path: 'race', component: RaceComponent },
         {path: 'jobPosition', component: JobPositionComponent },
         {path: 'absence', component: AbsenceComponent },
-        {path: 'sourceHire', component: SourceHireComponent }
+        {path: 'sourceHire', component: SourceHireComponent },
+        {path: 'store', component: StoreComponent }
+
      ]},
    ] },
 

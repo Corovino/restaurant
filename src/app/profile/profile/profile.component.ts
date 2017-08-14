@@ -1,15 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
+
 import { DatauserService } from '../../providers/datauser.service';
 import { Fileitem } from '../../directives/fileitem';
 import { UploadImagesService } from '../../providers/upload-images.service';
 import {  FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { PasswordValidation } from '../../forms-validations/password-validation';
 
-import { Subject } from 'rxjs/Subject';
-import * as firebase from 'firebase/app';
 
 @Component({
   selector: 'app-profile',

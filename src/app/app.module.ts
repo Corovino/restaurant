@@ -52,6 +52,8 @@ import { LogsUserComponent } from './manage-employee/logs-user/logs-user.compone
 import { TerminationEmployeeComponent } from './manage-employee/termination-employee/termination-employee.component';
 import { VerificationCodeComponent } from './verification-code/verification-code.component';
 import { ReAuthUserComponent } from './manage-employee/re-auth-user/re-auth-user.component';
+import { StoreComponent } from './manage-employee/store/store.component';
+import { StoreService } from './providers/store.service';
 
 
 
@@ -95,6 +97,7 @@ import { ReAuthUserComponent } from './manage-employee/re-auth-user/re-auth-user
     TerminationEmployeeComponent,
     VerificationCodeComponent,
     ReAuthUserComponent,
+    StoreComponent,
 
   ],
   imports: [

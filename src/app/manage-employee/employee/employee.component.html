@@ -2,6 +2,10 @@
   <div  class="col-md-5 ">
     <button type="button"  type="button" class="btn btn-primary" data-toggle="modal" data-target="#createEmployee"  >Add Employee</button>
     <button type="button"  type="button" class="btn btn-primary"  (click)="importCsvEmployee()"  >Export</button>
+    <form>
+      <div class="upload">
+        <label><input type="file" accept=".csv" (change) = "fileUploadListener($event)"/></label></div>
+    </form>
   </div>
 
   <div  class="col-md-5 ">

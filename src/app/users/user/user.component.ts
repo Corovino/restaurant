@@ -50,23 +50,19 @@ export class UserComponent implements OnInit {
   userInfo(value : any)
   {
   		console.log(value);
-  		let promise = new Promise( (resolve, reject) =>{
-  			this.user.push({
 
-                name:value.name,
-                last_name:value.last_name,
-                password:value.password,
-                cell_phone:value.cellphone,
-                email: value.email,
-                restaurant:value.restaurant,
-                rol:value.rol,
-                status : value.status
-  			});
+      this.user.push({
 
-  			//this.register();
-  		} ).catch( error => {
-          console.log('Error promesa postRestaurant', error);
-  		});
+              name:value.name,
+              last_name:value.last_name,
+              password:value.password,
+              cell_phone:value.cellphone,
+              email: value.email,
+              restaurant:value.restaurant,
+              rol:value.rol,
+              status : value.status
+      });
+
       let userName = value.name.concat(value.last_name);
   		this.register(value.email,value.password);
       this.logUserAction( userName, value.restaurant , 'Create', 'user');

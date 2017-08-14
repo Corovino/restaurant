@@ -1,0 +1,145 @@
+<div class="col-md-10 content">
+  <!-- Form ModAL Create Rol -->
+  <button type="button"
+          type="button"
+          class="btn btn-primary"
+          data-toggle="modal"
+          data-target="#addStore"  >
+          Add Store
+  </button>
+  <!-- Modal Create Rol-->
+  <div class="modal fade" id="addStore" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Add Race</h4>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="formStore" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <i class="fa fa-check-circle check"  *ngIf="formStore.controls.name.valid"></i>
+              <i class="fa fa-exclamation-circle uncheck"  *ngIf="formStore.controls.name.invalid && formStore.controls.name.touched "></i>
+              <input type="text"
+                     class="form-control"
+                     id="name"
+                     formControlName="name">
+              <p class="alert alert-danger"
+                 *ngIf="formStore.controls.name.invalid && formStore.controls.name.touched ">
+                 El campo name es obligatorio
+              </p>
+            </div>
+            <div class="form-group">
+              <label for="address">Address</label>
+              <i class="fa fa-check-circle check"  *ngIf="formStore.controls.address.valid"></i>
+              <i class="fa fa-exclamation-circle uncheck"  *ngIf="formStore.controls.address.invalid && formStore.controls.address.touched "></i>
+              <input type="text"
+                     class="form-control"
+                     id="address"
+                     formControlName="address">
+              <p class="alert alert-danger"
+                 *ngIf="formStore.controls.address.invalid && formStore.controls.address.touched ">
+                El campo address es obligatorio
+              </p>
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <i class="fa fa-check-circle check"  *ngIf="formStore.controls.email.valid"></i>
+              <i class="fa fa-exclamation-circle uncheck"  *ngIf="formStore.controls.email.invalid && formStore.controls.email.touched "></i>
+              <input type="email"
+                     class="form-control"
+                     id="email"
+                     formControlName="email">
+              <p class="alert alert-danger"
+                 *ngIf="formStore.controls.email.invalid && formStore.controls.email.touched ">
+                El campo email es obligatorio
+              </p>
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone</label>
+              <i class="fa fa-check-circle check"  *ngIf="formStore.controls.phone.valid"></i>
+              <i class="fa fa-exclamation-circle uncheck"  *ngIf="formStore.controls.phone.invalid && formStore.controls.phone.touched "></i>
+              <input type="text"
+                     class="form-control"
+                     id="phone"
+                     formControlName="phone">
+              <p class="alert alert-danger"
+                 *ngIf="formStore.controls.phone.invalid && formStore.controls.phone.touched ">
+                El campo Phone es obligatorio
+              </p>
+            </div>
+            <div class="form-group">
+              <label for="admin_name">Admin</label>
+              <i class="fa fa-check-circle check"  *ngIf="formStore.controls.admin_name.valid"></i>
+              <i class="fa fa-exclamation-circle uncheck"  *ngIf="formStore.controls.admin_name.invalid && formStore.controls.admin_name.touched "></i>
+              <input type="text"
+                     class="form-control"
+                     id="admin_name"
+                     formControlName="admin_name">
+              <p class="alert alert-danger"
+                 *ngIf="formStore.controls.admin_name.invalid && formStore.controls.admin_name.touched ">
+                El campo admin es obligatorio
+              </p>
+            </div>
+            <div class="form-group">
+              <label for="city">City</label>
+              <i class="fa fa-check-circle check"  *ngIf="formStore.controls.city.valid"></i>
+              <i class="fa fa-exclamation-circle uncheck"  *ngIf="formStore.controls.city.invalid && formStore.controls.city.touched "></i>
+              <input type="text"
+                     class="form-control"
+                     id="city"
+                     formControlName="city">
+              <p class="alert alert-danger"
+                 *ngIf="formStore.controls.city.invalid && formStore.controls.city.touched ">
+                El campo city es obligatorio
+              </p>
+            </div>
+
+            <button type="submit"
+                    class="btn btn-primary"
+                    [disabled]="!formStore.valid"  >
+                    Save
+            </button>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default"    data-dismiss="modal">Close</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ./ -->
+
+  <!--  show list restaurant -->
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+      <tr>
+        <th>Name </th>
+        <th>City</th>
+        <th>Address</th>
+        <th>Phone</th>
+        <th>Email</th>
+        <th>Admin</th>
+        <th>Edit</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let item of store | async" id="">
+        <td ><p>{{ item.name }}</p></td>
+        <td><p >{{ item.city }}</p></td>
+        <td><p >{{ item.address }}</p></td>
+        <td><p >{{ item.phone }}</p></td>
+        <td><p >{{ item.email }}</p></td>
+        <td><p >{{ item.admin_name }}</p></td>
+        <td><button  (click)="editRace(item.$key)" class="btn btn-primary" data-toggle="modal" data-target="#editRestauran">Edit</button></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+
+</div>
