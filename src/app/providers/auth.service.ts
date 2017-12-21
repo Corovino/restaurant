@@ -30,7 +30,7 @@ export class AuthService  {
        this.au = firebase.auth().currentUser;
   }
 
-
+ //TODO verificar loginde usuario no olvidar.
   login(email : string, password : string, appVerifier :any ) {
 
      this.userEmail = email;
@@ -73,7 +73,7 @@ export class AuthService  {
   register(email:any, password:any)
   {
 
-      this.auth.createUserWithEmailAndPassword(email, password).then(e =>{
+      this.auth.createUser(email, password).then(e =>{
 
         //this.router.navigate(['/dashboard']);
          console.log(e);

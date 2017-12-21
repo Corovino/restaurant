@@ -86,7 +86,6 @@ export class ProfileComponent implements OnInit {
   accountInfo( dataUser : any)
   {
       console.log(dataUser);
-
       this.files.map( data => console.log(data));
 
 

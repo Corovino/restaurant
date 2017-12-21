@@ -14,14 +14,17 @@ export class StoreService {
 
   postStore( storeData : any)
   {
-      return this.store.push(storeData)
-        .map( resp => resp.json() );
+      return this.store.push(storeData);
 
   }
 
-  getStore()
+  getStores()
   {
       return this.af.list('/store');
   }
 
+  updateStore( store :any, key : string)
+  {
+     return this.store.update(key ,store);
+  }
 }

@@ -31,7 +31,7 @@ export class ReAuthUserComponent implements OnInit {
                if(reAuthPass.reAuthPassword !== data.password ){
                   alert('Usted no puedo hacer el cambio');
                }else{
-                 //localStorage.setItem('reauthUser', 'true');
+
                  switch (reAuthPass.fromAction){
                    case '1':
                         this.modalShow('btnadministrativeDataEmployee', reAuthPass);
@@ -41,6 +41,9 @@ export class ReAuthUserComponent implements OnInit {
                      break;
                    case '3':
                          this.modalShow('btnterminationEmployee', reAuthPass);
+                     break;
+                   case '4':
+                     this.modalShow('btnEditStore', reAuthPass);
                      break;
 
                  }

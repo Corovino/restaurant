@@ -49,7 +49,10 @@ export class EmployeeComponent implements OnInit {
   private employees: any;
   private key:any;
 
-  constructor(private af : AngularFireDatabase, private auth: AngularFireAuth, private userRestaurant : DatauserService, private  logUser : LogsUserService  ) {
+  constructor(private af : AngularFireDatabase,
+              private auth: AngularFireAuth,
+              private userRestaurant : DatauserService,
+              private  logUser : LogsUserService  ) {
 
 
   }
@@ -74,9 +77,9 @@ export class EmployeeComponent implements OnInit {
                    }
                  });
 
-                 this.restaurant = this.af.list('/restaurant',{
+                 this.restaurant = this.af.list('/store',{
                    query:{
-                     orderByChild: 'store',
+                     orderByChild: 'restaurant',
                      equalTo: data.restaurant
                    }
                   });

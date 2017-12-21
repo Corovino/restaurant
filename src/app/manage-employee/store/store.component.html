@@ -7,7 +7,7 @@
           data-target="#addStore"  >
           Add Store
   </button>
-  <!-- Modal Create Rol-->
+  <!-- Modal Create Store -->
   <div class="modal fade" id="addStore" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -95,6 +95,23 @@
                 El campo city es obligatorio
               </p>
             </div>
+            <div class="form group">
+              <label for="status">Status</label>
+              <i class="fa fa-check-circle check"  *ngIf="formStore.controls.status.valid"></i>
+              <i class="fa fa-exclamation-circle uncheck"  *ngIf="formStore.controls.status.invalid && formStore.controls.status.touched "></i>
+              <select
+                class="form-control"
+                id="status"
+                formControlName="status">
+                <option value="">Select... <option>
+                <option value="0">Active<option>
+                <option value="1">Disable<option>
+              </select>
+              <p class="alert alert-danger"
+                 *ngIf="formStore.controls.status.invalid && formStore.controls.status.touched ">
+                El campo status es obligatorio
+              </p>
+            </div>
 
             <button type="submit"
                     class="btn btn-primary"
@@ -123,6 +140,7 @@
         <th>Phone</th>
         <th>Email</th>
         <th>Admin</th>
+        <th>Status</th>
         <th>Edit</th>
       </tr>
       </thead>
@@ -134,12 +152,142 @@
         <td><p >{{ item.phone }}</p></td>
         <td><p >{{ item.email }}</p></td>
         <td><p >{{ item.admin_name }}</p></td>
-        <td><button  (click)="editRace(item.$key)" class="btn btn-primary" data-toggle="modal" data-target="#editRestauran">Edit</button></td>
+        <td>
+          <div [ngSwitch]="item.status">
+            <p class="label label-success" *ngSwitchCase="0">Active</p>
+            <p class="label label-danger"*ngSwitchCase="1">Disable</p>
+            <p *ngSwitchCase="3">Other</p>
+          </div>
+        </td>
+        <td>
+            <button  (click)="editStore(item.$key)"
+                     class="btn btn-primary"
+                     data-toggle="modal"
+                     data-target="#editStore">
+              Edit
+            </button>
+        </td>
       </tr>
       </tbody>
     </table>
   </div>
 
+
+
+  <!-- Modal Edit Store -->
+  <div class="modal fade" id="editStore" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Edit Store</h4>
+        </div>
+        <div class="modal-body">
+          <form #storeForm="ngForm" (ngSubmit)="onUpdateStore(storeForm.value)">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text"
+                     class="form-control"
+                     id="name"
+                     name="name"
+                     #nameRef="ngModel"
+                     [(ngModel)]="storeObject.name">
+              <div [hidden]="nameRef.valid || nameRef.pristine" class="alert alert-danger">
+                  Please enter a Name Store.
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="address">Address</label>
+              <input type="text"
+                     class="form-control"
+                     id="address"
+                     name="address"
+                     #addressRef="ngModel"
+                     [(ngModel)]="storeObject.address">
+              <div [hidden]="addressRef.valid || addressRef.pristine" class="alert alert-danger">
+                Please enter a Address Store.
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email"
+                     class="form-control"
+                     id="email"
+                     name="email"
+                     #emailRef="ngModel"
+                     [(ngModel)]="storeObject.email">
+              <div [hidden]="emailRef.valid || emailRef.pristine" class="alert alert-danger">
+                Please enter a Email Store.
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone</label>
+              <input type="text"
+                     class="form-control"
+                     id="phone"
+                     name="phone"
+                     #phoneRef="ngModel"
+                     [(ngModel)]="storeObject.phone">
+              <div [hidden]="phoneRef.valid || phoneRef.pristine" class="alert alert-danger">
+                Please enter a Phone Store.
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="admin_name">Admin</label>
+              <input type="text"
+                     class="form-control"
+                     id="admin_name"
+                     #adminNameRef="ngModel"
+                     name="admin_name"
+                     [(ngModel)]="storeObject.admin_name">
+              <div [hidden]="adminNameRef.valid || adminNameRef.pristine" class="alert alert-danger">
+                Please enter a Admin Name.
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="city">City</label>
+              <input type="text"
+                     class="form-control"
+                     id="city"
+                     name="city"
+                     #cityRef="ngModel"
+                     [(ngModel)]="storeObject.city">
+              <div [hidden]="cityRef.valid || cityRef.pristine" class="alert alert-danger">
+                  Please enter a City Store.
+              </div>
+            </div>
+            <div class="form group">
+              <label for="status">Status</label>
+              <select
+                class="form-control"
+                id="status"
+                name="status"
+                [(ngModel)]="storeObject.status">
+                <option value="">Select... <option>
+                <option value="0">Active<option>
+                <option value="1">Disable<option>
+              </select>
+              <p class="alert alert-danger"
+                 *ngIf="formStore.controls.status.invalid && formStore.controls.status.touched ">
+                El campo status es obligatorio
+              </p>
+            </div>
+
+            <button type="submit"
+                    class="btn btn-primary"
+                    [disabled]="!storeForm.valid"  >
+              Save
+            </button>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default"  #btnClose  data-dismiss="modal">Close</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ./ -->
 
 
 </div>

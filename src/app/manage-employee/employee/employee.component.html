@@ -63,7 +63,8 @@
                           <div class="controls">
                             <!--input type="text" id="password" #passwordRef="ngModel" name="password" required  placeholder="" class="input-xlarge" ngModel-->
                             <select #restaurantdRef="ngModel" name="restaurant" name="restaurant" required ngModel  >
-                               <option *ngFor="let item of restaurant | async" value="{{item.store}}">{{item.store}}</option>
+
+                               <option *ngFor="let item of restaurant | async" value="{{item.name}}">{{item.name}}</option>
 
                             </select>
 
